@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hwc-6D-Q11" customClass="CameraPreviewCell" customModule="ImagePickerProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="148" height="120"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="148" height="120"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-nj-bYH" customClass="CameraPreviewView" customModule="ImagePickerProject" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="148" height="120"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagepick_camera" translatesAutoresizingMaskIntoConstraints="NO" id="8cd-Cb-56p">
+                        <rect key="frame" x="0.0" y="0.0" width="148" height="120"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="8cd-Cb-56p" secondAttribute="trailing" id="1BN-R7-L3J"/>
+                <constraint firstItem="j3h-nj-bYH" firstAttribute="top" secondItem="hwc-6D-Q11" secondAttribute="top" id="QML-dN-Hhh"/>
+                <constraint firstItem="8cd-Cb-56p" firstAttribute="top" secondItem="hwc-6D-Q11" secondAttribute="top" id="Yg8-bM-udK"/>
+                <constraint firstAttribute="bottom" secondItem="8cd-Cb-56p" secondAttribute="bottom" id="eiF-g6-fbD"/>
+                <constraint firstItem="j3h-nj-bYH" firstAttribute="leading" secondItem="hwc-6D-Q11" secondAttribute="leading" id="gqd-i0-5Zb"/>
+                <constraint firstItem="8cd-Cb-56p" firstAttribute="leading" secondItem="hwc-6D-Q11" secondAttribute="leading" id="tMS-Xs-5Tw"/>
+                <constraint firstAttribute="trailing" secondItem="j3h-nj-bYH" secondAttribute="trailing" id="yrQ-9f-YGC"/>
+                <constraint firstAttribute="bottom" secondItem="j3h-nj-bYH" secondAttribute="bottom" id="zet-he-zli"/>
+            </constraints>
+            <size key="customSize" width="148" height="120"/>
+            <connections>
+                <outlet property="cameraPreviewView" destination="j3h-nj-bYH" id="BfL-YA-hQr"/>
+            </connections>
+            <point key="canvasLocation" x="277" y="305"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="imagepick_camera" width="100" height="100"/>
+    </resources>
+</document>
