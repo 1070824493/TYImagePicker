@@ -145,6 +145,8 @@ class PhotoColletionViewController: UIViewController {
 
     navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
     
+    navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.red,NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14)], for: .normal)
+    
   }
   
   private func initNavigationBarButton() {

@@ -90,21 +90,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   #
 
   s.source_files  = "ImagePicker/**/*.swift"
-  # s.public_header_files = "Classes/**/*.h"
-
-
-  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  A list of resources included with the Pod. These are copied into the
-  #  target bundle with a build phase script. Anything else will be cleaned.
-  #  You can preserve files from being cleaned, please don't preserve
-  #  non-essential files like tests, examples and documentation.
-  #
-
-  # s.resource  = "imagepick_unchecked.png"
-  # s.resources = "Resources/*.png"
-
-  s.resources = "ImagePicker/Resource/*.png", "ImagePicker/**/*.xib"
+  s.resource = "ImagePicker/Resource/*.png", "ImagePicker/**/*.xib"
 
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
