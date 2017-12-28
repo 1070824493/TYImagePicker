@@ -207,7 +207,7 @@ class PhotoColletionViewController: UIViewController {
   private func initAblum() {
   
     ablumView = PhotoAlbumView(frame: view.bounds, delegate: self)
-    self.view.addSubview(ablumView)
+//    self.view.addSubview(ablumView)
     popViewHelp = PopViewHelper(superView: view, targetView: ablumView, viewPopDirection: .fromLeft, maskStatus: .normal)
     popViewHelp.showAnimateDuration = 0.35
     popViewHelp.hideAnimateDuration = 0.35
