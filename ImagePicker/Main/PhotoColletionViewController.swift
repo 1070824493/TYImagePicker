@@ -16,9 +16,18 @@ class PhotoColletionViewController: UIViewController {
   private var selectedCountLabel: UILabel!
   private var completionLabel: UILabel!
   private var completionButton: UIControl!
+  private var bottomBarLabel:UILabel!
   private var ablumButton: UIControl!
   private var titleLabel: UILabel!
-  private var indicatorImageView: UIImageView!
+
+  lazy private var backButton : UIButton = { [unowned self] in
+    let back = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
+    back.setTitle("返回", for: .normal)
+    back.setImage(#imageLiteral(resourceName: "back_white_arrow.png"), for: .normal)
+    back.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
+    return back
+    }()
+//  private var indicatorImageView: UIImageView!
   private var ablumView: UIView!
   
   fileprivate var selectItemNum = 0
@@ -30,13 +39,15 @@ class PhotoColletionViewController: UIViewController {
   fileprivate let previewIdentifier = "CameraPreviewCell"
 
   fileprivate let midSpace: CGFloat = 2
-  fileprivate let rowCount = 3
   fileprivate let ablumButtonWidth: CGFloat = 120
   fileprivate let selectedCountLabelWidth: CGFloat = 20
   fileprivate let indicatorWidth: CGFloat = 15
   
   var canOpenCamera = true
   var cameraHelper: CameraHelper!
+  var rowCount = 4
+  var maskEnable = false
+    
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -103,6 +114,7 @@ class PhotoColletionViewController: UIViewController {
     
     let selectedImageCount = PhotosManager.sharedInstance.selectedImages.count
     let selectedVideoCount = PhotosManager.sharedInstance.selectedVideo == nil ? 0 : 1
+    
     let selectedCount = max(selectedImageCount, selectedVideoCount)
     let countString = selectedCount == 0 ? "" : "\(selectedCount)"
     
@@ -111,13 +123,21 @@ class PhotoColletionViewController: UIViewController {
     
     completionLabel.isEnabled = selectedCount != 0
     completionButton.isEnabled = selectedCount != 0
-    
+
     for cell in collectionView.visibleCells {
-      
       (cell as? PhotoThumbCell)?.updateSelectedStatus()
       (cell as? PhotoThumbCell)?.updateIsSelectable()
-
     }
+    
+    //新增遮罩修改
+    if maskEnable {
+      let lastCount = PhotosManager.sharedInstance.lastCount
+      if selectedCount == PhotosManager.sharedInstance.maxSelectedCount || (selectedCount == PhotosManager.sharedInstance.maxSelectedCount - 1 && lastCount > selectedCount){
+        collectionView.reloadData()
+      }
+    }
+    
+    
   }
   
   /******************************************************************************
@@ -128,7 +148,7 @@ class PhotoColletionViewController: UIViewController {
   private func setupUI() {
     
     initAblum()
-    initNavigationBarButton()
+    initNavigationBarButton(isShow: false)
     
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionViewFlowLayout)
@@ -142,45 +162,53 @@ class PhotoColletionViewController: UIViewController {
     view.addSubview(collectionView)
     
     initCompletionButton()
-
-    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
-    
-    navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.red,NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14)], for: .normal)
     
   }
   
-  private func initNavigationBarButton() {
+  private func initNavigationBarButton(isShow: Bool) {
     
+    self.navigationController?.navigationBar.barTintColor = .black
+    //导航栏标题
     ablumButton = UIControl(frame: CGRect(x: 0 , y: 0, width: ablumButtonWidth, height: 44))
     navigationItem.titleView = ablumButton
-    
-    ablumButton.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
-    
+//    ablumButton.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
     titleLabel = UILabel()
     ablumButton.addSubview(titleLabel)
     
-    titleLabel.textColor = .jx_main
+    titleLabel.textColor = .white
     titleLabel.font = UIFont.systemFont(ofSize: 18)
     titleLabel.textAlignment = .center
     updateTitle()
     titleLabel.sizeToFit()
     titleLabel.center = CGPoint(x: ablumButton.frame.midX, y: ablumButton.frame.midY)
     
-    indicatorImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: indicatorWidth, height: indicatorWidth))
-    ablumButton.addSubview(indicatorImageView)
-    indicatorImageView.center.y = titleLabel.center.y
-    indicatorImageView.frame.origin.x = titleLabel.frame.maxX
+    //导航栏右边取消按钮
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
+    navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], for: .normal)
     
-    indicatorImageView.contentMode = .scaleAspectFit
-    let image = UIImage(named: "ic_down_arrow", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
-    indicatorImageView.image = image
+    //导航栏左边返回按钮
+    if isShow {
+      titleLabel.text = "相册"
+      navigationItem.leftBarButtonItem = nil
+    }else{
+      navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+    }
+//    indicatorImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: indicatorWidth, height: indicatorWidth))
+//    ablumButton.addSubview(indicatorImageView)
+//    indicatorImageView.center.y = titleLabel.center.y
+//    indicatorImageView.frame.origin.x = titleLabel.frame.maxX
+//
+//    indicatorImageView.contentMode = .scaleAspectFit
+//    let image = UIImage(named: "ic_down_arrow", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
+//    indicatorImageView.image = image
     
   }
   
   private func initAblum() {
   
     ablumView = PhotoAlbumView(frame: view.bounds, delegate: self)
-    popViewHelp = PopViewHelper(superView: view, targetView: ablumView, viewPopDirection: .above, maskStatus: .normal)
+    self.view.addSubview(ablumView)
+    popViewHelp = PopViewHelper(superView: view, targetView: ablumView, viewPopDirection: .fromLeft, maskStatus: .normal)
     popViewHelp.showAnimateDuration = 0.35
     popViewHelp.hideAnimateDuration = 0.35
     popViewHelp.alpha = [0, 1, 1]
@@ -190,9 +218,20 @@ class PhotoColletionViewController: UIViewController {
   
   private func initCompletionButton() {
   
+    //创建底部工具栏
+    let kScreenH = UIScreen.main.bounds.height
+    let kScreenW = UIScreen.main.bounds.width
+    let longer = ((kScreenW > kScreenH) ? kScreenW : kScreenH)
+    let isIPhoneX = (longer == 812 ? true : false)
+    let kHomeIndicator: CGFloat = (isIPhoneX ? 34 : 0)
+    let kBottomBarHeight: CGFloat = 50
+    
+    bottomBarLabel = UILabel(frame: CGRect(x: 0, y: kScreenH - kBottomBarHeight - kHomeIndicator, width: kScreenW, height: kBottomBarHeight))
+    bottomBarLabel.text = "选择图片后共享"
+    self.view.addSubview(bottomBarLabel)
+    
     completionButton = UIControl(frame: CGRect(x: view.frame.width - 60, y: 0, width: 60, height: 44))
     completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), for: .touchUpInside)
-    navigationController?.navigationBar.addSubview(completionButton)
     
     selectedCountLabel = UILabel(frame: CGRect(x: 0, y: (completionButton.frame.height - selectedCountLabelWidth) / 2, width: selectedCountLabelWidth, height: selectedCountLabelWidth))
     selectedCountLabel.backgroundColor = UIColor(hex: 0x03AC00)
@@ -206,10 +245,13 @@ class PhotoColletionViewController: UIViewController {
     
     completionLabel = UILabel(frame: CGRect(x: selectedCountLabelWidth, y: 0, width: completionButton.frame.width - selectedCountLabelWidth, height: 44))
     completionLabel.textColor = UIColor(hex: 0x03AC00)
-    completionLabel.text = "完成"
+    completionLabel.text = "共享"
     completionLabel.font = UIFont.systemFont(ofSize: 14)
     completionLabel.textAlignment = .center
     completionButton.addSubview(completionLabel)
+    bottomBarLabel.addSubview(completionButton)
+    
+    
     
   }
   
@@ -245,15 +287,15 @@ class PhotoColletionViewController: UIViewController {
     }
   }
   
-  fileprivate func animateIndicator(_ isIndicatShowing: Bool) {
-    
-    UIView.animate(withDuration: 0.3, animations: { 
-      
-      let transform = CGAffineTransform(rotationAngle: isIndicatShowing ? CGFloat(Double.pi) : 0)
-      self.indicatorImageView.transform = transform
-      
-    }) 
-  }
+//  fileprivate func animateIndicator(_ isIndicatShowing: Bool) {
+//
+//    UIView.animate(withDuration: 0.3, animations: {
+//
+//      let transform = CGAffineTransform(rotationAngle: isIndicatShowing ? CGFloat(Double.pi) : 0)
+//      self.indicatorImageView.transform = transform
+//
+//    })
+//  }
 }
 
 extension PhotoColletionViewController: UICollectionViewDataSource {
@@ -279,14 +321,16 @@ extension PhotoColletionViewController: UICollectionViewDataSource {
     if !showPreview {
       
       let thumbCell = cell as! PhotoThumbCell
-      
       thumbCell.photoColletionViewController = self
       
-      if let asset = PhotosManager.sharedInstance.getAssetInCurrentAlbum(with: canOpenCamera == true ? indexPath.row - 1 : indexPath.row) {
-        
+      if let asset = PhotosManager.sharedInstance.getAssetInCurrentAlbum(with: canOpenCamera == true ? indexPath.row - 1 : indexPath.row) { 
         thumbCell.setAsset(asset)
-
+        if maskEnable {
+          thumbCell.updateGrayMaskStatus()
+        }
+        
       }
+      
     }
     
     return cell
@@ -372,7 +416,7 @@ extension PhotoColletionViewController: PhotoAlbumViewDelegate {
   }
   
   @objc(collectionView:willDisplayCell:forItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-
+    
     guard cellFadeAnimation else { return }
     
     cell.alpha = 0
@@ -411,11 +455,12 @@ extension PhotoColletionViewController: PopViewHelperDelegate {
   
   func popViewHelper(_ popViewHelper: PopViewHelper, willShowPoppingView targetView: UIView) {
     
-    animateIndicator(true)
+//    animateIndicator(true)
+    initNavigationBarButton(isShow: true)
   }
   
   func popViewHelper(_ popViewHelper: PopViewHelper, willHidePoppingView targetView: UIView) {
-    
-    animateIndicator(false)
+    initNavigationBarButton(isShow: false)
+//    animateIndicator(false)
   }
 }

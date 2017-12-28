@@ -29,6 +29,7 @@ enum ViewPopDirection{
   case center
   case onlyShowFullScreen
   case fade
+  case fromLeft
 }
 
 //动画表现
@@ -150,6 +151,13 @@ class PopViewHelper: NSObject {
     
     switch viewPopDirection{
       
+    case .fromLeft:
+      beginOrigin.x = -superView.frame.width
+      beginOrigin.y = 0
+      showOrigin.x = 0
+      showOrigin.y = 0
+      
+      endOrigin = beginOrigin
     case .above:
       
       beginOrigin.x = 0

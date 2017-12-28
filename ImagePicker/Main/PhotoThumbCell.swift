@@ -17,6 +17,8 @@ class PhotoThumbCell: UICollectionViewCell {
   @IBOutlet weak var unselectedImageView: UIImageView!
   @IBOutlet weak var selectedButton: UIControl!
   @IBOutlet weak var durationLabel: UILabel!
+  @IBOutlet weak var maskButton: UIButton!
+  
   
   private(set) var isInICloud = false
   
@@ -27,6 +29,11 @@ class PhotoThumbCell: UICollectionViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+  }
+  
+  @IBAction func onClickMask(_ sender: UIButton) {
+    let alert = UIAlertView(title: "", message: "你最多只能共享\(PhotosManager.sharedInstance.maxSelectedCount)张照片", delegate: nil, cancelButtonTitle: "确定")
+    alert.show()
   }
   
   @IBAction func onClickRadio() {
@@ -123,6 +130,18 @@ class PhotoThumbCell: UICollectionViewCell {
       setResourceSelected(isSelected)
       durationLabel.text = ""
       
+    }
+  }
+  
+  func updateGrayMaskStatus() {
+    if asset.mediaType == .image {
+      
+      let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: asset)
+      if PhotosManager.sharedInstance.selectedImages.count == PhotosManager.sharedInstance.maxSelectedCount {
+        self.maskButton.isHidden = isSelected
+      }else if PhotosManager.sharedInstance.selectedImages.count == PhotosManager.sharedInstance.maxSelectedCount - 1{
+        self.maskButton.isHidden = true
+      }
     }
   }
   

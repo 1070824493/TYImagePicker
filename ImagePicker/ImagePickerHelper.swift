@@ -52,9 +52,11 @@ open class TYImagePickerHelper: NSObject {
   private weak var handlerViewController: UIViewController?
   
   public weak var delegate: TYImagePickerDelegate?
-  public var maxSelectedCount: Int = 1
+  public var maxSelectedCount: Int = 9
   public var isCrop: Bool = false
   public var type: TYImagePickerType = .albumAndCamera
+  public var rowCount: Int = 4
+  public var maskEnable:Bool = false
   public var resourceOption: TYResourceOption = .image
   
   public init(delegate: TYImagePickerDelegate?, handlerViewController: UIViewController? = nil) {
@@ -218,7 +220,8 @@ open class TYImagePickerHelper: NSObject {
     
     let viewController = PhotoColletionViewController()
     viewController.canOpenCamera = self.type != .album
-    
+    viewController.rowCount = self.rowCount
+    viewController.maskEnable = self.maskEnable
     let navigationController = UINavigationController(rootViewController: viewController)
     navigationController.navigationBar.isTranslucent = false
     navigationController.navigationBar.tintColor = .jx_main

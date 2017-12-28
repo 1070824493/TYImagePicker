@@ -11,7 +11,10 @@ import UIKit
 class ViewController: UIViewController {
 
   @IBOutlet var isCropSwitch: UISwitch!
+  @IBOutlet weak var maskEnableSwitch: UISwitch!
   @IBOutlet var maxCountTextField: UITextField!
+  @IBOutlet weak var numberOfColumnField: UITextField!
+    
   @IBOutlet var imageViews: [UIImageView]!
   
   fileprivate lazy var imagePickerHelper: TYImagePickerHelper = {
@@ -20,7 +23,9 @@ class ViewController: UIViewController {
   
   var isCrop: Bool = true
   var type: TYImagePickerType = .albumAndCamera
-  var maxCount = 3
+  var maxCount = 9
+  var rowCount = 4
+  var maskEnable = false
   var reourceOption: TYResourceOption = [.image]
   
   @IBAction func onStart() {
@@ -29,7 +34,14 @@ class ViewController: UIViewController {
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
     imagePickerHelper.resourceOption = reourceOption
+    imagePickerHelper.rowCount = rowCount
+    imagePickerHelper.maskEnable = maskEnable
     imagePickerHelper.start()
+  }
+  
+  
+  @IBAction func onMaskEnable(_ sender: UISwitch) {
+    maskEnable = sender.isOn
   }
   
   @IBAction func onIsCrop(_ sender: UISwitch) {
@@ -76,6 +88,12 @@ class ViewController: UIViewController {
     if maxCount != 1 {
       isCropSwitch.setOn(false, animated: true)
     }
+  }
+  
+  @IBAction func onColumnChange(_ sender: UITextField) {
+    
+    guard let rowCount = Int(sender.text!) else { return }
+    self.rowCount = rowCount
   }
   
 }

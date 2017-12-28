@@ -56,6 +56,8 @@ class PhotosManager: NSObject {
   
   var imagePicker: TYImagePickerHelper!
   
+  var lastCount:Int = 0
+  
   var maxSelectedCount: Int {
     return imagePicker.maxSelectedCount
   }
@@ -109,39 +111,42 @@ class PhotosManager: NSObject {
       
       return assetCollectionList
     }
+
+    let defaultAlbum = PHAssetCollectionSubtype.smartAlbumUserLibrary //默认为相机胶卷
     
-    var albumType: [PHAssetCollectionSubtype] = [.smartAlbumRecentlyAdded, .smartAlbumUserLibrary]
-    
-    if #available(iOS 9.0, *) {
-      albumType += [.smartAlbumSelfPortraits, .smartAlbumScreenshots]
-    }
-    
-    //      ["相机胶卷", "自拍" , "最近添加", "屏幕快照"]
-    let defaultAlbum = PHAssetCollectionSubtype.smartAlbumUserLibrary
-    
-    let albumFetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
-    
+    let albumFetchSmartResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+    let albumFetchAlbumResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
     assetCollectionList.removeAll()
     
-    albumFetchResult.enumerateObjects({ (object, index, point) -> Void in
+    albumFetchSmartResult.enumerateObjects({ (object, index, point) -> Void in
       
       let assetCollection = object
       
       let title = assetCollection.localizedTitle
       
-      if title != nil && albumType.contains(assetCollection.assetCollectionSubtype) {
-        self.assetCollectionList += [assetCollection]
+      if title != nil && assetCollection.assetCollectionSubtype != .smartAlbumAllHidden{
+        if assetCollection.assetCollectionSubtype == defaultAlbum {
+          self.assetCollectionList.insert(assetCollection, at: 0)
+          self.currentAlbumIndex = 0
+        }else{
+          self.assetCollectionList += [assetCollection]
+        }
       }
-      
-      if assetCollection.assetCollectionSubtype == defaultAlbum {
-        self.currentAlbumIndex = self.assetCollectionList.count - 1
-      }
-      
     })
-    
-    if self.currentAlbumIndex == nil && assetCollectionList.count > 0 {
-      self.currentAlbumIndex = 0
-    }
+    albumFetchAlbumResult.enumerateObjects({ (object, index, point) -> Void in
+      
+      let assetCollection = object
+      
+      let title = assetCollection.localizedTitle
+      
+      if title != nil && assetCollection.estimatedAssetCount > 0{
+          self.assetCollectionList += [assetCollection]
+      }
+    })
+
+//    if self.currentAlbumIndex == nil && assetCollectionList.count > 0 {
+//      self.currentAlbumIndex = 0
+//    }
     
     return assetCollectionList
   }
@@ -312,6 +317,7 @@ class PhotosManager: NSObject {
     let isExist = getPhotoSelectedStatus(with: asset)
     
     if isExist {
+      lastCount = selectedImages.count
       selectedImages.remove(asset)
     } else {
       
@@ -320,7 +326,7 @@ class PhotosManager: NSObject {
         return false
         
       } else {
-        
+        lastCount = selectedImages.count
         selectedImages.insert(asset)
         return true
         

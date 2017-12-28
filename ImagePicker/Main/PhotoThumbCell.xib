@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -62,17 +62,28 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xz6-KE-shW">
+                        <rect key="frame" x="0.0" y="0.0" width="148" height="120"/>
+                        <color key="backgroundColor" white="1" alpha="0.79642016267123283" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <action selector="onClickMask:" destination="gTV-IL-0wX" eventType="touchUpInside" id="GNS-jc-GSF"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="0mQ-yv-W40" secondAttribute="trailing" constant="8" id="FI5-sF-3NL"/>
                 <constraint firstItem="ySD-rQ-ETe" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Iof-0p-vvV"/>
+                <constraint firstItem="Xz6-KE-shW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Nik-st-l7Y"/>
+                <constraint firstAttribute="trailing" secondItem="Xz6-KE-shW" secondAttribute="trailing" id="Rxc-NF-j01"/>
                 <constraint firstItem="eIg-iW-95C" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="XTb-SH-Yaq"/>
                 <constraint firstAttribute="bottom" secondItem="ySD-rQ-ETe" secondAttribute="bottom" id="awZ-47-dbX"/>
                 <constraint firstItem="fbA-rJ-rg9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="k0i-h5-h1H"/>
+                <constraint firstAttribute="bottom" secondItem="Xz6-KE-shW" secondAttribute="bottom" id="n90-4u-tc8"/>
                 <constraint firstItem="ySD-rQ-ETe" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="o2E-2d-eyH"/>
                 <constraint firstAttribute="trailing" secondItem="eIg-iW-95C" secondAttribute="trailing" constant="8" id="p4V-gq-BTD"/>
                 <constraint firstAttribute="trailing" secondItem="fbA-rJ-rg9" secondAttribute="trailing" id="sEM-km-jRG"/>
+                <constraint firstItem="Xz6-KE-shW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ttW-Sh-YJh"/>
                 <constraint firstAttribute="trailing" secondItem="ySD-rQ-ETe" secondAttribute="trailing" id="wPl-Xa-5Pe"/>
                 <constraint firstAttribute="bottom" secondItem="0mQ-yv-W40" secondAttribute="bottom" constant="8" id="zUD-hD-1CZ"/>
             </constraints>
@@ -80,6 +91,7 @@
             <connections>
                 <outlet property="durationLabel" destination="0mQ-yv-W40" id="1cK-Y2-ODR"/>
                 <outlet property="imageView" destination="ySD-rQ-ETe" id="qkS-Dp-cjV"/>
+                <outlet property="maskButton" destination="Xz6-KE-shW" id="3RC-w9-JqM"/>
                 <outlet property="selectedButton" destination="fbA-rJ-rg9" id="gGG-Ta-vQt"/>
                 <outlet property="selectedImageView" destination="oxf-g1-gHg" id="hDe-nd-BNI"/>
                 <outlet property="selectedStatusContainerView" destination="eIg-iW-95C" id="58x-LH-OO8"/>
