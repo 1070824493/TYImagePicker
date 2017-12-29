@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1004465D1FF6459F00B42BD5 /* ImagePickerHelper.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1004465C1FF6459F00B42BD5 /* ImagePickerHelper.xcassets */; };
 		CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F11C89613700B72821 /* AppDelegate.swift */; };
 		CF2C77F41C89613700B72821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F31C89613700B72821 /* ViewController.swift */; };
 		CF2C77F71C89613700B72821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F51C89613700B72821 /* Main.storyboard */; };
@@ -31,18 +32,13 @@
 		CF467CBC1EC17306003F85F5 /* TYPhotoBrowserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA71EC17306003F85F5 /* TYPhotoBrowserLite.swift */; };
 		CF467CBD1EC17306003F85F5 /* ZoomImageScrollViewLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA81EC17306003F85F5 /* ZoomImageScrollViewLite.swift */; };
 		CF467CBE1EC17306003F85F5 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA91EC17306003F85F5 /* PhotosManager.swift */; };
-		CF467CC71EC17454003F85F5 /* back_white_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC11EC17454003F85F5 /* back_white_arrow@3x.png */; };
-		CF467CC81EC17454003F85F5 /* default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC21EC17454003F85F5 /* default_pic.png */; };
-		CF467CC91EC17454003F85F5 /* ic_down_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC31EC17454003F85F5 /* ic_down_arrow.png */; };
-		CF467CCA1EC17454003F85F5 /* imagepick_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC41EC17454003F85F5 /* imagepick_camera.png */; };
-		CF467CCB1EC17454003F85F5 /* imagepick_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC51EC17454003F85F5 /* imagepick_unchecked.png */; };
-		CF467CCC1EC17454003F85F5 /* imagepick_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC61EC17454003F85F5 /* imagepick_checked.png */; };
 		CF467CD01EC17493003F85F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CCE1EC17493003F85F5 /* Extension.swift */; };
 		CF467CD11EC17493003F85F5 /* PopViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CCF1EC17493003F85F5 /* PopViewHelper.swift */; };
 		DB07072D855558974CCCA5B9 /* Pods_ImagePickerProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E81F196D59D9C20DB1AA34A /* Pods_ImagePickerProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1004465C1FF6459F00B42BD5 /* ImagePickerHelper.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagePickerHelper.xcassets; sourceTree = "<group>"; };
 		30193EB4488311F7EE4A4CBB /* Pods-ImagePickerProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95A5E52D98A73A4239134B4F /* Pods-ImagePickerProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject.release.xcconfig"; sourceTree = "<group>"; };
 		9E81F196D59D9C20DB1AA34A /* Pods_ImagePickerProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImagePickerProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,12 +69,6 @@
 		CF467CA71EC17306003F85F5 /* TYPhotoBrowserLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPhotoBrowserLite.swift; sourceTree = "<group>"; };
 		CF467CA81EC17306003F85F5 /* ZoomImageScrollViewLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageScrollViewLite.swift; sourceTree = "<group>"; };
 		CF467CA91EC17306003F85F5 /* PhotosManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
-		CF467CC11EC17454003F85F5 /* back_white_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_white_arrow@3x.png"; sourceTree = "<group>"; };
-		CF467CC21EC17454003F85F5 /* default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_pic.png; sourceTree = "<group>"; };
-		CF467CC31EC17454003F85F5 /* ic_down_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_down_arrow.png; sourceTree = "<group>"; };
-		CF467CC41EC17454003F85F5 /* imagepick_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagepick_camera.png; sourceTree = "<group>"; };
-		CF467CC51EC17454003F85F5 /* imagepick_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagepick_unchecked.png; sourceTree = "<group>"; };
-		CF467CC61EC17454003F85F5 /* imagepick_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagepick_checked.png; sourceTree = "<group>"; };
 		CF467CCE1EC17493003F85F5 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		CF467CCF1EC17493003F85F5 /* PopViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopViewHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,7 +154,7 @@
 				CF467C9A1EC17306003F85F5 /* Crop */,
 				CF467CA01EC17306003F85F5 /* Main */,
 				CF467CA41EC17306003F85F5 /* PhotoBrowser */,
-				CF467CC01EC17454003F85F5 /* Resource */,
+				CF467CC01EC17454003F85F5 /* Source */,
 			);
 			name = ImagePicker;
 			path = ../../ImagePicker;
@@ -222,17 +212,12 @@
 			path = PhotoBrowser;
 			sourceTree = "<group>";
 		};
-		CF467CC01EC17454003F85F5 /* Resource */ = {
+		CF467CC01EC17454003F85F5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				CF467CC11EC17454003F85F5 /* back_white_arrow@3x.png */,
-				CF467CC21EC17454003F85F5 /* default_pic.png */,
-				CF467CC31EC17454003F85F5 /* ic_down_arrow.png */,
-				CF467CC41EC17454003F85F5 /* imagepick_camera.png */,
-				CF467CC51EC17454003F85F5 /* imagepick_unchecked.png */,
-				CF467CC61EC17454003F85F5 /* imagepick_checked.png */,
+				1004465C1FF6459F00B42BD5 /* ImagePickerHelper.xcassets */,
 			);
-			path = Resource;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		CF467CCD1EC17493003F85F5 /* Tool */ = {
@@ -307,18 +292,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF467CCB1EC17454003F85F5 /* imagepick_unchecked.png in Resources */,
 				CF467CAC1EC17306003F85F5 /* PhotoAlbumCell.xib in Resources */,
 				CF467CB91EC17306003F85F5 /* PhotoThumbCell.xib in Resources */,
-				CF467CC71EC17454003F85F5 /* back_white_arrow@3x.png in Resources */,
-				CF467CCA1EC17454003F85F5 /* imagepick_camera.png in Resources */,
 				CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */,
-				CF467CC81EC17454003F85F5 /* default_pic.png in Resources */,
 				CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */,
 				CF467CB01EC17306003F85F5 /* CameraPreviewCell.xib in Resources */,
 				CF2C77F71C89613700B72821 /* Main.storyboard in Resources */,
-				CF467CC91EC17454003F85F5 /* ic_down_arrow.png in Resources */,
-				CF467CCC1EC17454003F85F5 /* imagepick_checked.png in Resources */,
+				1004465D1FF6459F00B42BD5 /* ImagePickerHelper.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

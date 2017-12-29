@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "TYImagePicker"
-  s.version      = "3.0.1"
+  s.version      = "3.0.2"
   s.summary      = "A complete functions ImagePicker."
 
   # This description is used to generate tags and improve search results.
@@ -89,8 +89,8 @@ A complete functions ImagePicker. It can picks image, gif, video.
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "ImagePicker/**/*.swift"
-  s.resource = "ImagePicker/Resource/*.png", "ImagePicker/**/*.xib"
+  s.source_files  = "ImagePicker/**/*.swift", "ImagePicker/**/*.xib"
+  s.resource = "ImagePicker/Source/*.xcassets"
 
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

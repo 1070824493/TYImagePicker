@@ -77,10 +77,11 @@ extension PhotoAlbumView: UITableViewDataSource {
     PhotosManager.sharedInstance.fetchImage(with: indexPath.row, imageIndex: 0, sizeType: .thumbnail) { (image, _) -> Void in
       
       if image == nil {
-        return
-      }
-      
-      cell.thumbImageView.image = image
+        cell.thumbImageView.image = UIImage(named: "default_pic")
+      }else{
+        cell.thumbImageView.image = image
+        
+        }
     }
     
     cell.separatorInset = UIEdgeInsets.zero
