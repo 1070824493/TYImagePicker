@@ -78,7 +78,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/1070824493/TYImagePicker.git", :tag => "s.version" }
+  s.source       = { :git => "https://github.com/1070824493/TYImagePicker.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -115,6 +115,6 @@ A complete functions ImagePicker. It can picks image, gif, video.
   # s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "SnapKit"
+  s.dependency "SnapKit", '3.2.0'
 
 end
