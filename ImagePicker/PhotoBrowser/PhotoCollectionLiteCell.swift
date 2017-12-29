@@ -47,7 +47,7 @@ class PhotoCollectionLiteCell: UICollectionViewCell {
         return
       }
       
-      self.zoomImageScrollView.setImage(image == nil ? UIImage(named: "default_pic") : image)
+      self.zoomImageScrollView.setImage(image == nil ? UIImage(named: "default_pic", in: Bundle(for: PhotoCollectionLiteCell.self), compatibleWith: nil) : image)
       
     })
     

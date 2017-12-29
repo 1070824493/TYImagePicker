@@ -144,7 +144,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
       make.center.equalTo(selectButton)
     }
     
-    unselectedImageView.image = UIImage(named: "imagepick_unchecked")
+    unselectedImageView.image = UIImage(named: "imagepick_unchecked", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
     
     //selectedButton
     selectedImageView = UIImageView()
@@ -154,7 +154,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
       make.center.equalTo(selectButton)
     }
     
-    selectedImageView.image = UIImage(named: "imagepick_checked")
+    selectedImageView.image = UIImage(named: "imagepick_checked", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
     
   }
   

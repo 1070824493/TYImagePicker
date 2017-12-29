@@ -36,7 +36,7 @@ class PhotoColletionViewController: UIViewController {
     let back = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
 //    back.setAttributedTitle(NSAttributedString(string: "返回", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)]), for: .normal)
     back.setAttributedTitle(NSAttributedString(string: "返回", attributes: [NSForegroundColorAttributeName : UIColor.white ,NSFontAttributeName : UIFont.systemFont(ofSize: 16)]), for: .normal)
-    back.setImage(UIImage(named: "back_white_arrow"), for: .normal)
+    back.setImage(UIImage(named: "back_white_arrow", in: Bundle(for: PhotoColletionViewController.self), compatibleWith: nil), for: .normal)
     back.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
     return back
     }()
