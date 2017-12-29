@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1004465D1FF6459F00B42BD5 /* ImagePickerHelper.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1004465C1FF6459F00B42BD5 /* ImagePickerHelper.xcassets */; };
+		1004465F1FF6523800B42BD5 /* TYImagePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1004465E1FF6523800B42BD5 /* TYImagePicker.bundle */; };
 		CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F11C89613700B72821 /* AppDelegate.swift */; };
 		CF2C77F41C89613700B72821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F31C89613700B72821 /* ViewController.swift */; };
 		CF2C77F71C89613700B72821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F51C89613700B72821 /* Main.storyboard */; };
@@ -23,7 +23,7 @@
 		CF467CB21EC17306003F85F5 /* CropImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C9B1EC17306003F85F5 /* CropImageScrollView.swift */; };
 		CF467CB31EC17306003F85F5 /* PhotoCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C9C1EC17306003F85F5 /* PhotoCropViewController.swift */; };
 		CF467CB41EC17306003F85F5 /* PhotoMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C9D1EC17306003F85F5 /* PhotoMaskView.swift */; };
-		CF467CB61EC17306003F85F5 /* ImagePickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C9F1EC17306003F85F5 /* ImagePickerHelper.swift */; };
+		CF467CB61EC17306003F85F5 /* TYImagePickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C9F1EC17306003F85F5 /* TYImagePickerHelper.swift */; };
 		CF467CB71EC17306003F85F5 /* PhotoColletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA11EC17306003F85F5 /* PhotoColletionViewController.swift */; };
 		CF467CB81EC17306003F85F5 /* PhotoThumbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA21EC17306003F85F5 /* PhotoThumbCell.swift */; };
 		CF467CB91EC17306003F85F5 /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF467CA31EC17306003F85F5 /* PhotoThumbCell.xib */; };
@@ -38,7 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1004465C1FF6459F00B42BD5 /* ImagePickerHelper.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagePickerHelper.xcassets; sourceTree = "<group>"; };
+		1004465E1FF6523800B42BD5 /* TYImagePicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TYImagePicker.bundle; sourceTree = "<group>"; };
 		30193EB4488311F7EE4A4CBB /* Pods-ImagePickerProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95A5E52D98A73A4239134B4F /* Pods-ImagePickerProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject.release.xcconfig"; sourceTree = "<group>"; };
 		9E81F196D59D9C20DB1AA34A /* Pods_ImagePickerProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImagePickerProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +60,7 @@
 		CF467C9B1EC17306003F85F5 /* CropImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropImageScrollView.swift; sourceTree = "<group>"; };
 		CF467C9C1EC17306003F85F5 /* PhotoCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCropViewController.swift; sourceTree = "<group>"; };
 		CF467C9D1EC17306003F85F5 /* PhotoMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMaskView.swift; sourceTree = "<group>"; };
-		CF467C9F1EC17306003F85F5 /* ImagePickerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerHelper.swift; sourceTree = "<group>"; };
+		CF467C9F1EC17306003F85F5 /* TYImagePickerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYImagePickerHelper.swift; sourceTree = "<group>"; };
 		CF467CA11EC17306003F85F5 /* PhotoColletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoColletionViewController.swift; sourceTree = "<group>"; };
 		CF467CA21EC17306003F85F5 /* PhotoThumbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoThumbCell.swift; sourceTree = "<group>"; };
 		CF467CA31EC17306003F85F5 /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		CF467C901EC17306003F85F5 /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
-				CF467C9F1EC17306003F85F5 /* ImagePickerHelper.swift */,
+				CF467C9F1EC17306003F85F5 /* TYImagePickerHelper.swift */,
 				CF467CA91EC17306003F85F5 /* PhotosManager.swift */,
 				CF467CCD1EC17493003F85F5 /* Tool */,
 				CF467C911EC17306003F85F5 /* Album */,
@@ -154,7 +154,7 @@
 				CF467C9A1EC17306003F85F5 /* Crop */,
 				CF467CA01EC17306003F85F5 /* Main */,
 				CF467CA41EC17306003F85F5 /* PhotoBrowser */,
-				CF467CC01EC17454003F85F5 /* Source */,
+				1004465E1FF6523800B42BD5 /* TYImagePicker.bundle */,
 			);
 			name = ImagePicker;
 			path = ../../ImagePicker;
@@ -210,14 +210,6 @@
 				CF467CA81EC17306003F85F5 /* ZoomImageScrollViewLite.swift */,
 			);
 			path = PhotoBrowser;
-			sourceTree = "<group>";
-		};
-		CF467CC01EC17454003F85F5 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				1004465C1FF6459F00B42BD5 /* ImagePickerHelper.xcassets */,
-			);
-			path = Source;
 			sourceTree = "<group>";
 		};
 		CF467CCD1EC17493003F85F5 /* Tool */ = {
@@ -294,11 +286,11 @@
 			files = (
 				CF467CAC1EC17306003F85F5 /* PhotoAlbumCell.xib in Resources */,
 				CF467CB91EC17306003F85F5 /* PhotoThumbCell.xib in Resources */,
+				1004465F1FF6523800B42BD5 /* TYImagePicker.bundle in Resources */,
 				CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */,
 				CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */,
 				CF467CB01EC17306003F85F5 /* CameraPreviewCell.xib in Resources */,
 				CF2C77F71C89613700B72821 /* Main.storyboard in Resources */,
-				1004465D1FF6459F00B42BD5 /* ImagePickerHelper.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,7 +360,7 @@
 				CF467CD11EC17493003F85F5 /* PopViewHelper.swift in Sources */,
 				CF467CB21EC17306003F85F5 /* CropImageScrollView.swift in Sources */,
 				CF2C77F41C89613700B72821 /* ViewController.swift in Sources */,
-				CF467CB61EC17306003F85F5 /* ImagePickerHelper.swift in Sources */,
+				CF467CB61EC17306003F85F5 /* TYImagePickerHelper.swift in Sources */,
 				CF467CAD1EC17306003F85F5 /* PhotoAlbumView.swift in Sources */,
 				CF467CB71EC17306003F85F5 /* PhotoColletionViewController.swift in Sources */,
 				CF467CB81EC17306003F85F5 /* PhotoThumbCell.swift in Sources */,

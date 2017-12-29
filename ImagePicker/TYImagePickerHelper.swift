@@ -229,3 +229,23 @@ open class TYImagePickerHelper: NSObject {
     
   }
 }
+extension NSObject {
+//    NSBundle *bundle = [NSBundle bundleForClass:[SVProgressHUD class]];
+//    NSURL *url = [bundle URLForResource:@"SVProgressHUD" withExtension:@"bundle"];
+//    NSBundle *imageBundle = [NSBundle bundleWithURL:url];
+//
+//    UIImage* infoImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"info" ofType:@"png"]];
+//    UIImage* successImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"success" ofType:@"png"]];
+//    UIImage* errorImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"error" ofType:@"png"]];
+    func ImageResourcePath(_ fileName: String) -> UIImage? {
+        let bundle = Bundle(for: TYImagePickerHelper.self)
+        
+        if let url = bundle.url(forResource: "TYImagePicker", withExtension: "bundle") {
+            if let imageBundle = Bundle(url: url) {
+                let image  = UIImage(contentsOfFile: imageBundle.path(forResource: fileName, ofType: "png")!)
+                return image
+            }
+        }
+        return nil
+    }
+}
