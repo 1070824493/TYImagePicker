@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1004465F1FF6523800B42BD5 /* TYImagePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1004465E1FF6523800B42BD5 /* TYImagePicker.bundle */; };
 		CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F11C89613700B72821 /* AppDelegate.swift */; };
 		CF2C77F41C89613700B72821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F31C89613700B72821 /* ViewController.swift */; };
 		CF2C77F71C89613700B72821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F51C89613700B72821 /* Main.storyboard */; };
@@ -38,7 +37,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1004465E1FF6523800B42BD5 /* TYImagePicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TYImagePicker.bundle; sourceTree = "<group>"; };
 		30193EB4488311F7EE4A4CBB /* Pods-ImagePickerProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95A5E52D98A73A4239134B4F /* Pods-ImagePickerProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject.release.xcconfig"; sourceTree = "<group>"; };
 		9E81F196D59D9C20DB1AA34A /* Pods_ImagePickerProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImagePickerProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,7 +152,6 @@
 				CF467C9A1EC17306003F85F5 /* Crop */,
 				CF467CA01EC17306003F85F5 /* Main */,
 				CF467CA41EC17306003F85F5 /* PhotoBrowser */,
-				1004465E1FF6523800B42BD5 /* TYImagePicker.bundle */,
 			);
 			name = ImagePicker;
 			path = ../../ImagePicker;
@@ -286,7 +283,6 @@
 			files = (
 				CF467CAC1EC17306003F85F5 /* PhotoAlbumCell.xib in Resources */,
 				CF467CB91EC17306003F85F5 /* PhotoThumbCell.xib in Resources */,
-				1004465F1FF6523800B42BD5 /* TYImagePicker.bundle in Resources */,
 				CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */,
 				CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */,
 				CF467CB01EC17306003F85F5 /* CameraPreviewCell.xib in Resources */,
