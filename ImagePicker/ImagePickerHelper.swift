@@ -223,8 +223,8 @@ open class TYImagePickerHelper: NSObject {
     viewController.rowCount = self.rowCount
     viewController.maskEnable = self.maskEnable
     let navigationController = UINavigationController(rootViewController: viewController)
-    navigationController.navigationBar.isTranslucent = false
-    navigationController.navigationBar.tintColor = .jx_main
+    navigationController.navigationBar.barTintColor = .black
+    navigationController.navigationBar.barStyle = .black
     self.handlerViewController?.present(navigationController, animated: true, completion: nil)
     
   }

@@ -10,19 +10,29 @@ import UIKit
 import Photos
 import SnapKit
 
+let kScreenH = UIScreen.main.bounds.height
+let kScreenW = UIScreen.main.bounds.width
+let longer = ((kScreenW > kScreenH) ? kScreenW : kScreenH)
+let isIPhoneX = (longer == 812 ? true : false)
+let kHomeIndicator: CGFloat = (isIPhoneX ? 34 : 0)
+let kBottomBarHeight: CGFloat = 50
+let completionBgColorDisable = #colorLiteral(red: 0.006263995543, green: 0.1826446056, blue: 0.3904125094, alpha: 1)
+let completionBgColorEnable = #colorLiteral(red: 0, green: 0.364348799, blue: 0.7843860388, alpha: 1)
+
 class PhotoColletionViewController: UIViewController {
-  
+
   private(set) var collectionView: UICollectionView!
-  private var selectedCountLabel: UILabel!
-  private var completionLabel: UILabel!
-  private var completionButton: UIControl!
+//  private var selectedCountLabel: UILabel!
+//  private var completionLabel: UILabel!
+  private var completionButton: UIButton!
   private var bottomBarLabel:UILabel!
+  private var bottomBarBaseView:UIView!
   private var ablumButton: UIControl!
   private var titleLabel: UILabel!
 
   lazy private var backButton : UIButton = { [unowned self] in
     let back = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-    back.setTitle("返回", for: .normal)
+    back.setAttributedTitle(NSAttributedString(string: "返回", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)]), for: .normal)
     back.setImage(#imageLiteral(resourceName: "back_white_arrow.png"), for: .normal)
     back.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
     return back
@@ -116,14 +126,13 @@ class PhotoColletionViewController: UIViewController {
     let selectedVideoCount = PhotosManager.sharedInstance.selectedVideo == nil ? 0 : 1
     
     let selectedCount = max(selectedImageCount, selectedVideoCount)
-    let countString = selectedCount == 0 ? "" : "\(selectedCount)"
+    let countString = selectedCount == 0 ? "共享" : "共享(\(selectedCount))"
+    let bgcolor = selectedCount == 0 ? completionBgColorDisable : completionBgColorEnable
     
-    selectedCountLabel.isHidden = selectedCount == 0
-    selectedCountLabel.text = countString
-    
-    completionLabel.isEnabled = selectedCount != 0
+    completionButton.setAttributedTitle(NSAttributedString(string: countString, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15) , NSAttributedStringKey.foregroundColor : UIColor.white]), for: .normal)
+    completionButton.backgroundColor = bgcolor
     completionButton.isEnabled = selectedCount != 0
-
+    
     for cell in collectionView.visibleCells {
       (cell as? PhotoThumbCell)?.updateSelectedStatus()
       (cell as? PhotoThumbCell)?.updateIsSelectable()
@@ -151,7 +160,7 @@ class PhotoColletionViewController: UIViewController {
     initNavigationBarButton(isShow: false)
     
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
-    collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionViewFlowLayout)
+    collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH-kHomeIndicator-kBottomBarHeight), collectionViewLayout: collectionViewFlowLayout)
     collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     collectionView.backgroundColor = UIColor.white
     collectionView.register(UINib(nibName: thumbIdentifier, bundle: Bundle(for: PhotoColletionViewController.self)), forCellWithReuseIdentifier: thumbIdentifier)
@@ -167,11 +176,9 @@ class PhotoColletionViewController: UIViewController {
   
   private func initNavigationBarButton(isShow: Bool) {
     
-    self.navigationController?.navigationBar.barTintColor = .black
     //导航栏标题
     ablumButton = UIControl(frame: CGRect(x: 0 , y: 0, width: ablumButtonWidth, height: 44))
     navigationItem.titleView = ablumButton
-//    ablumButton.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
     titleLabel = UILabel()
     ablumButton.addSubview(titleLabel)
     
@@ -184,7 +191,7 @@ class PhotoColletionViewController: UIViewController {
     
     //导航栏右边取消按钮
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
-    navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], for: .normal)
+    navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white , NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)], for: .normal)
     
     //导航栏左边返回按钮
     if isShow {
@@ -219,39 +226,31 @@ class PhotoColletionViewController: UIViewController {
   private func initCompletionButton() {
   
     //创建底部工具栏
-    let kScreenH = UIScreen.main.bounds.height
-    let kScreenW = UIScreen.main.bounds.width
-    let longer = ((kScreenW > kScreenH) ? kScreenW : kScreenH)
-    let isIPhoneX = (longer == 812 ? true : false)
-    let kHomeIndicator: CGFloat = (isIPhoneX ? 34 : 0)
-    let kBottomBarHeight: CGFloat = 50
     
-    bottomBarLabel = UILabel(frame: CGRect(x: 0, y: kScreenH - kBottomBarHeight - kHomeIndicator, width: kScreenW, height: kBottomBarHeight))
-    bottomBarLabel.text = "选择图片后共享"
-    self.view.addSubview(bottomBarLabel)
+    bottomBarBaseView = UIView(frame: CGRect(x: 0, y: kScreenH - kBottomBarHeight - kHomeIndicator, width: kScreenW, height: kBottomBarHeight))
+    bottomBarBaseView.backgroundColor = .black
+    self.view.addSubview(bottomBarBaseView)
     
-    completionButton = UIControl(frame: CGRect(x: view.frame.width - 60, y: 0, width: 60, height: 44))
+    bottomBarLabel = UILabel(frame: CGRect(x: 20, y: 0, width: kScreenW-20, height: kBottomBarHeight))
+    bottomBarLabel.attributedText = NSAttributedString(string: "选择图片后共享", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17) , NSAttributedStringKey.foregroundColor : UIColor.white])
+    bottomBarLabel.backgroundColor = .black
+    bottomBarLabel.textColor = .white
+    bottomBarBaseView.addSubview(bottomBarLabel)
+    
+    completionButton = UIButton(type: .custom)
+    completionButton.frame = CGRect(x: kScreenW - 10 - 70, y: 10, width: 70, height: 30)
+    completionButton.setTitleColor(.white, for: .normal)
+    completionButton.backgroundColor = completionBgColorDisable
+    
+    
+    completionButton.layer.cornerRadius = 5
+
+    completionButton.setAttributedTitle(NSAttributedString(string: "共享", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15) , NSAttributedStringKey.foregroundColor : UIColor.white]), for: .normal)
+    completionButton.isEnabled = false
     completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), for: .touchUpInside)
     
-    selectedCountLabel = UILabel(frame: CGRect(x: 0, y: (completionButton.frame.height - selectedCountLabelWidth) / 2, width: selectedCountLabelWidth, height: selectedCountLabelWidth))
-    selectedCountLabel.backgroundColor = UIColor(hex: 0x03AC00)
-    selectedCountLabel.font = UIFont.systemFont(ofSize: 14)
-    selectedCountLabel.textColor = UIColor.white
-    selectedCountLabel.textAlignment = .center
-    selectedCountLabel.layer.cornerRadius = selectedCountLabel.frame.size.height / 2
-    selectedCountLabel.layer.masksToBounds = true
-  
-    completionButton.addSubview(selectedCountLabel)
-    
-    completionLabel = UILabel(frame: CGRect(x: selectedCountLabelWidth, y: 0, width: completionButton.frame.width - selectedCountLabelWidth, height: 44))
-    completionLabel.textColor = UIColor(hex: 0x03AC00)
-    completionLabel.text = "共享"
-    completionLabel.font = UIFont.systemFont(ofSize: 14)
-    completionLabel.textAlignment = .center
-    completionButton.addSubview(completionLabel)
-    bottomBarLabel.addSubview(completionButton)
-    
-    
+    bottomBarBaseView.addSubview(completionButton)
+
     
   }
   

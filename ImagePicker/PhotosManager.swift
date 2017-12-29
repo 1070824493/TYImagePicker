@@ -124,7 +124,8 @@ class PhotosManager: NSObject {
       
       let title = assetCollection.localizedTitle
       
-      if title != nil && assetCollection.assetCollectionSubtype != .smartAlbumAllHidden{
+      if title != nil && assetCollection.assetCollectionSubtype != .smartAlbumAllHidden {//这个if和微信一致
+//      if title != nil && assetCollection.assetCollectionSubtype != .smartAlbumAllHidden && assetCollection.estimatedAssetCount > 0{
         if assetCollection.assetCollectionSubtype == defaultAlbum {
           self.assetCollectionList.insert(assetCollection, at: 0)
           self.currentAlbumIndex = 0
