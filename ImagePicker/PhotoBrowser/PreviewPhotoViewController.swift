@@ -121,7 +121,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
       make.width.equalTo(50)
     }
     
-    let image = self.ImageResourcePath("back_white_arrow@3x")
+    let image = self.ImageResourcePath("back_white_arrow", className: PreviewPhotoViewController.self)
     backButton.setImage(image, for: .normal)
     backButton.addTarget(self, action: #selector(PreviewPhotoViewController.onBack), for: .touchUpInside)
     
@@ -144,7 +144,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
       make.center.equalTo(selectButton)
     }
     
-    unselectedImageView.image = self.ImageResourcePath("imagepick_unchecked")
+    unselectedImageView.image = self.ImageResourcePath("imagepick_unchecked", className: PreviewPhotoViewController.self)
     
     //selectedButton
     selectedImageView = UIImageView()
@@ -154,7 +154,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
       make.center.equalTo(selectButton)
     }
     
-    selectedImageView.image = self.ImageResourcePath("imagepick_checked")
+    selectedImageView.image = self.ImageResourcePath("imagepick_checked", className: PreviewPhotoViewController.self)
     
   }
   

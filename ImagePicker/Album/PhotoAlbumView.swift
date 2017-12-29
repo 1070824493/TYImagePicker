@@ -77,7 +77,7 @@ extension PhotoAlbumView: UITableViewDataSource {
     PhotosManager.sharedInstance.fetchImage(with: indexPath.row, imageIndex: 0, sizeType: .thumbnail) { (image, _) -> Void in
       
       if image == nil {
-        cell.thumbImageView.image = self.ImageResourcePath("default_pic")
+        cell.thumbImageView.image = self.ImageResourcePath("default_pic", className: PhotoAlbumView.self)
       }else{
         cell.thumbImageView.image = image
         

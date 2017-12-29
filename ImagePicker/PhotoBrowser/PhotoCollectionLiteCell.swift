@@ -47,7 +47,7 @@ class PhotoCollectionLiteCell: UICollectionViewCell {
         return
       }
       
-      self.zoomImageScrollView.setImage(image == nil ? self.ImageResourcePath("default_pic") : image)
+      self.zoomImageScrollView.setImage(image == nil ? self.ImageResourcePath("default_pic", className: PhotoCollectionLiteCell.self) : image)
       
     })
     

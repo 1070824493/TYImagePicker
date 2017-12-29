@@ -90,7 +90,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   #
 
   s.source_files  = "ImagePicker/**/*.swift", "ImagePicker/**/*.xib"
-  s.resource = "ImagePicker/TYImagePicker.bundle"
+  s.resource = "ImagePicker/**/*.png"
 
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

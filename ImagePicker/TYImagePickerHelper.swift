@@ -237,15 +237,16 @@ extension NSObject {
 //    UIImage* infoImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"info" ofType:@"png"]];
 //    UIImage* successImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"success" ofType:@"png"]];
 //    UIImage* errorImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"error" ofType:@"png"]];
-    func ImageResourcePath(_ fileName: String) -> UIImage? {
-        let bundle = Bundle(for: TYImagePickerHelper.self)
+    func ImageResourcePath(_ fileName: String, className:Swift.AnyClass) -> UIImage? {
+        let bundle = Bundle(for: className)
+        let image = UIImage(named: fileName, in: bundle, compatibleWith: nil)
+//        if let url = bundle.url(forResource: "TYImagePicker", withExtension: "bundle") {
+//            if let imageBundle = Bundle(url: url) {
+//                let image  = UIImage(contentsOfFile: imageBundle.path(forResource: fileName, ofType: "png")!)
         
-        if let url = bundle.url(forResource: "TYImagePicker", withExtension: "bundle") {
-            if let imageBundle = Bundle(url: url) {
-                let image  = UIImage(contentsOfFile: imageBundle.path(forResource: fileName, ofType: "png")!)
                 return image
-            }
-        }
-        return nil
+//            }
+//        }
+//        return nil
     }
 }

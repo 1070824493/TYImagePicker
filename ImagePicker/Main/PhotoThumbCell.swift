@@ -183,7 +183,7 @@ class PhotoThumbCell: UICollectionViewCell {
     }
     selectedImageView.isHidden = false
     unselectedImageView.isHidden = false
-    
+    unselectedImageView.image = self.ImageResourcePath("imagepick_unchecked", className: PhotoThumbCell.self)
     selectedImageView.transform = isSelected == false ? CGAffineTransform(scaleX: 0.5, y: 0.5) : CGAffineTransform.identity
     self.selectedImageView.alpha = isSelected ? 1 : 0
     
