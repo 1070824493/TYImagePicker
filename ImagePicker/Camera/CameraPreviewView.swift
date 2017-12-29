@@ -81,17 +81,17 @@ class CameraPreviewView: UIView {
     }
     
     preLayer = AVCaptureVideoPreviewLayer(session: session)
-    preLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+    preLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     layer.addSublayer(preLayer)
     
   }
 
   fileprivate func getCamera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
     
-    for device in AVCaptureDevice.devices(for: AVMediaType.video) {
+    for device in AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) {
       
-      if device.position == position {
-        return device
+      if (device as? AVCaptureDevice)?.position == position {
+        return device as? AVCaptureDevice
       }
     }
     

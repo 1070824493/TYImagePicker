@@ -14,6 +14,8 @@ let kScreenH = UIScreen.main.bounds.height
 let kScreenW = UIScreen.main.bounds.width
 let longer = ((kScreenW > kScreenH) ? kScreenW : kScreenH)
 let isIPhoneX = (longer == 812 ? true : false)
+let kStatusBarOffset = isIPhoneX ? 24 : 0
+
 let kHomeIndicator: CGFloat = (isIPhoneX ? 34 : 0)
 let kBottomBarHeight: CGFloat = 50
 let completionBgColorDisable = #colorLiteral(red: 0.006263995543, green: 0.1826446056, blue: 0.3904125094, alpha: 1)
@@ -32,7 +34,8 @@ class PhotoColletionViewController: UIViewController {
 
   lazy private var backButton : UIButton = { [unowned self] in
     let back = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-    back.setAttributedTitle(NSAttributedString(string: "返回", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)]), for: .normal)
+//    back.setAttributedTitle(NSAttributedString(string: "返回", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)]), for: .normal)
+    back.setAttributedTitle(NSAttributedString(string: "返回", attributes: [NSForegroundColorAttributeName : UIColor.white ,NSFontAttributeName : UIFont.systemFont(ofSize: 16)]), for: .normal)
     back.setImage(#imageLiteral(resourceName: "back_white_arrow.png"), for: .normal)
     back.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
     return back
@@ -129,7 +132,8 @@ class PhotoColletionViewController: UIViewController {
     let countString = selectedCount == 0 ? "共享" : "共享(\(selectedCount))"
     let bgcolor = selectedCount == 0 ? completionBgColorDisable : completionBgColorEnable
     
-    completionButton.setAttributedTitle(NSAttributedString(string: countString, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15) , NSAttributedStringKey.foregroundColor : UIColor.white]), for: .normal)
+    completionButton.setAttributedTitle(NSAttributedString(string: countString, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 15) , NSForegroundColorAttributeName : UIColor.white]), for: .normal)
+    
     completionButton.backgroundColor = bgcolor
     completionButton.isEnabled = selectedCount != 0
     
@@ -174,7 +178,7 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  private func initNavigationBarButton(isShow: Bool) {
+  fileprivate func initNavigationBarButton(isShow: Bool) {
     
     //导航栏标题
     ablumButton = UIControl(frame: CGRect(x: 0 , y: 0, width: ablumButtonWidth, height: 44))
@@ -191,7 +195,7 @@ class PhotoColletionViewController: UIViewController {
     
     //导航栏右边取消按钮
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
-    navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white , NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)], for: .normal)
+    navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.white , NSFontAttributeName : UIFont.systemFont(ofSize: 16)], for: .normal)
     
     //导航栏左边返回按钮
     if isShow {
@@ -232,7 +236,7 @@ class PhotoColletionViewController: UIViewController {
     self.view.addSubview(bottomBarBaseView)
     
     bottomBarLabel = UILabel(frame: CGRect(x: 20, y: 0, width: kScreenW-20, height: kBottomBarHeight))
-    bottomBarLabel.attributedText = NSAttributedString(string: "选择图片后共享", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17) , NSAttributedStringKey.foregroundColor : UIColor.white])
+    bottomBarLabel.attributedText = NSAttributedString(string: "选择图片后共享", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 17) , NSForegroundColorAttributeName : UIColor.white])
     bottomBarLabel.backgroundColor = .black
     bottomBarLabel.textColor = .white
     bottomBarBaseView.addSubview(bottomBarLabel)
@@ -245,7 +249,7 @@ class PhotoColletionViewController: UIViewController {
     
     completionButton.layer.cornerRadius = 5
 
-    completionButton.setAttributedTitle(NSAttributedString(string: "共享", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15) , NSAttributedStringKey.foregroundColor : UIColor.white]), for: .normal)
+    completionButton.setAttributedTitle(NSAttributedString(string: "共享", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 15) , NSForegroundColorAttributeName : UIColor.white]), for: .normal)
     completionButton.isEnabled = false
     completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), for: .touchUpInside)
     
@@ -256,7 +260,7 @@ class PhotoColletionViewController: UIViewController {
   
   private func checkCamera(){
     
-    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
     if (AVAuthorizationStatus.denied == authStatus || AVAuthorizationStatus.restricted == authStatus){
       
       let alertController = UIAlertController(title: "相机被禁用", message: "请在设置－隐私－相机中开启", preferredStyle: .alert)

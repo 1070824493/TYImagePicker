@@ -94,8 +94,9 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     topBarTransparentView = UIView()
     view.addSubview(topBarTransparentView)
     topBarTransparentView.snp.makeConstraints { (make) -> Void in
-      make.top.right.left.equalTo(view)
-      make.height.equalTo(64)
+      make.right.left.equalTo(view)
+      make.height.equalTo(64+kStatusBarOffset)
+      make.top.equalTo(view)
     }
     
     topBarTransparentView.alpha = 0.7
@@ -105,8 +106,9 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     topBarContainerView = UIView()
     view.addSubview(topBarContainerView)
     topBarContainerView.snp.makeConstraints { (make) -> Void in
-      make.top.right.left.equalTo(view)
-      make.height.equalTo(64)
+      make.right.left.equalTo(view)
+      make.height.equalTo(64+kStatusBarOffset)
+      make.top.equalTo(view).offset(kStatusBarOffset)
     }
     
     topBarContainerView.backgroundColor = UIColor.clear
@@ -162,8 +164,9 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     bottomBarTransparentView = UIView()
     view.addSubview(bottomBarTransparentView)
     bottomBarTransparentView.snp.makeConstraints { (make) -> Void in
-      make.right.bottom.left.equalTo(view)
-      make.height.equalTo(44)
+      make.right.left.equalTo(view)
+      make.height.equalTo(44+kHomeIndicator)
+      make.bottom.equalTo(view)
     }
     
     bottomBarTransparentView.alpha = 0.7
@@ -173,8 +176,9 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     bottomBarContainerView = UIView()
     view.addSubview(bottomBarContainerView)
     bottomBarContainerView.snp.makeConstraints { (make) -> Void in
-      make.right.bottom.left.equalTo(view)
-      make.height.equalTo(44)
+      make.right.left.equalTo(view)
+      make.height.equalTo(44+kHomeIndicator)
+      make.bottom.equalTo(view)
     }
     
     bottomBarContainerView.backgroundColor = UIColor.clear
@@ -183,8 +187,9 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     completeButton = UIButton()
     bottomBarContainerView.addSubview(completeButton)
     completeButton.snp.makeConstraints { (make) -> Void in
-      make.right.bottom.top.equalTo(bottomBarContainerView)
+      make.right.top.equalTo(bottomBarContainerView)
       make.width.equalTo(50)
+      make.height.equalTo(44)
     }
     
     completeButton.setTitle("完成", for: UIControlState())
@@ -196,7 +201,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     selectedCountLabel = UILabel()
     bottomBarContainerView.addSubview(selectedCountLabel)
     selectedCountLabel.snp.makeConstraints { (make) -> Void in
-      make.centerY.equalTo(bottomBarContainerView)
+      make.centerY.equalTo(completeButton)
       make.right.equalTo(completeButton.snp.left)
       make.width.height.equalTo(20)
     }
