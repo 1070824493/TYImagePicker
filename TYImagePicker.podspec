@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "TYImagePicker"
-  s.version      = "0.2.0"
+  s.version      = "3.0.0"
   s.summary      = "A complete functions ImagePicker."
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/1070824493/TYImagePicker.git", :branch => 'master'}
+  s.source       = { :git => "https://github.com/1070824493/TYImagePicker.git", :tag => "s.version" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
