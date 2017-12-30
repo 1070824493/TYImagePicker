@@ -121,7 +121,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
       make.width.equalTo(50)
     }
     
-    let image = self.ImageResourcePath("back_white_arrow@3x")
+    let image = self.ImageResourcePath("back_white_arrow")
     backButton.setImage(image, for: .normal)
     backButton.addTarget(self, action: #selector(PreviewPhotoViewController.onBack), for: .touchUpInside)
     

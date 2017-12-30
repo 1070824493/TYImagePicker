@@ -42,7 +42,7 @@ class PhotoAlbumView: UIView {
   
   func setupUI(){
     
-    tableView = UITableView(frame: bounds, style: .plain)
+    tableView = UITableView(frame: CGRect(x: 0, y: kNavHeight, width: kScreenW, height: kScreenH - kNavHeight), style: .plain)
     tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     tableView.backgroundColor = UIColor.white
     tableView.tableFooterView = UIView()

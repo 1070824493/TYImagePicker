@@ -14,8 +14,8 @@ let kScreenH = UIScreen.main.bounds.height
 let kScreenW = UIScreen.main.bounds.width
 let longer = ((kScreenW > kScreenH) ? kScreenW : kScreenH)
 let isIPhoneX = (longer == 812 ? true : false)
-let kStatusBarOffset = isIPhoneX ? 24 : 0
-
+let kStatusBarOffset:CGFloat = (isIPhoneX ? 24 : 0)
+let kNavHeight:CGFloat = (64 + kStatusBarOffset)
 let kHomeIndicator: CGFloat = (isIPhoneX ? 34 : 0)
 let kBottomBarHeight: CGFloat = 50
 let completionBgColorDisable = #colorLiteral(red: 0.006263995543, green: 0.1826446056, blue: 0.3904125094, alpha: 1)
@@ -24,8 +24,6 @@ let completionBgColorEnable = #colorLiteral(red: 0, green: 0.364348799, blue: 0.
 class PhotoColletionViewController: UIViewController {
 
   private(set) var collectionView: UICollectionView!
-//  private var selectedCountLabel: UILabel!
-//  private var completionLabel: UILabel!
   private var completionButton: UIButton!
   private var bottomBarLabel:UILabel!
   private var bottomBarBaseView:UIView!
@@ -33,14 +31,12 @@ class PhotoColletionViewController: UIViewController {
   private var titleLabel: UILabel!
 
   lazy private var backButton : UIButton = { [unowned self] in
-    let back = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-//    back.setAttributedTitle(NSAttributedString(string: "返回", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)]), for: .normal)
+    let back = UIButton(frame: CGRect(x: 0, y: 0, width: 55, height: 30))
     back.setAttributedTitle(NSAttributedString(string: "返回", attributes: [NSForegroundColorAttributeName : UIColor.white ,NSFontAttributeName : UIFont.systemFont(ofSize: 16)]), for: .normal)
-    back.setImage(self.ImageResourcePath("back_white_arrow@3x"), for: .normal)
+    back.setImage(self.ImageResourcePath("back_white_arrow"), for: .normal)
     back.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
     return back
     }()
-//  private var indicatorImageView: UIImageView!
   private var ablumView: UIView!
   
   fileprivate var selectItemNum = 0
@@ -164,7 +160,7 @@ class PhotoColletionViewController: UIViewController {
     initNavigationBarButton(isShow: false)
     
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
-    collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH-kHomeIndicator-kBottomBarHeight), collectionViewLayout: collectionViewFlowLayout)
+    collectionView = UICollectionView(frame: CGRect(x: 0, y: kNavHeight, width: kScreenW, height: kScreenH-kHomeIndicator-kBottomBarHeight-kNavHeight), collectionViewLayout: collectionViewFlowLayout)
     collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     collectionView.backgroundColor = UIColor.white
     collectionView.register(UINib(nibName: thumbIdentifier, bundle: Bundle(for: PhotoColletionViewController.self)), forCellWithReuseIdentifier: thumbIdentifier)
