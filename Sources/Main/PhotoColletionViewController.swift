@@ -102,9 +102,8 @@ class PhotoColletionViewController: UIViewController {
   
   @objc func completeButtonClick() {
     
-    completionButton.removeFromSuperview()
-
     PhotosManager.sharedInstance.didFinish()
+    completionButton.removeFromSuperview()
     
   }
   
