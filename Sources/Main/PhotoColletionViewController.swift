@@ -119,8 +119,8 @@ class PhotoColletionViewController: UIViewController {
   
   @objc func onCancel() {
     
-    completionButton.removeFromSuperview()
     PhotosManager.sharedInstance.imagePicker.delegate?.pickedPhoto(PhotosManager.sharedInstance.imagePicker)
+    completionButton.removeFromSuperview()
     dismiss(animated: true) {
       PhotosManager.sharedInstance.cancel()
     }
