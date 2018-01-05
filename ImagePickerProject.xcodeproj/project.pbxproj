@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		103964E41FFB5F7F00DB583A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103964E21FFB5F7F00DB583A /* ImageCollectionViewCell.swift */; };
+		103964E51FFB5F7F00DB583A /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 103964E31FFB5F7F00DB583A /* ImageCollectionViewCell.xib */; };
 		10CE792C1FF72ED90099FB35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79041FF72ED90099FB35 /* ViewController.swift */; };
 		10CE792D1FF72ED90099FB35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79051FF72ED90099FB35 /* Assets.xcassets */; };
 		10CE792E1FF72ED90099FB35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79081FF72ED90099FB35 /* LaunchScreen.storyboard */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		103964E21FFB5F7F00DB583A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		103964E31FFB5F7F00DB583A /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		10CE79041FF72ED90099FB35 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		10CE79051FF72ED90099FB35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10CE79091FF72ED90099FB35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 				10CE790A1FF72ED90099FB35 /* Main.storyboard */,
 				10CE790C1FF72ED90099FB35 /* AppDelegate.swift */,
 				10CE792B1FF72ED90099FB35 /* Info.plist */,
+				103964E21FFB5F7F00DB583A /* ImageCollectionViewCell.swift */,
+				103964E31FFB5F7F00DB583A /* ImageCollectionViewCell.xib */,
 			);
 			path = ImagePickerDemo;
 			sourceTree = "<group>";
@@ -289,6 +295,7 @@
 				10CE792F1FF72ED90099FB35 /* Main.storyboard in Resources */,
 				10CE79741FF72EF10099FB35 /* PhotoThumbCell.xib in Resources */,
 				10CE792D1FF72ED90099FB35 /* Assets.xcassets in Resources */,
+				103964E51FFB5F7F00DB583A /* ImageCollectionViewCell.xib in Resources */,
 				10CE792E1FF72ED90099FB35 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,6 +364,7 @@
 				10CE79781FF72EF10099FB35 /* PhotoAlbumCell.swift in Sources */,
 				10CE79661FF72EF10099FB35 /* CameraPreviewCell.swift in Sources */,
 				10CE79621FF72EF10099FB35 /* PhotosManager.swift in Sources */,
+				103964E41FFB5F7F00DB583A /* ImageCollectionViewCell.swift in Sources */,
 				10CE79791FF72EF10099FB35 /* PhotoAlbumView.swift in Sources */,
 				10CE797B1FF72EF10099FB35 /* PopViewHelper.swift in Sources */,
 				10CE79751FF72EF10099FB35 /* PhotoThumbCell.swift in Sources */,

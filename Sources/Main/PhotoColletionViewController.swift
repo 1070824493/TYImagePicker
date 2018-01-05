@@ -13,6 +13,7 @@ import SnapKit
 let kScreenH = UIScreen.main.bounds.height
 let kScreenW = UIScreen.main.bounds.width
 let longer = ((kScreenW > kScreenH) ? kScreenW : kScreenH)
+let shorter = ((kScreenW < kScreenH) ? kScreenW : kScreenH)
 let isIPhoneX = (longer == 812 ? true : false)
 let kStatusBarOffset:CGFloat = (isIPhoneX ? 24 : 0)
 let kNavHeight:CGFloat = (64 + kStatusBarOffset)
@@ -51,20 +52,36 @@ class PhotoColletionViewController: UIViewController {
   fileprivate let ablumButtonWidth: CGFloat = 120
   fileprivate let selectedCountLabelWidth: CGFloat = 20
   fileprivate let indicatorWidth: CGFloat = 15
+
   
   var canOpenCamera = true
   var cameraHelper: CameraHelper!
-  var rowCount = 4
+  var rowCountH = 6 //横屏显示列数
+  var rowCountV = 4 //竖屏显示列数
   var maskEnable = false
     
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    initAblum()
+    NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    self.view.backgroundColor = .white
     setupUI()
     
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+  }
+  
+  @available(iOS 11.0, *)
+  override func viewSafeAreaInsetsDidChange() {
+    super.viewSafeAreaInsetsDidChange()
+    updateSafeAreaLayout(edg: view.safeAreaInsets)
+  }
+  
+    
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -75,11 +92,12 @@ class PhotoColletionViewController: UIViewController {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
-    imageWidth = (view.frame.width - midSpace * CGFloat(rowCount - 1)) / CGFloat(rowCount)
-    
+
+    let count = UIApplication.shared.statusBarOrientation == .landscapeRight || UIApplication.shared.statusBarOrientation == .landscapeLeft ? rowCountH : rowCountV
+
+    imageWidth = (view.frame.width - midSpace * CGFloat(count - 1)) / CGFloat(count)
     let scale = UIScreen.main.scale
     PhotosManager.assetGridThumbnailSize = CGSize(width: imageWidth * scale, height: imageWidth * scale)
-    
   }
   
   @objc func completeButtonClick() {
@@ -92,18 +110,18 @@ class PhotoColletionViewController: UIViewController {
   
   @objc func albumButtonClick() {
     
-    if popViewHelp.isShow {
-      popViewHelp.hidePoppingView()
-    } else {
-      popViewHelp.showPoppingView()
+    if ablumView != nil {
+      ablumView.removeFromSuperview()
+      ablumView = nil
     }
-    
+    initAblum()
+    popViewHelp.showPoppingView()
   }
   
   @objc func onCancel() {
     
     completionButton.removeFromSuperview()
-
+    PhotosManager.sharedInstance.imagePicker.delegate?.pickedPhoto(PhotosManager.sharedInstance.imagePicker)
     dismiss(animated: true) {
       PhotosManager.sharedInstance.cancel()
     }
@@ -153,25 +171,77 @@ class PhotoColletionViewController: UIViewController {
    *  private  Implements
    ******************************************************************************/
    //MARK: - private Implements
+  private func updateSafeAreaLayout(edg:UIEdgeInsets) {
+    completionButton.snp.remakeConstraints { (make) in
+      make.top.equalToSuperview().offset(10)
+      make.right.equalToSuperview().offset(-10-edg.right)
+      make.bottom.equalToSuperview().offset(-10-kHomeIndicator)
+      make.width.equalTo(70)
+    }
+    bottomBarLabel.snp.remakeConstraints { (make) in
+      make.left.equalToSuperview().offset(20+edg.left)
+      make.top.equalToSuperview().offset(10)
+      make.right.equalToSuperview()
+      make.bottom.equalToSuperview().offset(-10-kHomeIndicator)
+    }
+  }
+  
+  @objc private func orientationChanged() {
+    let orient = UIDevice.current.orientation
+    switch orient {
+    case .portrait :
+      if !popViewHelp.isShow {
+        self.setupUI()
+      }else{
+        ablumView.snp.remakeConstraints({ (make) in
+          make.top.right.left.bottom.equalToSuperview()
+          ablumView.layoutSubviews()
+        })
+        
+      }
+      break
+    case .landscapeLeft,.landscapeRight:
+      if !popViewHelp.isShow {
+        self.setupUI()
+      }else{
+        ablumView.snp.remakeConstraints({ (make) in
+          make.top.right.left.bottom.equalToSuperview()
+          ablumView.layoutSubviews()
+        })
+      }
+      break
+    default:
+      break
+    }
+  }
   
   private func setupUI() {
-    
-    initAblum()
     initNavigationBarButton(isShow: false)
-    
+    initCollectionView()
+    initBottomBar()
+  }
+  
+  fileprivate func initCollectionView(){
+
+    guard collectionView == nil else {
+      collectionView.reloadData()
+      return
+    }
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
-    collectionView = UICollectionView(frame: CGRect(x: 0, y: kNavHeight, width: kScreenW, height: kScreenH-kHomeIndicator-kBottomBarHeight-kNavHeight), collectionViewLayout: collectionViewFlowLayout)
+    collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionViewFlowLayout)
     collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     collectionView.backgroundColor = UIColor.white
     collectionView.register(UINib(nibName: thumbIdentifier, bundle: Bundle(for: PhotoColletionViewController.self)), forCellWithReuseIdentifier: thumbIdentifier)
     collectionView.register(UINib(nibName: previewIdentifier, bundle: Bundle(for: PhotoColletionViewController.self)), forCellWithReuseIdentifier: previewIdentifier)
-
+    
     collectionView.dataSource = self
     collectionView.delegate = self
+    
     view.addSubview(collectionView)
-    
-    initCompletionButton()
-    
+    collectionView.snp.makeConstraints { (make) in
+      make.top.left.right.equalToSuperview()
+      make.bottom.equalToSuperview().offset(-kBottomBarHeight - kHomeIndicator)
+    }
   }
   
   fileprivate func initNavigationBarButton(isShow: Bool) {
@@ -200,21 +270,12 @@ class PhotoColletionViewController: UIViewController {
     }else{
       navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
-//    indicatorImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: indicatorWidth, height: indicatorWidth))
-//    ablumButton.addSubview(indicatorImageView)
-//    indicatorImageView.center.y = titleLabel.center.y
-//    indicatorImageView.frame.origin.x = titleLabel.frame.maxX
-//
-//    indicatorImageView.contentMode = .scaleAspectFit
-//    let image = UIImage(named: "ic_down_arrow", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
-//    indicatorImageView.image = image
     
   }
   
   private func initAblum() {
   
     ablumView = PhotoAlbumView(frame: view.bounds, delegate: self)
-//    self.view.addSubview(ablumView)
     popViewHelp = PopViewHelper(superView: view, targetView: ablumView, viewPopDirection: .fromLeft, maskStatus: .normal)
     popViewHelp.showAnimateDuration = 0.35
     popViewHelp.hideAnimateDuration = 0.35
@@ -223,34 +284,48 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  private func initCompletionButton() {
+  private func initBottomBar() {
   
     //创建底部工具栏
-    
-    bottomBarBaseView = UIView(frame: CGRect(x: 0, y: kScreenH - kBottomBarHeight - kHomeIndicator, width: kScreenW, height: kBottomBarHeight))
+    guard bottomBarBaseView == nil else {
+      bottomBarBaseView.setNeedsLayout()
+      bottomBarBaseView.layoutIfNeeded()
+      return
+    }
+    bottomBarBaseView = UIView()
     bottomBarBaseView.backgroundColor = .black
     self.view.addSubview(bottomBarBaseView)
-    
-    bottomBarLabel = UILabel(frame: CGRect(x: 20, y: 0, width: kScreenW-20, height: kBottomBarHeight))
+    bottomBarBaseView.snp.makeConstraints { (make) in
+      make.left.right.equalToSuperview()
+      make.height.equalTo(kBottomBarHeight + kHomeIndicator)
+      make.bottom.equalToSuperview()
+    }
+    bottomBarLabel = UILabel()
     bottomBarLabel.attributedText = NSAttributedString(string: "选择图片后共享", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 17) , NSForegroundColorAttributeName : UIColor.white])
     bottomBarLabel.backgroundColor = .black
     bottomBarLabel.textColor = .white
     bottomBarBaseView.addSubview(bottomBarLabel)
+    bottomBarLabel.snp.makeConstraints { (make) in
+      make.left.equalToSuperview().offset(20)
+      make.top.equalToSuperview().offset(10)
+      make.right.equalToSuperview()
+      make.bottom.equalToSuperview().offset(-10-kHomeIndicator)
+    }
     
     completionButton = UIButton(type: .custom)
-    completionButton.frame = CGRect(x: kScreenW - 10 - 70, y: 10, width: 70, height: 30)
     completionButton.setTitleColor(.white, for: .normal)
     completionButton.backgroundColor = completionBgColorDisable
-    
-    
     completionButton.layer.cornerRadius = 5
-
     completionButton.setAttributedTitle(NSAttributedString(string: "共享", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 15) , NSForegroundColorAttributeName : UIColor.white]), for: .normal)
     completionButton.isEnabled = false
     completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), for: .touchUpInside)
-    
     bottomBarBaseView.addSubview(completionButton)
-
+    completionButton.snp.makeConstraints { (make) in
+      make.top.equalToSuperview().offset(10)
+      make.right.equalToSuperview().offset(-10)
+      make.bottom.equalToSuperview().offset(-10-kHomeIndicator)
+      make.width.equalTo(70)
+    }
     
   }
   
@@ -286,15 +361,14 @@ class PhotoColletionViewController: UIViewController {
     }
   }
   
-//  fileprivate func animateIndicator(_ isIndicatShowing: Bool) {
-//
-//    UIView.animate(withDuration: 0.3, animations: {
-//
-//      let transform = CGAffineTransform(rotationAngle: isIndicatShowing ? CGFloat(Double.pi) : 0)
-//      self.indicatorImageView.transform = transform
-//
-//    })
-//  }
+  
+  fileprivate func isLandscape() -> Bool {
+    if UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft {
+      return true
+    }
+    return false
+  }
+  
 }
 
 extension PhotoColletionViewController: UICollectionViewDataSource {
@@ -410,8 +484,6 @@ extension PhotoColletionViewController: PhotoAlbumViewDelegate {
     popViewHelp.hidePoppingView()
     collectionView.reloadData()
     cellFadeAnimation = true
-
-
   }
   
   @objc(collectionView:willDisplayCell:forItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

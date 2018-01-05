@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCellIdentifier" id="gTV-IL-0wX" customClass="ImageCollectionViewCell" customModule="ImagePickerProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="skQ-qz-Pld">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="skQ-qz-Pld" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="6cd-lx-uUr"/>
+                <constraint firstAttribute="bottom" secondItem="skQ-qz-Pld" secondAttribute="bottom" id="P5k-R9-rqX"/>
+                <constraint firstItem="skQ-qz-Pld" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="afr-wd-8dE"/>
+                <constraint firstAttribute="trailing" secondItem="skQ-qz-Pld" secondAttribute="trailing" id="tH8-ED-crl"/>
+            </constraints>
+            <connections>
+                <outlet property="imgView" destination="skQ-qz-Pld" id="C8I-UM-ncu"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

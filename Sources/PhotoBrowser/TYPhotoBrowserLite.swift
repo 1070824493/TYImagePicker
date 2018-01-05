@@ -111,7 +111,12 @@ class TYPhotoBrowserLite: UIViewController {
     mainCollectionView.backgroundColor = UIColor.black
     mainCollectionView.register(PhotoCollectionLiteCell.self, forCellWithReuseIdentifier: "PhotoCollectionLiteCell")
     view.addSubview(mainCollectionView)
-    
+    mainCollectionView.snp.makeConstraints { (make) in
+      make.left.equalToSuperview().offset(-padding)
+      make.top.equalToSuperview()
+      make.width.equalToSuperview().offset(padding*2)
+      make.height.equalToSuperview()
+    }
   }
   
   /**

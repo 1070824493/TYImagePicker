@@ -13,14 +13,14 @@ public protocol TYImagePickerDelegate: NSObjectProtocol {
   
   func pickedPhoto(_ imagePickerHelper: TYImagePickerHelper, didPickResource resource: TYResourceType)
   func pickedPhoto(_ imagePickerHelper: TYImagePickerHelper, shouldPickResource resource: TYResourceType) -> Bool
-  
+  func pickedPhoto(_ imagePickerHelperDidCancel: TYImagePickerHelper)
 }
 
 public extension TYImagePickerDelegate {
   
   func pickedPhoto(_ imagePickerHelper: TYImagePickerHelper, didPickResource resource: TYResourceType) {}
   func pickedPhoto(_ imagePickerHelper: TYImagePickerHelper, shouldPickResource resource: TYResourceType) -> Bool { return true }
-  
+  func pickedPhoto(_ imagePickerHelperDidCancel: TYImagePickerHelper){}
 }
 
 public enum TYImagePickerType {
@@ -55,16 +55,15 @@ open class TYImagePickerHelper: NSObject {
   public var maxSelectedCount: Int = 9
   public var isCrop: Bool = false
   public var type: TYImagePickerType = .albumAndCamera
-  public var rowCount: Int = 4
+  public var rowCountH: Int = 6
+  public var rowCountV: Int = 4
   public var maskEnable:Bool = false
   public var resourceOption: TYResourceOption = .image
   
   public init(delegate: TYImagePickerDelegate?, handlerViewController: UIViewController? = nil) {
     self.delegate = delegate
     self.handlerViewController = handlerViewController ?? (delegate as! UIViewController)
-    self.maxSelectedCount = 1
     super.init()
-    
   }
   
   /******************************************************************************
@@ -220,7 +219,8 @@ open class TYImagePickerHelper: NSObject {
     
     let viewController = PhotoColletionViewController()
     viewController.canOpenCamera = self.type != .album
-    viewController.rowCount = self.rowCount
+    viewController.rowCountH = self.rowCountH
+    viewController.rowCountV = self.rowCountV
     viewController.maskEnable = self.maskEnable
     let navigationController = UINavigationController(rootViewController: viewController)
     navigationController.navigationBar.barTintColor = .black

@@ -35,7 +35,7 @@ class PhotosManager: NSObject {
   private lazy var imageManager: PHCachingImageManager = self.initImageManager()
   private var currentAlbumFetchResult: PHFetchResult<PHAsset>!
   private(set) var currentImageAlbumFetchResult: PHFetchResult<PHAsset>!
-  private(set) var selectedImages: Set<PHAsset> = []
+  private(set) var selectedImages: Array<PHAsset> = []
   private(set) var selectedVideo: PHAsset?
   
   var currentAlbumIndex: Int? {
@@ -319,7 +319,8 @@ class PhotosManager: NSObject {
     
     if isExist {
       lastCount = selectedImages.count
-      selectedImages.remove(asset)
+      let index:Int = selectedImages.index(of: asset)!
+      selectedImages.remove(at: index)
     } else {
       
       if imagePicker.maxSelectedCount == selectedImages.count {
@@ -328,7 +329,7 @@ class PhotosManager: NSObject {
         
       } else {
         lastCount = selectedImages.count
-        selectedImages.insert(asset)
+        selectedImages.append(asset)
         return true
         
       }
@@ -380,9 +381,8 @@ class PhotosManager: NSObject {
   }
   
   func fetchSelectedImages(_ handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
-    
-    let imageAssets = Array(selectedImages).sorted(by: {$0.creationDate ?? Date() > $1.creationDate ?? Date()})
-    getAllSelectedImageInCurrentAlbum(with: imageAssets, imageList: [], handleCompletion: handleCompletion)
+
+    getAllSelectedImageInCurrentAlbum(with: selectedImages, imageList: [], handleCompletion: handleCompletion)
     
   }
   

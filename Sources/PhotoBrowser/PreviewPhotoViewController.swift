@@ -28,7 +28,13 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     
     initTopbar()
     initBottomBar()
-
+    
+  }
+  
+  @available(iOS 11.0, *)
+  override func viewSafeAreaInsetsDidChange() {
+//    super.viewSafeAreaInsetsDidChange()
+    self.updateSafeAreaLayout(edg: view.safeAreaInsets)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +58,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     selectedCountLabel.layer.masksToBounds = true
 
   }
+ 
   
   @objc func onBack() {
     _ = navigationController?.popViewController(animated: true)
@@ -87,8 +94,39 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     print(#function)
   }
   
+  func updateSafeAreaLayout(edg:UIEdgeInsets) {
+    topBarTransparentView.snp.remakeConstraints { (make) in
+      make.right.left.equalTo(view)
+      make.height.equalTo(44+edg.top)
+      make.top.equalTo(view)
+    }
+    topBarContainerView.snp.remakeConstraints { (make) -> Void in
+      make.right.left.equalTo(view)
+      make.height.equalTo(44+edg.top)
+      make.top.equalTo(view)
+    }
+    backButton.snp.remakeConstraints { (make) -> Void in
+      make.top.equalToSuperview().offset(edg.top)
+      make.bottom.equalTo(topBarContainerView)
+      make.width.equalTo(50)
+      make.left.equalTo(topBarContainerView).offset(edg.left)
+    }
+    selectButton.snp.remakeConstraints { (make) -> Void in
+      make.top.equalToSuperview().offset(edg.top)
+      make.bottom.equalTo(topBarContainerView)
+      make.right.equalTo(topBarContainerView).offset(-10-edg.right)
+      make.width.equalTo(50)
+    }
+    completeButton.snp.remakeConstraints { (make) -> Void in
+      make.top.equalTo(bottomBarContainerView)
+      make.right.equalTo(bottomBarContainerView).offset(-edg.right)
+      make.width.equalTo(50)
+      make.height.equalTo(44)
+    }
+    view.layoutIfNeeded()
+  }
+  
   func initTopbar() {
-    
     
     //topBarTransparentView
     topBarTransparentView = UIView()
@@ -108,7 +146,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     topBarContainerView.snp.makeConstraints { (make) -> Void in
       make.right.left.equalTo(view)
       make.height.equalTo(64+kStatusBarOffset)
-      make.top.equalTo(view).offset(kStatusBarOffset)
+      make.top.equalTo(view)
     }
     
     topBarContainerView.backgroundColor = UIColor.clear
@@ -273,4 +311,5 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     selectedCountLabel.text = countString
     
   }
+  
 }

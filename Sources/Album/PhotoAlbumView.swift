@@ -42,7 +42,7 @@ class PhotoAlbumView: UIView {
   
   func setupUI(){
     
-    tableView = UITableView(frame: CGRect(x: 0, y: kNavHeight, width: kScreenW, height: kScreenH - kNavHeight), style: .plain)
+    tableView = UITableView(frame: CGRect.zero, style: .plain)
     tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     tableView.backgroundColor = UIColor.white
     tableView.tableFooterView = UIView()
@@ -53,7 +53,9 @@ class PhotoAlbumView: UIView {
     tableView.separatorColor = UIColor.separatorColor
     tableView.rowHeight = 60.0
     addSubview(tableView)
-    
+    tableView.snp.makeConstraints { (make) in
+      make.top.left.right.bottom.equalToSuperview()
+    }
     tableView.reloadData()
     
   }

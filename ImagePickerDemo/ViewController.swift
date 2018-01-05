@@ -9,13 +9,23 @@
 import UIKit
 
 class ViewController: UIViewController {
+    //轮播图相关
+    
+    @IBOutlet weak var customCollectionView: UICollectionView!
+    //    var customCollectionView: UICollectionView!
+    var selectedImages: [UIImage]! = []
+    let identifier = "imageCellIdentifier"
+    override func viewDidLoad() {
+        customCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
+    }
 
   @IBOutlet var isCropSwitch: UISwitch!
   @IBOutlet weak var maskEnableSwitch: UISwitch!
   @IBOutlet var maxCountTextField: UITextField!
   @IBOutlet weak var numberOfColumnField: UITextField!
     
-  @IBOutlet var imageViews: [UIImageView]!
+  @IBOutlet weak var columnHField: UITextField!
+  //  @IBOutlet var imageViews: [UIImageView]!
   
   fileprivate lazy var imagePickerHelper: TYImagePickerHelper = {
     return TYImagePickerHelper(delegate: self)
@@ -24,7 +34,8 @@ class ViewController: UIViewController {
   var isCrop: Bool = true
   var type: TYImagePickerType = .albumAndCamera
   var maxCount = 9
-  var rowCount = 4
+  var rowCountH = 6
+  var rowCountV = 4
   var maskEnable = false
   var reourceOption: TYResourceOption = [.image]
   
@@ -34,7 +45,8 @@ class ViewController: UIViewController {
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
     imagePickerHelper.resourceOption = reourceOption
-    imagePickerHelper.rowCount = rowCount
+    imagePickerHelper.rowCountH = rowCountH
+    imagePickerHelper.rowCountV = rowCountV
     imagePickerHelper.maskEnable = maskEnable
     imagePickerHelper.start()
   }
@@ -93,9 +105,13 @@ class ViewController: UIViewController {
   @IBAction func onColumnChange(_ sender: UITextField) {
     
     guard let rowCount = Int(sender.text!) else { return }
-    self.rowCount = rowCount
+    self.rowCountV = rowCount
   }
   
+  @IBAction func onColumnChangeH(_ sender: UITextField) {
+    guard let rowCount = Int(sender.text!) else { return }
+    self.rowCountH = rowCount
+  }
 }
 
 extension ViewController: TYImagePickerDelegate {
@@ -112,17 +128,31 @@ extension ViewController: TYImagePickerDelegate {
     }
     
     if case .image(images: let images) = resource {
-      print(images.count)
-      
-      for (index, image) in images.enumerated() {
-        
-        if index >= imageViews.count {
-          return
-        }
-        
-        imageViews[index].image = image
-      }
+        print(images.count)
+        selectedImages = images
+        customCollectionView.reloadData()
     }
   }
+  
+  func pickedPhoto(_ imagePickerHelperDidCancel: TYImagePickerHelper) {
+    print("取消选择")
+  }
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    //MARK: - UICollectionViewDataSource
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return selectedImages.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ImageCollectionViewCell
+
+        cell.imgView?.image = selectedImages[indexPath.row]
+        return cell
+    }
+    
+    //MARK: - UICollectionViewDelegate
+    
 }
 
