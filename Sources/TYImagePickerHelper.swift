@@ -108,7 +108,9 @@ open class TYImagePickerHelper: NSObject {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
                 if status == PHAuthorizationStatus.authorized {
-                    self.showAblum()
+                    DispatchQueue.main.async {
+                        self.showAblum()
+                    }
                 }else{
                     self.delegate?.pickedPhoto(self)
                 }
