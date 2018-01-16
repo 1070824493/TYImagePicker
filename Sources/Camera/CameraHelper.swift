@@ -31,7 +31,7 @@ class CameraHelper: NSObject {
   
   func openCamera() {
 
-    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+    if UIImagePickerController.isSourceTypeAvailable(.camera) && AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == .authorized {
       imagePicker = UIImagePickerController()
       imagePicker.sourceType = .camera
       imagePicker.cameraDevice = .front
