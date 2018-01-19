@@ -40,7 +40,7 @@ class CameraHelper: NSObject {
       handlerViewController?.modalPresentationStyle = .overCurrentContext
       handlerViewController?.present(imagePicker, animated: true, completion: nil)
     } else {
-      let _ = UIAlertView(title: "相机不可用", message: nil, delegate: nil, cancelButtonTitle: "确定").show()
+      let _ = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerCameraUnavailable"), message: nil, delegate: nil, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerSureText")).show()
     }
   }
 }

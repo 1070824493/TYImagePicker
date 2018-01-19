@@ -42,9 +42,12 @@ class TYPhotoBrowserLite: UIViewController {
     self.delegate = delegate
     self.quitBlock = quitBlock
     super.init(nibName: nil, bundle: nil)
-
+    
   }
   
+  deinit {
+      NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+  }
   required init?(coder aDecoder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
   }
@@ -53,7 +56,7 @@ class TYPhotoBrowserLite: UIViewController {
     super.viewDidLoad()
   
     initView()
-    
+    NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -70,10 +73,8 @@ class TYPhotoBrowserLite: UIViewController {
     hideNavigationBar()
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
+    
+    
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -82,6 +83,34 @@ class TYPhotoBrowserLite: UIViewController {
   
   override var prefersStatusBarHidden : Bool {
     return true
+  }
+  
+  @objc private func orientationChanged() {
+    
+    
+    
+    let orient = UIDevice.current.orientation
+    switch orient {
+    case .landscapeLeft,.landscapeRight,.portrait:
+      
+      print("orientationChanged:\(currentIndex)")
+      
+      mainCollectionView.snp.makeConstraints { (make) in
+        make.left.equalToSuperview().offset(-padding)
+        make.top.equalToSuperview()
+        make.width.equalToSuperview().offset(padding*2)
+        make.height.equalToSuperview()
+      }
+      let layout:UICollectionViewFlowLayout = mainCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+      layout.itemSize = CGSize(width: view.bounds.width + padding * 2, height: view.bounds.height)
+      mainCollectionView.setCollectionViewLayout(layout, animated: false)
+      mainCollectionView.reloadData()
+      mainCollectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: false)
+
+      break
+    default:
+      break
+    }
   }
   
   fileprivate func initView() {
@@ -177,7 +206,7 @@ extension TYPhotoBrowserLite: UICollectionViewDelegateFlowLayout {
     if let _showPhotoIndex = showPhotoIndex , currentIndex != _showPhotoIndex.row {
       currentIndex = showPhotoIndex!.row
     }
-    
+    print("scrollViewDidScroll:\(currentIndex)")
   }
   
 }

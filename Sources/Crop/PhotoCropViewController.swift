@@ -180,7 +180,7 @@ class PhotoCropViewController: UIViewController {
       make.width.equalTo(60)
     }
     
-    completeButton.setTitle("选取", for: UIControlState())
+    completeButton.setTitle(self.GetLocalizableText(key: "TYImagePickerChooseText"), for: UIControlState())
     completeButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
     completeButton.setTitleColor(UIColor.white, for: UIControlState())
     completeButton.addTarget(self, action: #selector(PhotoCropViewController.onComplete), for: .touchUpInside)
@@ -193,7 +193,7 @@ class PhotoCropViewController: UIViewController {
       make.width.equalTo(60)
     }
     
-    cancelButton.setTitle("取消", for: UIControlState())
+    cancelButton.setTitle(self.GetLocalizableText(key: "TYImagePickerCancelText"), for: UIControlState())
     cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
     cancelButton.setTitleColor(UIColor.white, for: UIControlState())
     cancelButton.addTarget(self, action: #selector(PhotoCropViewController.onCancel), for: .touchUpInside)

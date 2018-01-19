@@ -116,7 +116,7 @@ open class TYImagePickerHelper: NSObject {
                 }
             })
         case .restricted,.denied:
-            let alertView = UIAlertView(title: "当前无相册权限", message: "是否前往授权?", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+            let alertView = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerNoAuthTitle"), message: self.GetLocalizableText(key: "TYImagePickerNoAuthMessage"), delegate: self, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerCancelText"), otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
             alertView.show()
         case .authorized:
             showAblum()
@@ -251,6 +251,11 @@ extension NSObject {
         let bundle = Bundle(for: TYImagePickerHelper.self)
         let image  = UIImage(named: fileName, in: bundle, compatibleWith: nil)
         return image
+    }
+  
+    func GetLocalizableText(key: String) -> String {
+        let bundle = Bundle(for: TYImagePickerHelper.self)
+        return bundle.localizedString(forKey: key, value: "", table: "TYImagePickerLocalize")
     }
 }
 

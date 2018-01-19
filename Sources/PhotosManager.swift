@@ -262,12 +262,12 @@ class PhotosManager: NSObject {
         
         if isInICloud {
           
-          let alertView = UIAlertView(title: "无法选取图片", message: "该图片尚未从iCloud下载\n请使用本地图片", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+          let alertView = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerCanNotChooseImage"), message: self.GetLocalizableText(key: "TYImagePickerCanNotChooseMessage"), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
           alertView.show()
           
         } else {
           
-          let alertView = UIAlertView(title: "", message: "选取图片失败", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+          let alertView = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerChooseFailedPicture"), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
           alertView.show()
 
         }
@@ -287,12 +287,12 @@ class PhotosManager: NSObject {
         
         if isInICloud {
           
-          let alertView = UIAlertView(title: "无法选取图片", message: "该图片尚未从iCloud下载\n请使用本地图片", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+          let alertView = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerCanNotChooseVideo"), message: self.GetLocalizableText(key: "TYImagePickerCanNotChooseMessage"), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
           alertView.show()
           
         } else {
           
-          let alertView = UIAlertView(title: "", message: "选取图片失败", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+          let alertView = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerChooseFailedVideo"), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
           alertView.show()
           
         }

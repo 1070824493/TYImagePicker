@@ -118,9 +118,9 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
       make.width.equalTo(50)
     }
     completeButton.snp.remakeConstraints { (make) -> Void in
-      make.top.equalTo(bottomBarContainerView)
+      make.top.bottom.equalTo(bottomBarContainerView)
       make.right.equalTo(bottomBarContainerView).offset(-edg.right)
-      make.width.equalTo(50)
+      make.width.greaterThanOrEqualTo(50)
       make.height.equalTo(44)
     }
     view.layoutIfNeeded()
@@ -225,12 +225,13 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     completeButton = UIButton()
     bottomBarContainerView.addSubview(completeButton)
     completeButton.snp.makeConstraints { (make) -> Void in
-      make.right.top.equalTo(bottomBarContainerView)
-      make.width.equalTo(50)
+      make.right.equalTo(bottomBarContainerView)
+        make.top.bottom.equalTo(bottomBarContainerView)
+      make.width.greaterThanOrEqualTo(50)
       make.height.equalTo(44)
     }
     
-    completeButton.setTitle("完成", for: UIControlState())
+    completeButton.setTitle(self.GetLocalizableText(key: "TYImagePickerCompleteButtonText"), for: UIControlState())
     completeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     completeButton.setTitleColor(UIColor.green, for: UIControlState())
     completeButton.addTarget(self, action: #selector(PreviewPhotoViewController.onComplete), for: .touchUpInside)
@@ -265,11 +266,11 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     let isSuccess = PhotosManager.sharedInstance.selectPhoto(with: currentAsset)
     
     if !isSuccess {
-      
-      let alert = UIAlertView(title: "", message: "你最多只能选择\(PhotosManager.sharedInstance.maxSelectedCount)张照片", delegate: nil, cancelButtonTitle: "我知道了")
-      alert.show()
-      
-      return
+        if PhotosManager.sharedInstance.maxSelectedCount == 9 {
+            let alert = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), delegate: nil, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerSureText"))
+            alert.show()
+        }
+        return
     }
     
     let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: currentAsset)
