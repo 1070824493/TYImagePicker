@@ -141,7 +141,7 @@ class PhotoColletionViewController: UIViewController {
     let selectedVideoCount = PhotosManager.sharedInstance.selectedVideo == nil ? 0 : 1
     
     let selectedCount = max(selectedImageCount, selectedVideoCount)
-    let countString = selectedCount == 0 ? self.GetLocalizableText(key: "TYImagePickerShareButtonText") : self.GetLocalizableText(key: "TYImagePickerShareButtonText") + "\(selectedCount)"
+    let countString = selectedCount == 0 ? self.GetLocalizableText(key: "TYImagePickerShareButtonText") : self.GetLocalizableText(key: "TYImagePickerShareButtonText") + "(\(selectedCount))"
     let bgcolor = selectedCount == 0 ? completionBgColorDisable : completionBgColorEnable
     
     completionButton.setAttributedTitle(NSAttributedString(string: countString, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 15) , NSForegroundColorAttributeName : UIColor.white]), for: .normal)
