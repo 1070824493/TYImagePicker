@@ -16,7 +16,7 @@ let longer = ((kScreenW > kScreenH) ? kScreenW : kScreenH)
 let shorter = ((kScreenW < kScreenH) ? kScreenW : kScreenH)
 let isIPhoneX = (longer == 812 ? true : false)
 let kStatusBarOffset:CGFloat = (isIPhoneX ? 24 : 0)
-let kNavHeight:CGFloat = (64 + kStatusBarOffset)
+let kNavHeight:CGFloat = UIApplication.shared.statusBarOrientation.isPortrait ? (64 + kStatusBarOffset) : 44
 let kHomeIndicator: CGFloat = (isIPhoneX ? 34 : 0)
 let kBottomBarHeight: CGFloat = 50
 let completionBgColorDisable = #colorLiteral(red: 0.006263995543, green: 0.1826446056, blue: 0.3904125094, alpha: 1)
@@ -32,9 +32,10 @@ class PhotoColletionViewController: UIViewController {
   private var titleLabel: UILabel!
 
   lazy private var backButton : UIButton = { [unowned self] in
-    let back = UIButton(frame: CGRect(x: 0, y: 0, width: 55, height: 30))
+    let back = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
     back.setAttributedTitle(NSAttributedString(string: self.GetLocalizableText(key: "TYImagePickerBackText") , attributes: [NSForegroundColorAttributeName : UIColor.white ,NSFontAttributeName : UIFont.systemFont(ofSize: 16)]), for: .normal)
     back.setImage(self.ImageResourcePath("back_white_arrow"), for: .normal)
+    back.contentMode = .scaleAspectFill
     back.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
     return back
     }()
@@ -237,7 +238,8 @@ class PhotoColletionViewController: UIViewController {
     
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints { (make) in
-      make.top.left.right.equalToSuperview()
+        make.top.equalToSuperview()
+      make.left.right.equalToSuperview()
       make.bottom.equalToSuperview().offset(-kBottomBarHeight - kHomeIndicator)
     }
   }
@@ -268,6 +270,7 @@ class PhotoColletionViewController: UIViewController {
     }else{
       navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
+    self.navigationController?.navigationBar.isTranslucent = false
     
   }
   
