@@ -16,7 +16,6 @@ let longer = ((kScreenW > kScreenH) ? kScreenW : kScreenH)
 let shorter = ((kScreenW < kScreenH) ? kScreenW : kScreenH)
 let isIPhoneX = (longer == 812 ? true : false)
 let kStatusBarOffset:CGFloat = (isIPhoneX ? 24 : 0)
-let kNavHeight:CGFloat = UIApplication.shared.statusBarOrientation.isPortrait ? (64 + kStatusBarOffset) : 44
 let kHomeIndicator: CGFloat = (isIPhoneX ? 34 : 0)
 let kBottomBarHeight: CGFloat = 50
 let completionBgColorDisable = #colorLiteral(red: 0.006263995543, green: 0.1826446056, blue: 0.3904125094, alpha: 1)
