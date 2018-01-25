@@ -261,7 +261,7 @@ class PhotoColletionViewController: UIViewController {
     
     //导航栏右边取消按钮
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: self.GetLocalizableText(key: "TYImagePickerCancelText"), style: .plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
-    navigationItem.rightBarButtonItem?.setTitleTextAttributes([[NSAttributedStringKey.foregroundColor : UIColor.white , NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)], for: .normal)
+    navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white , NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)], for: .normal)
 
     
     //导航栏左边返回按钮
