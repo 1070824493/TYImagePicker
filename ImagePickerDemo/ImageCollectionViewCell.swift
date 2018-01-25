@@ -3,7 +3,7 @@
 //  ImagePickerProject
 //
 //  Created by ty on 2018/1/2.
-//  Copyright © 2018年 范祎楠. All rights reserved.
+//  Copyright © 2018年 ty. All rights reserved.
 //
 
 import UIKit

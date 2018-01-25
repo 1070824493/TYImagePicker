@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		103964E41FFB5F7F00DB583A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103964E21FFB5F7F00DB583A /* ImageCollectionViewCell.swift */; };
 		103964E51FFB5F7F00DB583A /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 103964E31FFB5F7F00DB583A /* ImageCollectionViewCell.xib */; };
+		104208212010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1042081C2010A2A000A779FC /* TYImagePickerLocalize.strings */; };
+		104208222010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1042081F2010A2A000A779FC /* TYImagePickerLocalize.strings */; };
 		10CE792C1FF72ED90099FB35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79041FF72ED90099FB35 /* ViewController.swift */; };
 		10CE792D1FF72ED90099FB35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79051FF72ED90099FB35 /* Assets.xcassets */; };
 		10CE792E1FF72ED90099FB35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79081FF72ED90099FB35 /* LaunchScreen.storyboard */; };
@@ -43,6 +45,8 @@
 /* Begin PBXFileReference section */
 		103964E21FFB5F7F00DB583A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		103964E31FFB5F7F00DB583A /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		1042081D2010A2A000A779FC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = TYImagePickerLocalize.strings; sourceTree = "<group>"; };
+		104208202010A2A000A779FC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = TYImagePickerLocalize.strings; sourceTree = "<group>"; };
 		10CE79041FF72ED90099FB35 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		10CE79051FF72ED90099FB35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10CE79091FF72ED90099FB35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -89,6 +93,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1042081B2010A2A000A779FC /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				1042081C2010A2A000A779FC /* TYImagePickerLocalize.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		1042081E2010A2A000A779FC /* zh-Hans.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				1042081F2010A2A000A779FC /* TYImagePickerLocalize.strings */,
+			);
+			path = "zh-Hans.lproj";
+			sourceTree = "<group>";
+		};
 		10CE79031FF72ED90099FB35 /* ImagePickerDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +144,8 @@
 				10CE795A1FF72EF10099FB35 /* Album */,
 				10CE795E1FF72EF10099FB35 /* Tool */,
 				10CE797D1FF730DB0099FB35 /* TYImagePicker.xcassets */,
+				1042081B2010A2A000A779FC /* en.lproj */,
+				1042081E2010A2A000A779FC /* zh-Hans.lproj */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -256,7 +278,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "范祎楠";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					CF2C77ED1C89613700B72821 = {
 						CreatedOnToolsVersion = 7.2;
@@ -272,6 +294,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = CF2C77E51C89613700B72821;
 			productRefGroup = CF2C77EF1C89613700B72821 /* Products */;
@@ -290,9 +313,11 @@
 			files = (
 				10CE797E1FF730DB0099FB35 /* TYImagePicker.xcassets in Resources */,
 				10CE79691FF72EF10099FB35 /* CameraPreviewCell.xib in Resources */,
+				104208222010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */,
 				10CE793F1FF72ED90099FB35 /* Info.plist in Resources */,
 				10CE79771FF72EF10099FB35 /* PhotoAlbumCell.xib in Resources */,
 				10CE792F1FF72ED90099FB35 /* Main.storyboard in Resources */,
+				104208212010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */,
 				10CE79741FF72EF10099FB35 /* PhotoThumbCell.xib in Resources */,
 				10CE792D1FF72ED90099FB35 /* Assets.xcassets in Resources */,
 				103964E51FFB5F7F00DB583A /* ImageCollectionViewCell.xib in Resources */,
@@ -388,6 +413,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		1042081C2010A2A000A779FC /* TYImagePickerLocalize.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1042081D2010A2A000A779FC /* en */,
+			);
+			name = TYImagePickerLocalize.strings;
+			sourceTree = "<group>";
+		};
+		1042081F2010A2A000A779FC /* TYImagePickerLocalize.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				104208202010A2A000A779FC /* zh-Hans */,
+			);
+			name = TYImagePickerLocalize.strings;
+			sourceTree = "<group>";
+		};
 		10CE79081FF72ED90099FB35 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -443,7 +484,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -481,7 +522,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -497,7 +538,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = U722WZ76UQ;
 				INFOPLIST_FILE = "$(SRCROOT)/ImagePickerDemo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ty.ImagePicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -517,7 +558,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = U722WZ76UQ;
 				INFOPLIST_FILE = "$(SRCROOT)/ImagePickerDemo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ty.ImagePicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";

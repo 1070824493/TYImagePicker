@@ -32,8 +32,12 @@ class PhotoThumbCell: UICollectionViewCell {
   }
   
   @IBAction func onClickMask(_ sender: UIButton) {
-    let alert = UIAlertView(title: "", message: "你最多只能共享\(PhotosManager.sharedInstance.maxSelectedCount)张照片", delegate: nil, cancelButtonTitle: "确定")
-    alert.show()
+    
+    if PhotosManager.sharedInstance.maxSelectedCount == 9 {
+        let alert = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), delegate: nil, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerSureText"))
+        alert.show()
+    }
+    
   }
   
   @IBAction func onClickRadio() {
@@ -89,11 +93,11 @@ class PhotoThumbCell: UICollectionViewCell {
     let isSuccess = PhotosManager.sharedInstance.selectPhoto(with: asset)
     
     if !isSuccess {
-      
-      let alert = UIAlertView(title: "", message: "最多只能选择\(PhotosManager.sharedInstance.maxSelectedCount)张照片", delegate: nil, cancelButtonTitle: "知道了")
-      alert.show()
-      
-      return
+        if PhotosManager.sharedInstance.maxSelectedCount == 9 {
+            let alert = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), delegate: nil, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerSureText"))
+            alert.show()
+        }
+        return
     }
     let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: asset)
     setPhotoStatusWithAnimation(isSelected)

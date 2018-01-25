@@ -100,10 +100,27 @@ open class TYImagePickerHelper: NSObject {
         
       }
       
-    } else {
-      
-      showAblum()
-      
+    }
+    else{
+
+        switch PHPhotoLibrary.authorizationStatus(){
+            
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
+                if status == PHAuthorizationStatus.authorized {
+                    DispatchQueue.main.async {
+                        self.showAblum()
+                    }
+                }else{
+                    self.delegate?.pickedPhoto(self)
+                }
+            })
+        case .restricted,.denied:
+            let alertView = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerNoAuthTitle"), message: self.GetLocalizableText(key: "TYImagePickerNoAuthMessage"), delegate: self, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerCancelText"), otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
+            alertView.show()
+        case .authorized:
+            showAblum()
+        }
     }
   }
   
@@ -234,5 +251,22 @@ extension NSObject {
         let bundle = Bundle(for: TYImagePickerHelper.self)
         let image  = UIImage(named: fileName, in: bundle, compatibleWith: nil)
         return image
+    }
+  
+    func GetLocalizableText(key: String) -> String {
+        let bundle = Bundle(for: TYImagePickerHelper.self)
+        return bundle.localizedString(forKey: key, value: "", table: "TYImagePickerLocalize")
+    }
+}
+
+extension TYImagePickerHelper: UIAlertViewDelegate {
+    public func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+        if buttonIndex == 1 {
+            if let openUrl = URL(string: UIApplicationOpenSettingsURLString) {
+                if UIApplication.shared.canOpenURL(openUrl) {
+                    UIApplication.shared.openURL(openUrl)
+                }
+            }
+        }
     }
 }

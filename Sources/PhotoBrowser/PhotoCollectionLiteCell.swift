@@ -14,7 +14,12 @@ class PhotoCollectionLiteCell: UICollectionViewCell {
   var zoomImageScrollView: ZoomImageScrollViewLite!
   var padding: CGFloat = 0 {
     didSet{
-      zoomImageScrollView.frame = CGRect(x: padding, y: 0, width: frame.width - padding * CGFloat(2), height: frame.height)
+//      zoomImageScrollView.frame = CGRect(x: padding, y: 0, width: frame.width - padding * CGFloat(2), height: frame.height)
+      zoomImageScrollView.snp.makeConstraints { (make) in
+        make.left.equalToSuperview().offset(padding)
+        make.right.equalToSuperview().offset(-padding)
+        make.top.bottom.equalToSuperview()
+      }
     }
   }
   

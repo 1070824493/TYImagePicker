@@ -1,31 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="m9Q-eA-Fvb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="FtK-lo-TGE">
-            <objects>
-                <navigationController id="m9Q-eA-Fvb" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="9Db-8g-ywq">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Ztx-f9-RtR"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q6t-7t-CaN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-574" y="168"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -35,23 +18,23 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="裁剪" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8o-4X-cwN">
-                                <rect key="frame" x="20" y="20" width="35" height="21"/>
+                                <rect key="frame" x="20" y="40" width="35" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="de1-jE-D1e">
-                                <rect key="frame" x="75" y="15" width="51" height="31"/>
+                                <rect key="frame" x="75" y="35" width="51" height="31"/>
                                 <connections>
                                     <action selector="onIsCrop:" destination="BYZ-38-t0r" eventType="valueChanged" id="aLN-LU-Edw"/>
                                 </connections>
                             </switch>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="27v-kr-1YE">
-                                <rect key="frame" x="75" y="57" width="245" height="29"/>
+                                <rect key="frame" x="75" y="77" width="245" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="245" id="emo-MP-kSP"/>
                                     <constraint firstAttribute="height" constant="28" id="pYC-Xa-w4e"/>
@@ -66,13 +49,13 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="样式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Arj-ff-C0K">
-                                <rect key="frame" x="20" y="61" width="35" height="21"/>
+                                <rect key="frame" x="20" y="81" width="35" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="9" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x1P-Xy-dnJ">
-                                <rect key="frame" x="99.5" y="128.5" width="50" height="30"/>
+                                <rect key="frame" x="99.5" y="148.5" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="DV5-HT-mAQ"/>
                                     <constraint firstAttribute="height" constant="30" id="GSS-ao-SQx"/>
@@ -84,13 +67,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGM-fy-Ae1">
-                                <rect key="frame" x="20" y="97" width="35" height="21"/>
+                                <rect key="frame" x="20" y="117" width="35" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hFc-h4-nhu">
-                                <rect key="frame" x="75" y="93.5" width="83" height="29"/>
+                                <rect key="frame" x="75" y="113.5" width="83" height="29"/>
                                 <segments>
                                     <segment title="图片"/>
                                     <segment title="视频"/>
@@ -100,13 +83,13 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最大数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aa3-Lt-Ru8">
-                                <rect key="frame" x="20" y="133" width="69.5" height="21"/>
+                                <rect key="frame" x="20" y="153" width="69.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="竖屏每行显示个数(2-4)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEb-ts-qGw">
-                                <rect key="frame" x="20" y="171" width="179" height="21"/>
+                                <rect key="frame" x="20" y="191" width="179" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ChV-lr-mnt"/>
                                 </constraints>
@@ -115,7 +98,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="4" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YYG-5K-vm8">
-                                <rect key="frame" x="207" y="166" width="40" height="30"/>
+                                <rect key="frame" x="207" y="186" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="83C-Lu-MIq"/>
                                     <constraint firstAttribute="height" constant="30" id="hP8-hf-llk"/>
@@ -128,7 +111,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="达到Max未选是否遮罩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vky-YJ-YB2">
-                                <rect key="frame" x="20" y="248" width="171" height="21"/>
+                                <rect key="frame" x="20" y="268" width="171" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="GAY-ve-Qh3"/>
                                 </constraints>
@@ -137,7 +120,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bx9-xf-eh5">
-                                <rect key="frame" x="20" y="286" width="32" height="30"/>
+                                <rect key="frame" x="20" y="306" width="32" height="30"/>
                                 <color key="backgroundColor" red="0.8627451062" green="0.2588235438" blue="0.27450981740000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="hl9-FD-dFF"/>
@@ -150,7 +133,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nu1-8T-u4f">
-                                <rect key="frame" x="0.0" y="366" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="386" width="375" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Hw5-eI-RAJ"/>
@@ -185,7 +168,7 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="横屏每行显示个数(6-8)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qsv-GR-7Dg">
-                                <rect key="frame" x="20" y="207" width="179.5" height="21"/>
+                                <rect key="frame" x="20" y="227" width="179.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Yne-r5-Ydn"/>
                                 </constraints>
@@ -194,7 +177,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="6" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bqt-CE-Jkm">
-                                <rect key="frame" x="204.5" y="202.5" width="40" height="30"/>
+                                <rect key="frame" x="204.5" y="222.5" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="C7E-NP-nf0"/>
                                     <constraint firstAttribute="width" constant="40" id="I4x-ZU-4sE"/>
@@ -207,7 +190,7 @@
                                 </connections>
                             </textField>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Be9-Hj-HH7">
-                                <rect key="frame" x="215" y="243" width="49" height="31"/>
+                                <rect key="frame" x="215" y="263" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="H4D-3O-nBy"/>
                                     <constraint firstAttribute="width" constant="47" id="yVx-Fa-qPM"/>
