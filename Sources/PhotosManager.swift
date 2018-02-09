@@ -254,6 +254,18 @@ class PhotosManager: NSObject {
     
   }
   
+  func fetchExportImage(with asset: PHAsset, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void) {
+    let imageRequestOptions = getImageRequestOptions(with: .export)
+    PHImageManager.default().requestImageData(for: asset, options: imageRequestOptions) { (imgData, str, orient, info) in
+      
+      if let data = imgData, let image = UIImage(data: data) {
+        handleCompletion(image, info?[PHImageResultIsInCloudKey] as? Bool ?? false)
+      }else{
+        handleCompletion(nil,false)
+      }
+    }
+  }
+  
   func checkImageIsInLocal(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
     
     fetchImage(with: asset, sizeType: .export) { (image, isInICloud) -> Void in
@@ -393,7 +405,7 @@ class PhotosManager: NSObject {
       return
     }
     
-    fetchImage(with: imageAssets[0], sizeType: .export) { (image: UIImage?, _) -> Void in
+    fetchExportImage(with: imageAssets[0]) { (image: UIImage?, _) in
       if image == nil {
         
         handleCompletion([])

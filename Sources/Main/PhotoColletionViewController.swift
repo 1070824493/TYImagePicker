@@ -72,6 +72,7 @@ class PhotoColletionViewController: UIViewController {
   }
   
   deinit {
+    print(#function)
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
   }
   
