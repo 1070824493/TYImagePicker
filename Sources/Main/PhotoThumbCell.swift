@@ -143,7 +143,7 @@ class PhotoThumbCell: UICollectionViewCell {
       let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: asset)
       if PhotosManager.sharedInstance.selectedImages.count == PhotosManager.sharedInstance.maxSelectedCount {
         self.maskButton.isHidden = isSelected
-      }else if PhotosManager.sharedInstance.selectedImages.count == PhotosManager.sharedInstance.maxSelectedCount - 1{
+      }else{
         self.maskButton.isHidden = true
       }
     }
