@@ -49,7 +49,7 @@ public enum TYResourceType {
 open class TYImagePickerHelper: NSObject {
   
   private var cameraHelper: CameraHelper!
-  private weak var handlerViewController: UIViewController?
+  weak var handlerViewController: UIViewController?
   
   public weak var delegate: TYImagePickerDelegate?
   public var maxSelectedCount: Int = 9
@@ -158,7 +158,6 @@ open class TYImagePickerHelper: NSObject {
   }
   
   private func finish(with resource: TYResourceType) {
-    
     handlerViewController?.dismiss(animated: true, completion: {
       
       PhotosManager.sharedInstance.clearData()
@@ -216,8 +215,7 @@ open class TYImagePickerHelper: NSObject {
   
   private func fetchImages() {
     
-    PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
-      
+    PhotosManager.sharedInstance.fetchSelectedImages({ (images) in
       var images: [UIImage] = images
       
       if self.isCrop && images.count == 1 {
@@ -229,7 +227,7 @@ open class TYImagePickerHelper: NSObject {
       guard self.shouldPick(resource: resource) else { return }
       
       self.finish(with: resource)
-    }
+    })
   }
   
   private func showAblum() {

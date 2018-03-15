@@ -18,9 +18,9 @@ class PhotoThumbCell: UICollectionViewCell {
   @IBOutlet weak var selectedButton: UIControl!
   @IBOutlet weak var durationLabel: UILabel!
   @IBOutlet weak var maskButton: UIButton!
+  @IBOutlet weak var iCloudLabel: UILabel!
   
   
-  private(set) var isInICloud = false
   
   private var asset: PHAsset!
   
@@ -28,7 +28,7 @@ class PhotoThumbCell: UICollectionViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
+    self.iCloudLabel.text = self.GetLocalizableText(key: "TYImagePickerInCloudImage")
   }
   
   @IBAction func onClickMask(_ sender: UIButton) {
@@ -45,11 +45,12 @@ class PhotoThumbCell: UICollectionViewCell {
     guard let vc = photoColletionViewController else { return }
     
     PhotosManager.sharedInstance.checkImageIsInLocal(with: asset) { isExistInLocal in
-    
-      guard isExistInLocal else { return }
 
-      self.setResourceSelectedStatus()
+//      print(isExistInLocal == false ? "在云端" : "在本地")
+      self.setResourceSelectedStatus(isInLocal: isExistInLocal)
       vc.updateUI()
+      
+      
       
     }
   }
@@ -76,13 +77,12 @@ class PhotoThumbCell: UICollectionViewCell {
       if currentTag == self.tag {
         
         self.imageView.image = image
-        self.isInICloud = isInICloud
         
       }
     }
   }
   
-  func setResourceSelectedStatus() {
+  func setResourceSelectedStatus(isInLocal: Bool) {
     
     guard asset.mediaType == .image else {
       let isSelected = PhotosManager.sharedInstance.selectVideo(with: asset)
@@ -100,6 +100,11 @@ class PhotoThumbCell: UICollectionViewCell {
         return
     }
     let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: asset)
+    if isInLocal {
+      self.iCloudLabel.isHidden = true
+    }else{
+      self.iCloudLabel.isHidden = !isSelected
+    }
     setPhotoStatusWithAnimation(isSelected)
   }
   
@@ -133,7 +138,6 @@ class PhotoThumbCell: UICollectionViewCell {
       let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: asset)
       setResourceSelected(isSelected)
       durationLabel.text = ""
-      
     }
   }
   
@@ -190,6 +194,14 @@ class PhotoThumbCell: UICollectionViewCell {
     
     selectedImageView.transform = isSelected == false ? CGAffineTransform(scaleX: 0.5, y: 0.5) : CGAffineTransform.identity
     self.selectedImageView.alpha = isSelected ? 1 : 0
+    
+    if isSelected {
+      PhotosManager.sharedInstance.checkImageIsInLocal(with: asset, completion: { (isInLocal) in
+        self.iCloudLabel.isHidden = isInLocal
+      })
+    }else{
+      self.iCloudLabel.isHidden = true
+    }
     
   }
   

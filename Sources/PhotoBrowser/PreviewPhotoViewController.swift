@@ -68,8 +68,6 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     
     PhotosManager.sharedInstance.checkImageIsInLocal(with: currentAsset) { isExistInLocal in
       
-      guard isExistInLocal else { return }
-      
       self.setPhotoSelectedStatusWith(self.currentIndex)
       self.updateCount()
     }

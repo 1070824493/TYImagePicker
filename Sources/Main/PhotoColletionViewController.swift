@@ -53,6 +53,7 @@ class PhotoColletionViewController: UIViewController {
   fileprivate let selectedCountLabelWidth: CGFloat = 20
   fileprivate let indicatorWidth: CGFloat = 15
 
+  private var lastDirection:UIDeviceOrientation = .unknown  //记录上次的屏幕方向
   
   var canOpenCamera = true
   var cameraHelper: CameraHelper!
@@ -188,30 +189,22 @@ class PhotoColletionViewController: UIViewController {
   @objc private func orientationChanged() {
     let orient = UIDevice.current.orientation
     switch orient {
-    case .portrait :
-      if !popViewHelp.isShow {
-        self.setupUI()
-      }else{
-        ablumView.snp.remakeConstraints({ (make) in
-          make.top.right.left.bottom.equalToSuperview()
-          ablumView.layoutSubviews()
-        })
-        
+    case .portrait:
+      if lastDirection == .portrait{
+        break
       }
-      break
+      fitDirectionUI()
+      lastDirection = orient
     case .landscapeLeft,.landscapeRight:
-      if !popViewHelp.isShow {
-        self.setupUI()
-      }else{
-        ablumView.snp.remakeConstraints({ (make) in
-          make.top.right.left.bottom.equalToSuperview()
-          ablumView.layoutSubviews()
-        })
+      if lastDirection.isLandscape{
+        break
       }
-      break
+      fitDirectionUI()
+      lastDirection = orient
     default:
       break
     }
+    
   }
   
   private func setupUI() {
@@ -351,11 +344,15 @@ class PhotoColletionViewController: UIViewController {
   }
   
   
-  fileprivate func isLandscape() -> Bool {
-    if UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft {
-      return true
+  fileprivate func fitDirectionUI() {
+    if !popViewHelp.isShow {
+      self.setupUI()
+    }else{
+      ablumView.snp.remakeConstraints({ (make) in
+        make.top.right.left.bottom.equalToSuperview()
+        ablumView.layoutSubviews()
+      })
     }
-    return false
   }
   
 }
@@ -433,8 +430,6 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       if asset.mediaType == .image && PhotosManager.sharedInstance.selectedVideo == nil {
        
         PhotosManager.sharedInstance.checkImageIsInLocal(with: asset) { isExistInLocal in
-          
-          guard isExistInLocal else { return }
           
           if PhotosManager.sharedInstance.isCrop {
             

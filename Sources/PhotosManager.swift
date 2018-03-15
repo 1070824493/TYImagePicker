@@ -8,6 +8,7 @@
 
 import Photos
 import MobileCoreServices
+import SVProgressHUD
 
 enum PhotoSizeType {
   case thumbnail
@@ -37,6 +38,7 @@ class PhotosManager: NSObject {
   private(set) var currentImageAlbumFetchResult: PHFetchResult<PHAsset>!
   private(set) var selectedImages: Array<PHAsset> = []
   private(set) var selectedVideo: PHAsset?
+  var HUD:TYProgressView!
   
   var currentAlbumIndex: Int? {
     didSet{
@@ -144,10 +146,6 @@ class PhotosManager: NSObject {
           self.assetCollectionList += [assetCollection]
       }
     })
-
-//    if self.currentAlbumIndex == nil && assetCollectionList.count > 0 {
-//      self.currentAlbumIndex = 0
-//    }
     
     return assetCollectionList
   }
@@ -254,8 +252,15 @@ class PhotosManager: NSObject {
     
   }
   
-  func fetchExportImage(with asset: PHAsset, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void) {
-    let imageRequestOptions = getImageRequestOptions(with: .export)
+  func fetchExportImage(with asset: PHAsset, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void, progressHandler: @escaping PHAssetImageProgressHandler){
+    
+    let imageRequestOptions = PHImageRequestOptions()
+    
+    imageRequestOptions.isNetworkAccessAllowed = true
+    imageRequestOptions.progressHandler = progressHandler
+    imageRequestOptions.deliveryMode = .highQualityFormat
+    imageRequestOptions.isSynchronous = false
+    
     PHImageManager.default().requestImageData(for: asset, options: imageRequestOptions) { (imgData, str, orient, info) in
       
       if let data = imgData, let image = UIImage(data: data) {
@@ -273,21 +278,20 @@ class PhotosManager: NSObject {
       if  image == nil {
         
         if isInICloud {
-          
-          let alertView = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerCanNotChooseImage"), message: self.GetLocalizableText(key: "TYImagePickerCanNotChooseMessage"), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
-          alertView.show()
-          
+          completion(false)
         } else {
           
           let alertView = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerChooseFailedPicture"), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
           alertView.show()
-
+            return
         }
         
-        return
-      }
+        
+      }else{
+        completion(false)
+        }
       
-      completion(true)
+      
     }
   }
   
@@ -394,6 +398,11 @@ class PhotosManager: NSObject {
   
   func fetchSelectedImages(_ handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
 
+    self.HUD = TYProgressView()
+    UIApplication.shared.keyWindow?.addSubview(self.HUD)
+    self.HUD.center = (self.HUD.superview?.center)!
+    
+    
     getAllSelectedImageInCurrentAlbum(with: selectedImages, imageList: [], handleCompletion: handleCompletion)
     
   }
@@ -402,19 +411,35 @@ class PhotosManager: NSObject {
     
     if imageAssets.count == 0 {
       handleCompletion(imageList)
+      self.HUD.removeFromSuperview()
+      self.HUD = nil
       return
     }
     
-    fetchExportImage(with: imageAssets[0]) { (image: UIImage?, _) in
+    fetchExportImage(with: imageAssets[0], handleCompletion: { (image, isInCloud) in
       if image == nil {
-        
-        handleCompletion([])
+        self.HUD.removeFromSuperview()
+        self.HUD = nil
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setMinimumDismissTimeInterval(2)
+        SVProgressHUD.showError(withStatus: "同步失败,请检查网络~")
         return
       }
-      
       self.getAllSelectedImageInCurrentAlbum(with: Array(imageAssets[1..<imageAssets.count]), imageList: imageList + [image!], handleCompletion: handleCompletion)
       
+    }) { (progress, error, point, info) in
+      if error == nil {
+        let percent:Float = Float(imageList.count) / Float(self.selectedImages.count) + Float(progress) / Float(self.selectedImages.count)
+        print(percent)
+        DispatchQueue.main.async {
+          self.HUD.progressValue = CGFloat(percent)
+        }
+      }else{
+        print(error!)
+      }
+      
     }
+    
   }
   
   func fetchVideo(videoAsset: PHAsset, handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
@@ -487,8 +512,8 @@ class PhotosManager: NSObject {
     case .thumbnail:
       imageRequestOptions.isSynchronous = false
       imageRequestOptions.resizeMode = .fast
-      imageRequestOptions.deliveryMode = .opportunistic
-      imageRequestOptions.isNetworkAccessAllowed = true
+      imageRequestOptions.deliveryMode = .fastFormat
+      imageRequestOptions.isNetworkAccessAllowed = false
       
     case .preview:
       imageRequestOptions.isSynchronous = false
