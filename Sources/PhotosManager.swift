@@ -288,7 +288,7 @@ class PhotosManager: NSObject {
         
         
       }else{
-        completion(false)
+        completion(true)
         }
       
       
@@ -401,8 +401,7 @@ class PhotosManager: NSObject {
     self.HUD = TYProgressView()
     UIApplication.shared.keyWindow?.addSubview(self.HUD)
     self.HUD.center = (self.HUD.superview?.center)!
-    
-    
+    self.HUD.isHidden = true
     getAllSelectedImageInCurrentAlbum(with: selectedImages, imageList: [], handleCompletion: handleCompletion)
     
   }
@@ -410,9 +409,17 @@ class PhotosManager: NSObject {
   func getAllSelectedImageInCurrentAlbum(with imageAssets: [PHAsset], imageList: [UIImage],  handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
     
     if imageAssets.count == 0 {
-      handleCompletion(imageList)
-      self.HUD.removeFromSuperview()
-      self.HUD = nil
+      if self.HUD.isHidden == false {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+          handleCompletion(imageList)
+          self.HUD.removeFromSuperview()
+          self.HUD = nil
+        }
+      }else{
+        handleCompletion(imageList)
+        self.HUD.removeFromSuperview()
+        self.HUD = nil
+      }
       return
     }
     
@@ -422,24 +429,25 @@ class PhotosManager: NSObject {
         self.HUD = nil
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.setMinimumDismissTimeInterval(2)
-        SVProgressHUD.showError(withStatus: "同步失败,请检查网络~")
+        SVProgressHUD.showError(withStatus: self.GetLocalizableText(key: "TYImagePickerSyncFailed"))
         return
       }
+      let percent:Float = Float(imageList.count) / Float(self.selectedImages.count) + 1 / Float(self.selectedImages.count)
+      self.HUD.progressValue = CGFloat(percent)
       self.getAllSelectedImageInCurrentAlbum(with: Array(imageAssets[1..<imageAssets.count]), imageList: imageList + [image!], handleCompletion: handleCompletion)
       
     }) { (progress, error, point, info) in
+      DispatchQueue.main.async {
+        self.HUD.isHidden = false
+      }
       if error == nil {
         let percent:Float = Float(imageList.count) / Float(self.selectedImages.count) + Float(progress) / Float(self.selectedImages.count)
         print(percent)
         DispatchQueue.main.async {
           self.HUD.progressValue = CGFloat(percent)
         }
-      }else{
-        print(error!)
       }
-      
     }
-    
   }
   
   func fetchVideo(videoAsset: PHAsset, handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
