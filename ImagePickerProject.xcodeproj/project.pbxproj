@@ -12,7 +12,7 @@
 		104208212010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1042081C2010A2A000A779FC /* TYImagePickerLocalize.strings */; };
 		104208222010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1042081F2010A2A000A779FC /* TYImagePickerLocalize.strings */; };
 		105C3EDE205A65BE00BE47BA /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 105C3EDD205A65BE00BE47BA /* PhotoThumbCell.xib */; };
-		1069D56220591FFC00C06F3A /* TYProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1069D56120591FFC00C06F3A /* TYProgressView.m */; };
+		105C3EE7205A945E00BE47BA /* TYProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C3EE6205A945E00BE47BA /* TYProgressView.swift */; };
 		10CE792C1FF72ED90099FB35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79041FF72ED90099FB35 /* ViewController.swift */; };
 		10CE792D1FF72ED90099FB35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79051FF72ED90099FB35 /* Assets.xcassets */; };
 		10CE792E1FF72ED90099FB35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79081FF72ED90099FB35 /* LaunchScreen.storyboard */; };
@@ -49,9 +49,7 @@
 		1042081D2010A2A000A779FC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = TYImagePickerLocalize.strings; sourceTree = "<group>"; };
 		104208202010A2A000A779FC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = TYImagePickerLocalize.strings; sourceTree = "<group>"; };
 		105C3EDD205A65BE00BE47BA /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
-		1069D55C20591FE400C06F3A /* ImagePickerProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImagePickerProject-Bridging-Header.h"; sourceTree = "<group>"; };
-		1069D56020591FFC00C06F3A /* TYProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYProgressView.h; sourceTree = "<group>"; };
-		1069D56120591FFC00C06F3A /* TYProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYProgressView.m; sourceTree = "<group>"; };
+		105C3EE6205A945E00BE47BA /* TYProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYProgressView.swift; sourceTree = "<group>"; };
 		10CE79041FF72ED90099FB35 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		10CE79051FF72ED90099FB35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10CE79091FF72ED90099FB35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				10CE797D1FF730DB0099FB35 /* TYImagePicker.xcassets */,
 				1042081B2010A2A000A779FC /* en.lproj */,
 				1042081E2010A2A000A779FC /* zh-Hans.lproj */,
-				1069D55C20591FE400C06F3A /* ImagePickerProject-Bridging-Header.h */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -210,8 +207,7 @@
 		10CE795E1FF72EF10099FB35 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				1069D56020591FFC00C06F3A /* TYProgressView.h */,
-				1069D56120591FFC00C06F3A /* TYProgressView.m */,
+				105C3EE6205A945E00BE47BA /* TYProgressView.swift */,
 				10CE795F1FF72EF10099FB35 /* Extension.swift */,
 				10CE79601FF72EF10099FB35 /* PopViewHelper.swift */,
 			);
@@ -399,6 +395,7 @@
 				10CE79661FF72EF10099FB35 /* CameraPreviewCell.swift in Sources */,
 				10CE79621FF72EF10099FB35 /* PhotosManager.swift in Sources */,
 				103964E41FFB5F7F00DB583A /* ImageCollectionViewCell.swift in Sources */,
+				105C3EE7205A945E00BE47BA /* TYProgressView.swift in Sources */,
 				10CE79791FF72EF10099FB35 /* PhotoAlbumView.swift in Sources */,
 				10CE797B1FF72EF10099FB35 /* PopViewHelper.swift in Sources */,
 				10CE79751FF72EF10099FB35 /* PhotoThumbCell.swift in Sources */,
@@ -415,7 +412,6 @@
 				10CE79711FF72EF10099FB35 /* TYPhotoBrowserLite.swift in Sources */,
 				10CE79731FF72EF10099FB35 /* PhotoCollectionLiteCell.swift in Sources */,
 				10CE796A1FF72EF10099FB35 /* PhotoMaskView.swift in Sources */,
-				1069D56220591FFC00C06F3A /* TYProgressView.m in Sources */,
 				10CE792C1FF72ED90099FB35 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,7 +550,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tangyi.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Sources/ImagePickerProject-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 3.0;
@@ -576,7 +572,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tangyi.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Sources/ImagePickerProject-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 3.0;
 			};
