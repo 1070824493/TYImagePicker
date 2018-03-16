@@ -229,6 +229,23 @@ class PhotosManager: NSObject {
     }
   }
   
+  
+  /// 用于判断是否是云端
+  func fetchThumbImage(with asset: PHAsset, handleCompletion: @escaping (_ isInICloud: Bool) -> Void) {
+    
+    let imageRequestOptions = PHImageRequestOptions()
+    imageRequestOptions.isSynchronous = true
+    imageRequestOptions.isNetworkAccessAllowed = false
+
+    imageManager.requestImageData(for: asset, options: imageRequestOptions) { (data, str, orient, info) in
+      if data != nil {
+        handleCompletion(false)
+      }else{
+        handleCompletion(true)
+      }
+    }
+  }
+  
   func fetchImage(with albumIndex: Int, imageIndex: Int, sizeType: PhotoSizeType, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void) {
     
     if currentAlbumIndex != albumIndex {
@@ -273,25 +290,8 @@ class PhotosManager: NSObject {
   
   func checkImageIsInLocal(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
     
-    fetchImage(with: asset, sizeType: .export) { (image, isInICloud) -> Void in
-      
-      if  image == nil {
-        
-        if isInICloud {
-          completion(false)
-        } else {
-          
-          let alertView = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerChooseFailedPicture"), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
-          alertView.show()
-            return
-        }
-        
-        
-      }else{
-        completion(true)
-        }
-      
-      
+    fetchThumbImage(with: asset) { (isInICloud) in
+      completion(!isInICloud)
     }
   }
   
