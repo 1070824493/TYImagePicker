@@ -187,25 +187,26 @@ class PhotoColletionViewController: UIViewController {
   }
   
   @objc private func orientationChanged() {
-    let orient = UIDevice.current.orientation
-    switch orient {
-    case .portrait:
-      if lastDirection == .portrait{
-        break
+      let orient = UIDevice.current.orientation
+      switch orient {
+      case .portrait,.portraitUpsideDown:
+          if lastDirection == .portrait || lastDirection == .portraitUpsideDown{
+              break
+          }
+          fitDirectionUI()
+          lastDirection = orient
+      case .landscapeLeft,.landscapeRight:
+          if lastDirection.isLandscape{
+              break
+          }
+          fitDirectionUI()
+          lastDirection = orient
+      default:
+          break
       }
-      fitDirectionUI()
-      lastDirection = orient
-    case .landscapeLeft,.landscapeRight:
-      if lastDirection.isLandscape{
-        break
-      }
-      fitDirectionUI()
-      lastDirection = orient
-    default:
-      break
-    }
     
   }
+
   
   private func setupUI() {
     initNavigationBarButton(isShow: false)
