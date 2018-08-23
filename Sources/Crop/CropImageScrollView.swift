@@ -81,7 +81,9 @@ class CropImageScrollView: UIScrollView {
   }
   
   fileprivate func configUI() {
-    
+    if #available(iOS 11.0, *) {
+        contentInsetAdjustmentBehavior = .never
+    }
     delegate = self
     backgroundColor = UIColor.black
     showsHorizontalScrollIndicator = false
@@ -139,6 +141,7 @@ class CropImageScrollView: UIScrollView {
     
     if boundsSize.width > frameToCenter.size.width {
       frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / CGFloat(2)
+        
     } else {
       frameToCenter.origin.x = 0
     }
