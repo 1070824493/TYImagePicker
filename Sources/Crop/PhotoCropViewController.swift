@@ -12,7 +12,9 @@ import Photos
 class PhotoCropViewController: UIViewController {
   
   var asset: PHAsset?
-  
+  var space: CGFloat = 0
+    
+    
   var originImage: UIImage!
   
   var cropImageScrollView: CropImageScrollView!
@@ -139,10 +141,10 @@ class PhotoCropViewController: UIViewController {
     
     automaticallyAdjustsScrollViewInsets = false
     
-    cropImageScrollView = CropImageScrollView(frame: view.bounds, image: originImage)
+    cropImageScrollView = CropImageScrollView(frame: CGRect(x: 0, y: 0, width: view.bounds.width - space * 2, height: view.bounds.height - space * 2), image: originImage, space:space)
     view.addSubview(cropImageScrollView)
     
-    let maskView = PhotoMaskView(frame: view.bounds)
+    let maskView = PhotoMaskView(frame: view.bounds, space:space)
     view.addSubview(maskView)
     
     initBottomBar()

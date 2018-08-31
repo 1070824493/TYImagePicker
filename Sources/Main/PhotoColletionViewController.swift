@@ -60,7 +60,9 @@ class PhotoColletionViewController: UIViewController {
   var rowCountH = 6 //横屏显示列数
   var rowCountV = 4 //竖屏显示列数
   var maskEnable = false
-    
+  var space: CGFloat = 0 //裁剪框间隔
+  var bottomLabelTitle:String? = nil   //底部文字说明
+  var bottomButtonTitle:String? = nil  //底部按钮文字
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -296,7 +298,7 @@ class PhotoColletionViewController: UIViewController {
       make.bottom.equalToSuperview()
     }
     bottomBarLabel = UILabel()
-    bottomBarLabel.attributedText = NSAttributedString(string: self.GetLocalizableText(key: "TYImagePickerShareLabelText"), attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 17) , NSForegroundColorAttributeName : UIColor.white])
+    bottomBarLabel.attributedText = NSAttributedString(string: self.bottomLabelTitle ?? self.GetLocalizableText(key: "TYImagePickerShareLabelText"), attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 17) , NSForegroundColorAttributeName : UIColor.white])
     bottomBarLabel.backgroundColor = .black
     bottomBarLabel.textColor = .white
     bottomBarBaseView.addSubview(bottomBarLabel)
@@ -311,7 +313,7 @@ class PhotoColletionViewController: UIViewController {
     completionButton.setTitleColor(.white, for: .normal)
     completionButton.backgroundColor = completionBgColorDisable
     completionButton.layer.cornerRadius = 5
-    completionButton.setAttributedTitle(NSAttributedString(string: self.GetLocalizableText(key: "TYImagePickerShareButtonText"), attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 15) , NSForegroundColorAttributeName : UIColor.white]), for: .normal)
+    completionButton.setAttributedTitle(NSAttributedString(string: self.bottomButtonTitle ?? self.GetLocalizableText(key: "TYImagePickerShareButtonText"), attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 15) , NSForegroundColorAttributeName : UIColor.white]), for: .normal)
     completionButton.isEnabled = false
     completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), for: .touchUpInside)
     bottomBarBaseView.addSubview(completionButton)
@@ -433,8 +435,9 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
         PhotosManager.sharedInstance.checkImageIsInLocal(with: asset) { isExistInLocal in
           
           if PhotosManager.sharedInstance.isCrop {
-            
-            self.navigationController?.pushViewController(PhotoCropViewController(asset: asset), animated: true)
+            let vc = PhotoCropViewController(asset: asset)
+            vc.space = self.space
+            self.navigationController?.pushViewController(vc, animated: true)
             
           } else {
             

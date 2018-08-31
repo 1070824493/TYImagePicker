@@ -60,6 +60,10 @@ open class TYImagePickerHelper: NSObject {
   public var maskEnable:Bool = false
   public var resourceOption: TYResourceOption = .image
   
+  public var space: CGFloat = 0 //裁剪框间隔
+  public var bottomLabelTitle:String? = nil   //底部文字说明
+  public var bottomButtonTitle:String? = nil  //底部按钮文字
+  
   public init(delegate: TYImagePickerDelegate?, handlerViewController: UIViewController? = nil) {
     self.delegate = delegate
     self.handlerViewController = handlerViewController ?? (delegate as! UIViewController)
@@ -237,6 +241,9 @@ open class TYImagePickerHelper: NSObject {
     viewController.rowCountH = self.rowCountH
     viewController.rowCountV = self.rowCountV
     viewController.maskEnable = self.maskEnable
+    viewController.bottomLabelTitle = self.bottomLabelTitle
+    viewController.bottomButtonTitle = self.bottomButtonTitle
+    viewController.space = self.space
     let navigationController = UINavigationController(rootViewController: viewController)
     navigationController.navigationBar.barTintColor = .black
     navigationController.navigationBar.barStyle = .black
@@ -251,7 +258,7 @@ extension NSObject {
         return image
     }
   
-    func GetLocalizableText(key: String) -> String {
+    public func GetLocalizableText(key: String) -> String {
         let bundle = Bundle(for: TYImagePickerHelper.self)
         return bundle.localizedString(forKey: key, value: "", table: "TYImagePickerLocalize")
     }

@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     }
 
   @IBOutlet var isCropSwitch: UISwitch!
+  
+  @IBOutlet weak var spaceTF: UITextField!
   @IBOutlet weak var maskEnableSwitch: UISwitch!
   @IBOutlet var maxCountTextField: UITextField!
   @IBOutlet weak var numberOfColumnField: UITextField!
@@ -48,6 +50,7 @@ class ViewController: UIViewController {
     imagePickerHelper.rowCountH = rowCountH
     imagePickerHelper.rowCountV = rowCountV
     imagePickerHelper.maskEnable = maskEnable
+    imagePickerHelper.space = CGFloat(spaceTF.text == "" ? 0 : Double(spaceTF.text!)!)
     imagePickerHelper.start()
   }
   
@@ -63,6 +66,10 @@ class ViewController: UIViewController {
     if isCrop {
       maxCountTextField.text = "1"
       maxCount = 1
+      spaceTF.isHidden = false
+    }else{
+      spaceTF.isHidden = true
+      spaceTF.text = nil
     }
     
   }

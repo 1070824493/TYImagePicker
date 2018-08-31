@@ -10,7 +10,11 @@ import UIKit
 
 class PhotoMaskView: UIView {
   
-  override init(frame: CGRect) {
+  var space:CGFloat = 0
+  
+  
+  init(frame: CGRect, space:CGFloat) {
+    self.space = space
     super.init(frame: frame)
     
     backgroundColor = UIColor.clear
@@ -30,11 +34,11 @@ class PhotoMaskView: UIView {
     ctx.fill(rect);
     ctx.strokePath();
     
-    ctx.clear(CGRect(x: 0, y: (rect.height - rect.width) / 2, width: rect.width, height: rect.width))
+    ctx.clear(CGRect(x: space, y: (rect.height - rect.width) / 2 + space, width: rect.width - space*2, height: rect.width - space*2))
     
     ctx.setStrokeColor(red: 1, green: 1.0, blue: 1.0, alpha: 1.0)
     ctx.setLineWidth(1.0)
-    ctx.addRect(CGRect(x: 1, y: (rect.height - rect.width) / 2, width: rect.width - 2, height: rect.width));
+    ctx.addRect(CGRect(x: space, y: (rect.height - rect.width) / 2 + space, width: rect.width - space*2, height: rect.width - space*2));
     ctx.strokePath()
   }
   
