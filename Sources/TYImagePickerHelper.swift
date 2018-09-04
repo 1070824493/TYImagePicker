@@ -98,6 +98,7 @@ open class TYImagePickerHelper: NSObject {
       if resourceOption.contains(.image) {
         cameraHelper = CameraHelper(handlerViewController: _handlerViewController)
         cameraHelper.isCrop = isCrop
+        cameraHelper.space = space
         cameraHelper.cropViewControllerTranlateType = CameraHelper.cropViewControllerTranlateType_Present
         cameraHelper.openCamera()
       } else if resourceOption.contains(.video) {

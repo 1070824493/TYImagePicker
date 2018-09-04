@@ -17,7 +17,7 @@ class CameraHelper: NSObject {
   fileprivate weak var handlerViewController: UIViewController?
   
   var isCrop = false
-  
+  var space:CGFloat = 0
   //当为false时由ImagePickerHelper来负责dismiss
   var cropViewControllerTranlateType: Int = CameraHelper.cropViewControllerTranlateType_Push
   
@@ -58,6 +58,7 @@ extension CameraHelper: UIImagePickerControllerDelegate, UINavigationControllerD
       if isCrop {
         
         let viewController = PhotoCropViewController(image: image)
+        viewController.space = self.space
         viewController.hidesBottomBarWhenPushed = true
         
         picker.dismiss(animated: false, completion: nil)
