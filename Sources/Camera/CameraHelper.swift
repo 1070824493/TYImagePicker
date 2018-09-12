@@ -31,7 +31,7 @@ class CameraHelper: NSObject {
   
   func openCamera() {
 
-    if UIImagePickerController.isSourceTypeAvailable(.camera) && AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == .authorized {
+    if UIImagePickerController.isSourceTypeAvailable(.camera) && (AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == .authorized || AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == .notDetermined) {
       imagePicker = UIImagePickerController()
       imagePicker.sourceType = .camera
       imagePicker.cameraDevice = .front
@@ -40,7 +40,20 @@ class CameraHelper: NSObject {
       handlerViewController?.modalPresentationStyle = .overCurrentContext
       handlerViewController?.present(imagePicker, animated: true, completion: nil)
     } else {
-      let _ = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerCameraUnavailable"), message: nil, delegate: nil, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerSureText")).show()
+      let alertView = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerCameraNoAuth"), message: self.GetLocalizableText(key: "TYImagePickerNoAuthMessage"), delegate: self, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerCancelText"), otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
+      alertView.show()
+    }
+  }
+}
+
+extension CameraHelper: UIAlertViewDelegate {
+  public func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+    if buttonIndex == 1 {
+      if let openUrl = URL(string: UIApplicationOpenSettingsURLString) {
+        if UIApplication.shared.canOpenURL(openUrl) {
+          UIApplication.shared.openURL(openUrl)
+        }
+      }
     }
   }
 }
