@@ -136,11 +136,39 @@ extension ViewController: TYImagePickerDelegate {
     
     if case .image(images: let images) = resource {
         print(images.count)
-        selectedImages = images
+        if isCrop == true {
+            let img1 = imageWithImage(images[0], kWidth: 1000)
+            let img2 = imageWithImage(images[0], kWidth: 500)
+            let img3 = imageWithImage(images[0], kWidth: 300)
+            try! UIImagePNGRepresentation(img1)?.write(to: URL(fileURLWithPath: NSHomeDirectory() + "/Documents/test1.png"))
+            try! UIImagePNGRepresentation(img2)?.write(to: URL(fileURLWithPath: NSHomeDirectory() + "/Documents/test2.png"))
+            try! UIImagePNGRepresentation(img3)?.write(to: URL(fileURLWithPath: NSHomeDirectory() + "/Documents/test3.png"))
+            selectedImages = [images[0],img1,img2,img3]
+        }else{
+            selectedImages = images
+        }
         customCollectionView.reloadData()
     }
   }
   
+    ///对图片进行大小压缩
+    func imageWithImage(_ image:UIImage, kWidth: CGFloat) -> UIImage {
+        
+        var newSize:CGSize = image.size
+        
+        
+        if image.size.width >= kWidth {
+            newSize = CGSize(width: kWidth, height: kWidth)
+        }
+        
+        UIGraphicsBeginImageContext(newSize)
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
   func pickedPhoto(_ imagePickerHelperDidCancel: TYImagePickerHelper) {
     print("取消选择")
   }
@@ -160,6 +188,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     //MARK: - UICollectionViewDelegate
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detail = DetailViewController(nibName: "DetailViewController", bundle: nil)
+        detail.img = selectedImages[indexPath.item]
+        self.present(detail, animated: true, completion: nil)
+    }
 }
 

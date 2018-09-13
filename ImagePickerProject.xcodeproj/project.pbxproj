@@ -13,6 +13,8 @@
 		104208222010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1042081F2010A2A000A779FC /* TYImagePickerLocalize.strings */; };
 		105C3EDE205A65BE00BE47BA /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 105C3EDD205A65BE00BE47BA /* PhotoThumbCell.xib */; };
 		105C3EE7205A945E00BE47BA /* TYProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C3EE6205A945E00BE47BA /* TYProgressView.swift */; };
+		1082698E2149215D00FEDA22 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1082698C2149215D00FEDA22 /* DetailViewController.swift */; };
+		1082698F2149215D00FEDA22 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1082698D2149215D00FEDA22 /* DetailViewController.xib */; };
 		10CE792C1FF72ED90099FB35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79041FF72ED90099FB35 /* ViewController.swift */; };
 		10CE792D1FF72ED90099FB35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79051FF72ED90099FB35 /* Assets.xcassets */; };
 		10CE792E1FF72ED90099FB35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79081FF72ED90099FB35 /* LaunchScreen.storyboard */; };
@@ -50,6 +52,8 @@
 		104208202010A2A000A779FC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = TYImagePickerLocalize.strings; sourceTree = "<group>"; };
 		105C3EDD205A65BE00BE47BA /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
 		105C3EE6205A945E00BE47BA /* TYProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYProgressView.swift; sourceTree = "<group>"; };
+		1082698C2149215D00FEDA22 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1082698D2149215D00FEDA22 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		10CE79041FF72ED90099FB35 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		10CE79051FF72ED90099FB35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10CE79091FF72ED90099FB35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				10CE79041FF72ED90099FB35 /* ViewController.swift */,
+				1082698C2149215D00FEDA22 /* DetailViewController.swift */,
+				1082698D2149215D00FEDA22 /* DetailViewController.xib */,
 				10CE79051FF72ED90099FB35 /* Assets.xcassets */,
 				10CE79061FF72ED90099FB35 /* SupportFile */,
 				10CE79081FF72ED90099FB35 /* LaunchScreen.storyboard */,
@@ -322,6 +328,7 @@
 				10CE79771FF72EF10099FB35 /* PhotoAlbumCell.xib in Resources */,
 				105C3EDE205A65BE00BE47BA /* PhotoThumbCell.xib in Resources */,
 				10CE792F1FF72ED90099FB35 /* Main.storyboard in Resources */,
+				1082698F2149215D00FEDA22 /* DetailViewController.xib in Resources */,
 				104208212010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */,
 				10CE792D1FF72ED90099FB35 /* Assets.xcassets in Resources */,
 				103964E51FFB5F7F00DB583A /* ImageCollectionViewCell.xib in Resources */,
@@ -394,6 +401,7 @@
 			files = (
 				10CE79781FF72EF10099FB35 /* PhotoAlbumCell.swift in Sources */,
 				10CE79661FF72EF10099FB35 /* CameraPreviewCell.swift in Sources */,
+				1082698E2149215D00FEDA22 /* DetailViewController.swift in Sources */,
 				10CE79621FF72EF10099FB35 /* PhotosManager.swift in Sources */,
 				103964E41FFB5F7F00DB583A /* ImageCollectionViewCell.swift in Sources */,
 				105C3EE7205A945E00BE47BA /* TYProgressView.swift in Sources */,
