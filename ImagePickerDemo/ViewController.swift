@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     return TYImagePickerHelper(delegate: self)
   }()
   
-  var isCrop: Bool = true
+  var isCrop: Bool = false
   var type: TYImagePickerType = .albumAndCamera
   var maxCount = 9
   var rowCountH = 6
@@ -140,13 +140,7 @@ extension ViewController: TYImagePickerDelegate {
     if case .image(images: let images) = resource {
         print(images.count)
         if isCrop == true {
-            let img1 = imageWithImage(images[0], kWidth: 1000)
-            let img2 = imageWithImage(images[0], kWidth: 500)
-            let img3 = imageWithImage(images[0], kWidth: 300)
-            try! UIImagePNGRepresentation(img1)?.write(to: URL(fileURLWithPath: NSHomeDirectory() + "/Documents/test1.png"))
-            try! UIImagePNGRepresentation(img2)?.write(to: URL(fileURLWithPath: NSHomeDirectory() + "/Documents/test2.png"))
-            try! UIImagePNGRepresentation(img3)?.write(to: URL(fileURLWithPath: NSHomeDirectory() + "/Documents/test3.png"))
-            selectedImages = [images[0],img1,img2,img3]
+            selectedImages = [images[0]]
         }else{
             selectedImages = images
         }
