@@ -20,7 +20,6 @@
 		10CE792E1FF72ED90099FB35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79081FF72ED90099FB35 /* LaunchScreen.storyboard */; };
 		10CE792F1FF72ED90099FB35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE790A1FF72ED90099FB35 /* Main.storyboard */; };
 		10CE79301FF72ED90099FB35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE790C1FF72ED90099FB35 /* AppDelegate.swift */; };
-		10CE793F1FF72ED90099FB35 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10CE792B1FF72ED90099FB35 /* Info.plist */; };
 		10CE79621FF72EF10099FB35 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79411FF72EF10099FB35 /* PhotosManager.swift */; };
 		10CE79641FF72EF10099FB35 /* TYImagePickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79431FF72EF10099FB35 /* TYImagePickerHelper.swift */; };
 		10CE79661FF72EF10099FB35 /* CameraPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79461FF72EF10099FB35 /* CameraPreviewCell.swift */; };
@@ -291,9 +290,9 @@
 				TargetAttributes = {
 					CF2C77ED1C89613700B72821 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = U722WZ76UQ;
+						DevelopmentTeam = W5PEWS45E5;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -324,7 +323,6 @@
 				10CE797E1FF730DB0099FB35 /* TYImagePicker.xcassets in Resources */,
 				10CE79691FF72EF10099FB35 /* CameraPreviewCell.xib in Resources */,
 				104208222010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */,
-				10CE793F1FF72ED90099FB35 /* Info.plist in Resources */,
 				10CE79771FF72EF10099FB35 /* PhotoAlbumCell.xib in Resources */,
 				105C3EDE205A65BE00BE47BA /* PhotoThumbCell.xib in Resources */,
 				10CE792F1FF72ED90099FB35 /* Main.storyboard in Resources */,
@@ -552,15 +550,15 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U722WZ76UQ;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = W5PEWS45E5;
 				INFOPLIST_FILE = "$(SRCROOT)/ImagePickerDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ty.imagePicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = DevelopmentGeneral;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -576,8 +574,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U722WZ76UQ;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ImagePickerDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
