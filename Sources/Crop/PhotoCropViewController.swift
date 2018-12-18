@@ -12,7 +12,9 @@ import Photos
 class PhotoCropViewController: UIViewController {
   
   var asset: PHAsset?
-  
+  var space: CGFloat = 0
+    
+    
   var originImage: UIImage!
   
   var cropImageScrollView: CropImageScrollView!
@@ -139,10 +141,10 @@ class PhotoCropViewController: UIViewController {
     
     automaticallyAdjustsScrollViewInsets = false
     
-    cropImageScrollView = CropImageScrollView(frame: view.bounds, image: originImage)
+    cropImageScrollView = CropImageScrollView(frame: CGRect(x: 0, y: 0, width: view.bounds.width - space * 2, height: view.bounds.height - space * 2), image: originImage, space:space)
     view.addSubview(cropImageScrollView)
     
-    let maskView = PhotoMaskView(frame: view.bounds)
+    let maskView = PhotoMaskView(frame: view.bounds, space:space)
     view.addSubview(maskView)
     
     initBottomBar()
@@ -156,7 +158,7 @@ class PhotoCropViewController: UIViewController {
     view.addSubview(bottomBarTransparentView)
     bottomBarTransparentView.snp.makeConstraints { (make) -> Void in
       make.right.bottom.left.equalTo(view)
-      make.height.equalTo(60)
+      make.height.equalTo(60 + kHomeIndicator)
     }
     
     bottomBarTransparentView.alpha = 0.7
@@ -167,7 +169,7 @@ class PhotoCropViewController: UIViewController {
     view.addSubview(bottomBarContainerView)
     bottomBarContainerView.snp.makeConstraints { (make) -> Void in
       make.right.bottom.left.equalTo(view)
-      make.height.equalTo(60)
+      make.height.equalTo(60 + kHomeIndicator)
     }
     
     bottomBarContainerView.backgroundColor = UIColor.clear
@@ -177,7 +179,7 @@ class PhotoCropViewController: UIViewController {
     bottomBarContainerView.addSubview(completeButton)
     completeButton.snp.makeConstraints { (make) -> Void in
       make.right.bottom.top.equalTo(bottomBarContainerView)
-      make.width.equalTo(60)
+      make.width.equalTo(70)
     }
     
     completeButton.setTitle(self.GetLocalizableText(key: "TYImagePickerChooseText"), for: UIControlState())

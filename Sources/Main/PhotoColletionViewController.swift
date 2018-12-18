@@ -33,7 +33,6 @@ class PhotoColletionViewController: UIViewController {
   lazy private var backButton : UIButton = { [unowned self] in
     let back = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
     back.setAttributedTitle(NSAttributedString(string: self.GetLocalizableText(key: "TYImagePickerBackText") , attributes: [NSAttributedStringKey.foregroundColor : UIColor.white ,NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)]), for: .normal)
-
     back.setImage(self.ImageResourcePath("back_white_arrow"), for: .normal)
     back.contentMode = .scaleAspectFill
     back.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
@@ -54,13 +53,16 @@ class PhotoColletionViewController: UIViewController {
   fileprivate let selectedCountLabelWidth: CGFloat = 20
   fileprivate let indicatorWidth: CGFloat = 15
 
+  private var lastDirection:UIDeviceOrientation = .unknown  //记录上次的屏幕方向
   
   var canOpenCamera = true
   var cameraHelper: CameraHelper!
   var rowCountH = 6 //横屏显示列数
   var rowCountV = 4 //竖屏显示列数
   var maskEnable = false
-    
+  var space: CGFloat = 0 //裁剪框间隔
+  var bottomLabelTitle:String? = nil   //底部文字说明
+  var bottomButtonTitle:String? = nil  //底部按钮文字
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -73,6 +75,7 @@ class PhotoColletionViewController: UIViewController {
   }
   
   deinit {
+    print(#function)
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
   }
   
@@ -142,7 +145,14 @@ class PhotoColletionViewController: UIViewController {
     let selectedVideoCount = PhotosManager.sharedInstance.selectedVideo == nil ? 0 : 1
     
     let selectedCount = max(selectedImageCount, selectedVideoCount)
-    let countString = selectedCount == 0 ? self.GetLocalizableText(key: "TYImagePickerShareButtonText") : self.GetLocalizableText(key: "TYImagePickerShareButtonText") + "(\(selectedCount))"
+    var countString = ""
+    
+    if self.bottomButtonTitle == nil{
+        countString = selectedCount == 0 ? self.GetLocalizableText(key: "TYImagePickerShareButtonText") : self.GetLocalizableText(key: "TYImagePickerShareButtonText") + "(\(selectedCount))"
+    }else{
+        countString = selectedCount == 0 ? self.bottomButtonTitle! : self.bottomButtonTitle! + "(\(selectedCount))"
+    }
+    
     let bgcolor = selectedCount == 0 ? completionBgColorDisable : completionBgColorEnable
     
     completionButton.setAttributedTitle(NSAttributedString(string: countString, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15) , NSAttributedStringKey.foregroundColor : UIColor.white]), for: .normal)
@@ -186,33 +196,26 @@ class PhotoColletionViewController: UIViewController {
   }
   
   @objc private func orientationChanged() {
-    let orient = UIDevice.current.orientation
-    switch orient {
-    case .portrait :
-      if !popViewHelp.isShow {
-        self.setupUI()
-      }else{
-        ablumView.snp.remakeConstraints({ (make) in
-          make.top.right.left.bottom.equalToSuperview()
-          ablumView.layoutSubviews()
-        })
-        
+      let orient = UIDevice.current.orientation
+      switch orient {
+      case .portrait,.portraitUpsideDown:
+          if lastDirection == .portrait || lastDirection == .portraitUpsideDown{
+              break
+          }
+          fitDirectionUI()
+          lastDirection = orient
+      case .landscapeLeft,.landscapeRight:
+          if lastDirection.isLandscape{
+              break
+          }
+          fitDirectionUI()
+          lastDirection = orient
+      default:
+          break
       }
-      break
-    case .landscapeLeft,.landscapeRight:
-      if !popViewHelp.isShow {
-        self.setupUI()
-      }else{
-        ablumView.snp.remakeConstraints({ (make) in
-          make.top.right.left.bottom.equalToSuperview()
-          ablumView.layoutSubviews()
-        })
-      }
-      break
-    default:
-      break
-    }
+    
   }
+
   
   private func setupUI() {
     initNavigationBarButton(isShow: false)
@@ -262,7 +265,6 @@ class PhotoColletionViewController: UIViewController {
     //导航栏右边取消按钮
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: self.GetLocalizableText(key: "TYImagePickerCancelText"), style: .plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
     navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white , NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)], for: .normal)
-
     
     //导航栏左边返回按钮
     if isShow {
@@ -303,9 +305,7 @@ class PhotoColletionViewController: UIViewController {
       make.bottom.equalToSuperview()
     }
     bottomBarLabel = UILabel()
-
-    bottomBarLabel.attributedText = NSAttributedString(string: self.GetLocalizableText(key: "TYImagePickerShareLabelText"), attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17) , NSAttributedStringKey.foregroundColor : UIColor.white])
-
+    bottomBarLabel.attributedText = NSAttributedString(string: self.bottomLabelTitle ?? self.GetLocalizableText(key: "TYImagePickerShareLabelText"), attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17) , NSAttributedStringKey.foregroundColor : UIColor.white])
     bottomBarLabel.backgroundColor = .black
     bottomBarLabel.textColor = .white
     bottomBarBaseView.addSubview(bottomBarLabel)
@@ -320,8 +320,7 @@ class PhotoColletionViewController: UIViewController {
     completionButton.setTitleColor(.white, for: .normal)
     completionButton.backgroundColor = completionBgColorDisable
     completionButton.layer.cornerRadius = 5
-    completionButton.setAttributedTitle(NSAttributedString(string: self.GetLocalizableText(key: "TYImagePickerShareButtonText"), attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15) , NSAttributedStringKey.foregroundColor : UIColor.white]), for: .normal)
-
+    completionButton.setAttributedTitle(NSAttributedString(string: self.bottomButtonTitle ?? self.GetLocalizableText(key: "TYImagePickerShareButtonText"), attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15) , NSAttributedStringKey.foregroundColor : UIColor.white]), for: .normal)
     completionButton.isEnabled = false
     completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), for: .touchUpInside)
     bottomBarBaseView.addSubview(completionButton)
@@ -355,11 +354,15 @@ class PhotoColletionViewController: UIViewController {
   }
   
   
-  fileprivate func isLandscape() -> Bool {
-    if UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft {
-      return true
+  fileprivate func fitDirectionUI() {
+    if !popViewHelp.isShow {
+      self.setupUI()
+    }else{
+      ablumView.snp.remakeConstraints({ (make) in
+        make.top.right.left.bottom.equalToSuperview()
+        ablumView.layoutSubviews()
+      })
     }
-    return false
   }
   
 }
@@ -438,11 +441,10 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
        
         PhotosManager.sharedInstance.checkImageIsInLocal(with: asset) { isExistInLocal in
           
-          guard isExistInLocal else { return }
-          
           if PhotosManager.sharedInstance.isCrop {
-            
-            self.navigationController?.pushViewController(PhotoCropViewController(asset: asset), animated: true)
+            let vc = PhotoCropViewController(asset: asset)
+            vc.space = self.space
+            self.navigationController?.pushViewController(vc, animated: true)
             
           } else {
             

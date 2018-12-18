@@ -8,6 +8,7 @@
 
 import Photos
 import MobileCoreServices
+import SVProgressHUD
 
 enum PhotoSizeType {
   case thumbnail
@@ -37,6 +38,7 @@ class PhotosManager: NSObject {
   private(set) var currentImageAlbumFetchResult: PHFetchResult<PHAsset>!
   private(set) var selectedImages: Array<PHAsset> = []
   private(set) var selectedVideo: PHAsset?
+  var HUD:TYProgressView!
   
   var currentAlbumIndex: Int? {
     didSet{
@@ -144,10 +146,6 @@ class PhotosManager: NSObject {
           self.assetCollectionList += [assetCollection]
       }
     })
-
-//    if self.currentAlbumIndex == nil && assetCollectionList.count > 0 {
-//      self.currentAlbumIndex = 0
-//    }
     
     return assetCollectionList
   }
@@ -231,6 +229,23 @@ class PhotosManager: NSObject {
     }
   }
   
+  
+  /// 用于判断是否是云端
+  func fetchThumbImage(with asset: PHAsset, handleCompletion: @escaping (_ isInICloud: Bool) -> Void) {
+    
+    let imageRequestOptions = PHImageRequestOptions()
+    imageRequestOptions.isSynchronous = true
+    imageRequestOptions.isNetworkAccessAllowed = false
+
+    imageManager.requestImageData(for: asset, options: imageRequestOptions) { (data, str, orient, info) in
+      if data != nil {
+        handleCompletion(false)
+      }else{
+        handleCompletion(true)
+      }
+    }
+  }
+  
   func fetchImage(with albumIndex: Int, imageIndex: Int, sizeType: PhotoSizeType, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void) {
     
     if currentAlbumIndex != albumIndex {
@@ -254,28 +269,29 @@ class PhotosManager: NSObject {
     
   }
   
+  func fetchExportImage(with asset: PHAsset, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void, progressHandler: @escaping PHAssetImageProgressHandler){
+    
+    let imageRequestOptions = PHImageRequestOptions()
+    
+    imageRequestOptions.isNetworkAccessAllowed = true
+    imageRequestOptions.progressHandler = progressHandler
+    imageRequestOptions.deliveryMode = .highQualityFormat
+    imageRequestOptions.isSynchronous = false
+    
+    PHImageManager.default().requestImageData(for: asset, options: imageRequestOptions) { (imgData, str, orient, info) in
+      
+      if let data = imgData, let image = UIImage(data: data) {
+        handleCompletion(image, info?[PHImageResultIsInCloudKey] as? Bool ?? false)
+      }else{
+        handleCompletion(nil,false)
+      }
+    }
+  }
+  
   func checkImageIsInLocal(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
     
-    fetchImage(with: asset, sizeType: .export) { (image, isInICloud) -> Void in
-      
-      if  image == nil {
-        
-        if isInICloud {
-          
-          let alertView = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerCanNotChooseImage"), message: self.GetLocalizableText(key: "TYImagePickerCanNotChooseMessage"), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
-          alertView.show()
-          
-        } else {
-          
-          let alertView = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerChooseFailedPicture"), delegate: nil, cancelButtonTitle: nil, otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
-          alertView.show()
-
-        }
-        
-        return
-      }
-      
-      completion(true)
+    fetchThumbImage(with: asset) { (isInICloud) in
+      completion(!isInICloud)
     }
   }
   
@@ -382,6 +398,10 @@ class PhotosManager: NSObject {
   
   func fetchSelectedImages(_ handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
 
+    self.HUD = TYProgressView()
+    UIApplication.shared.keyWindow?.addSubview(self.HUD)
+    self.HUD.center = (self.HUD.superview?.center)!
+    self.HUD.isHidden = true
     getAllSelectedImageInCurrentAlbum(with: selectedImages, imageList: [], handleCompletion: handleCompletion)
     
   }
@@ -389,19 +409,44 @@ class PhotosManager: NSObject {
   func getAllSelectedImageInCurrentAlbum(with imageAssets: [PHAsset], imageList: [UIImage],  handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
     
     if imageAssets.count == 0 {
-      handleCompletion(imageList)
+      if self.HUD.isHidden == false {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+          handleCompletion(imageList)
+          self.HUD.removeFromSuperview()
+          self.HUD = nil
+        }
+      }else{
+        handleCompletion(imageList)
+        self.HUD.removeFromSuperview()
+        self.HUD = nil
+      }
       return
     }
     
-    fetchImage(with: imageAssets[0], sizeType: .export) { (image: UIImage?, _) -> Void in
+    fetchExportImage(with: imageAssets[0], handleCompletion: { (image, isInCloud) in
       if image == nil {
-        
-        handleCompletion([])
+        self.HUD.removeFromSuperview()
+        self.HUD = nil
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setMinimumDismissTimeInterval(2)
+        SVProgressHUD.showError(withStatus: self.GetLocalizableText(key: "TYImagePickerSyncFailed"))
         return
       }
-      
+      let percent:Float = Float(imageList.count) / Float(self.selectedImages.count) + 1 / Float(self.selectedImages.count)
+      self.HUD.progressValue = CGFloat(percent)
       self.getAllSelectedImageInCurrentAlbum(with: Array(imageAssets[1..<imageAssets.count]), imageList: imageList + [image!], handleCompletion: handleCompletion)
       
+    }) { (progress, error, point, info) in
+      DispatchQueue.main.async {
+        self.HUD.isHidden = false
+      }
+      if error == nil {
+        let percent:Float = Float(imageList.count) / Float(self.selectedImages.count) + Float(progress) / Float(self.selectedImages.count)
+        print(percent)
+        DispatchQueue.main.async {
+          self.HUD.progressValue = CGFloat(percent)
+        }
+      }
     }
   }
   
@@ -475,8 +520,8 @@ class PhotosManager: NSObject {
     case .thumbnail:
       imageRequestOptions.isSynchronous = false
       imageRequestOptions.resizeMode = .fast
-      imageRequestOptions.deliveryMode = .opportunistic
-      imageRequestOptions.isNetworkAccessAllowed = true
+      imageRequestOptions.deliveryMode = .fastFormat
+      imageRequestOptions.isNetworkAccessAllowed = false
       
     case .preview:
       imageRequestOptions.isSynchronous = false

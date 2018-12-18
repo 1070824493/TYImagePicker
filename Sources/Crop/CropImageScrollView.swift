@@ -14,13 +14,14 @@ class CropImageScrollView: UIScrollView {
   fileprivate var simpleTap: UITapGestureRecognizer!
   fileprivate var originImage: UIImage
   
+  fileprivate var space: CGFloat = 0
   fileprivate var maskHeight: CGFloat!
   var imageContainerView: UIView!
   
-  init(frame: CGRect, image: UIImage){
+  init(frame: CGRect, image: UIImage, space: CGFloat){
     
     self.originImage = image
-    
+    self.space = space
     super.init(frame: frame)
     
     maskHeight = (frame.height - frame.width) / 2
@@ -51,7 +52,7 @@ class CropImageScrollView: UIScrollView {
     //这里设置imageview的size为imagesize在当前缩放比例下的size
     imageView.frame = CGRect(x: 0, y: 0, width: image!.size.width * zoomScale, height: image!.size.height * zoomScale)
     
-    imageContainerView.frame = CGRect(x: 0, y: 0,width: imageView.frame.size.width , height: imageView.frame.size.height + maskHeight * 2)
+    imageContainerView.frame = CGRect(x: space, y: space,width: imageView.frame.size.width , height: imageView.frame.size.height + maskHeight * 2)
     
     imageView.center = CGPoint(x: imageContainerView.frame.width / 2, y: imageContainerView.frame.height / 2)
     
@@ -81,7 +82,9 @@ class CropImageScrollView: UIScrollView {
   }
   
   fileprivate func configUI() {
-    
+    if #available(iOS 11.0, *) {
+        contentInsetAdjustmentBehavior = .never
+    }
     delegate = self
     backgroundColor = UIColor.black
     showsHorizontalScrollIndicator = false
@@ -90,7 +93,7 @@ class CropImageScrollView: UIScrollView {
     alwaysBounceVertical = true
     alwaysBounceHorizontal = true
     bounces = true
-    
+    clipsToBounds = false
     //imageview
     imageView = UIImageView(frame: CGRect.zero)
     imageView.backgroundColor = UIColor.black
@@ -139,6 +142,7 @@ class CropImageScrollView: UIScrollView {
     
     if boundsSize.width > frameToCenter.size.width {
       frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / CGFloat(2)
+        
     } else {
       frameToCenter.origin.x = 0
     }
@@ -149,6 +153,8 @@ class CropImageScrollView: UIScrollView {
       frameToCenter.origin.y = 0
     }
   
+    frameToCenter.origin.x += space
+    frameToCenter.origin.y += space
     if !imageContainerView.frame.equalTo(frameToCenter) {
       imageContainerView.frame = frameToCenter
     }

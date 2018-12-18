@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -199,6 +199,12 @@
                                     <action selector="onMaskEnable:" destination="BYZ-38-t0r" eventType="valueChanged" id="Cwm-BJ-com"/>
                                 </connections>
                             </switch>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="裁剪间隔" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HRo-CT-rym">
+                                <rect key="frame" x="164" y="36" width="78.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -217,9 +223,11 @@
                             <constraint firstAttribute="trailing" secondItem="nu1-8T-u4f" secondAttribute="trailing" id="Ive-BO-rEH"/>
                             <constraint firstItem="Bqt-CE-Jkm" firstAttribute="leading" secondItem="Qsv-GR-7Dg" secondAttribute="trailing" constant="5" id="N2a-xK-oJs"/>
                             <constraint firstItem="eGM-fy-Ae1" firstAttribute="top" secondItem="Arj-ff-C0K" secondAttribute="bottom" constant="15" id="N3w-7y-Tvs"/>
+                            <constraint firstItem="HRo-CT-rym" firstAttribute="leading" secondItem="de1-jE-D1e" secondAttribute="trailing" constant="40" id="PJ3-DR-hrI"/>
                             <constraint firstItem="27v-kr-1YE" firstAttribute="centerY" secondItem="Arj-ff-C0K" secondAttribute="centerY" id="Pmn-yU-8Ta"/>
                             <constraint firstItem="YYG-5K-vm8" firstAttribute="centerY" secondItem="MEb-ts-qGw" secondAttribute="centerY" id="Q9T-Jx-6z0"/>
                             <constraint firstItem="Vky-YJ-YB2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="Wwy-yX-gDt"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HRo-CT-rym" secondAttribute="trailing" constant="20" symbolic="YES" id="dfX-kN-CqG"/>
                             <constraint firstItem="hFc-h4-nhu" firstAttribute="leading" secondItem="eGM-fy-Ae1" secondAttribute="trailing" constant="20" id="k3y-EW-g69"/>
                             <constraint firstItem="Bx9-xf-eh5" firstAttribute="top" secondItem="Vky-YJ-YB2" secondAttribute="bottom" constant="17" id="kve-yt-Y0c"/>
                             <constraint firstItem="de1-jE-D1e" firstAttribute="centerY" secondItem="K8o-4X-cwN" secondAttribute="centerY" id="ljY-So-UUb"/>
@@ -234,6 +242,7 @@
                             <constraint firstItem="Be9-Hj-HH7" firstAttribute="leading" secondItem="Vky-YJ-YB2" secondAttribute="trailing" constant="24" id="tqy-Vu-k0f"/>
                             <constraint firstItem="YYG-5K-vm8" firstAttribute="leading" secondItem="MEb-ts-qGw" secondAttribute="trailing" constant="8" id="uC3-pB-bln"/>
                             <constraint firstItem="Aa3-Lt-Ru8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="wlX-jQ-rxb"/>
+                            <constraint firstItem="HRo-CT-rym" firstAttribute="centerY" secondItem="K8o-4X-cwN" secondAttribute="centerY" id="xMh-Jh-elc"/>
                             <constraint firstItem="eGM-fy-Ae1" firstAttribute="leading" secondItem="Arj-ff-C0K" secondAttribute="leading" id="xwQ-FE-Yn7"/>
                             <constraint firstItem="nu1-8T-u4f" firstAttribute="top" secondItem="Bx9-xf-eh5" secondAttribute="bottom" constant="50" id="yD0-h8-Al2"/>
                             <constraint firstItem="Qsv-GR-7Dg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="ynW-Hl-ZxW"/>
@@ -247,6 +256,7 @@
                         <outlet property="isCropSwitch" destination="de1-jE-D1e" id="JKu-G4-Bzf"/>
                         <outlet property="maskEnableSwitch" destination="Be9-Hj-HH7" id="IXc-80-qzS"/>
                         <outlet property="maxCountTextField" destination="x1P-Xy-dnJ" id="ru9-qv-c36"/>
+                        <outlet property="spaceTF" destination="HRo-CT-rym" id="K13-Ss-SOf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

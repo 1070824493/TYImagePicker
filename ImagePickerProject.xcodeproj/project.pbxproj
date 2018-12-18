@@ -11,12 +11,15 @@
 		103964E51FFB5F7F00DB583A /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 103964E31FFB5F7F00DB583A /* ImageCollectionViewCell.xib */; };
 		104208212010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1042081C2010A2A000A779FC /* TYImagePickerLocalize.strings */; };
 		104208222010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1042081F2010A2A000A779FC /* TYImagePickerLocalize.strings */; };
+		105C3EDE205A65BE00BE47BA /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 105C3EDD205A65BE00BE47BA /* PhotoThumbCell.xib */; };
+		105C3EE7205A945E00BE47BA /* TYProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C3EE6205A945E00BE47BA /* TYProgressView.swift */; };
+		1082698E2149215D00FEDA22 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1082698C2149215D00FEDA22 /* DetailViewController.swift */; };
+		1082698F2149215D00FEDA22 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1082698D2149215D00FEDA22 /* DetailViewController.xib */; };
 		10CE792C1FF72ED90099FB35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79041FF72ED90099FB35 /* ViewController.swift */; };
 		10CE792D1FF72ED90099FB35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79051FF72ED90099FB35 /* Assets.xcassets */; };
 		10CE792E1FF72ED90099FB35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79081FF72ED90099FB35 /* LaunchScreen.storyboard */; };
 		10CE792F1FF72ED90099FB35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE790A1FF72ED90099FB35 /* Main.storyboard */; };
 		10CE79301FF72ED90099FB35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE790C1FF72ED90099FB35 /* AppDelegate.swift */; };
-		10CE793F1FF72ED90099FB35 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10CE792B1FF72ED90099FB35 /* Info.plist */; };
 		10CE79621FF72EF10099FB35 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79411FF72EF10099FB35 /* PhotosManager.swift */; };
 		10CE79641FF72EF10099FB35 /* TYImagePickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79431FF72EF10099FB35 /* TYImagePickerHelper.swift */; };
 		10CE79661FF72EF10099FB35 /* CameraPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79461FF72EF10099FB35 /* CameraPreviewCell.swift */; };
@@ -30,7 +33,6 @@
 		10CE79711FF72EF10099FB35 /* TYPhotoBrowserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79531FF72EF10099FB35 /* TYPhotoBrowserLite.swift */; };
 		10CE79721FF72EF10099FB35 /* ZoomImageScrollViewLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79541FF72EF10099FB35 /* ZoomImageScrollViewLite.swift */; };
 		10CE79731FF72EF10099FB35 /* PhotoCollectionLiteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79551FF72EF10099FB35 /* PhotoCollectionLiteCell.swift */; };
-		10CE79741FF72EF10099FB35 /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10CE79571FF72EF10099FB35 /* PhotoThumbCell.xib */; };
 		10CE79751FF72EF10099FB35 /* PhotoThumbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79581FF72EF10099FB35 /* PhotoThumbCell.swift */; };
 		10CE79761FF72EF10099FB35 /* PhotoColletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE79591FF72EF10099FB35 /* PhotoColletionViewController.swift */; };
 		10CE79771FF72EF10099FB35 /* PhotoAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10CE795B1FF72EF10099FB35 /* PhotoAlbumCell.xib */; };
@@ -47,6 +49,10 @@
 		103964E31FFB5F7F00DB583A /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		1042081D2010A2A000A779FC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = TYImagePickerLocalize.strings; sourceTree = "<group>"; };
 		104208202010A2A000A779FC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = TYImagePickerLocalize.strings; sourceTree = "<group>"; };
+		105C3EDD205A65BE00BE47BA /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
+		105C3EE6205A945E00BE47BA /* TYProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYProgressView.swift; sourceTree = "<group>"; };
+		1082698C2149215D00FEDA22 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1082698D2149215D00FEDA22 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		10CE79041FF72ED90099FB35 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		10CE79051FF72ED90099FB35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10CE79091FF72ED90099FB35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,7 +72,6 @@
 		10CE79531FF72EF10099FB35 /* TYPhotoBrowserLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYPhotoBrowserLite.swift; sourceTree = "<group>"; };
 		10CE79541FF72EF10099FB35 /* ZoomImageScrollViewLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageScrollViewLite.swift; sourceTree = "<group>"; };
 		10CE79551FF72EF10099FB35 /* PhotoCollectionLiteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionLiteCell.swift; sourceTree = "<group>"; };
-		10CE79571FF72EF10099FB35 /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
 		10CE79581FF72EF10099FB35 /* PhotoThumbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoThumbCell.swift; sourceTree = "<group>"; };
 		10CE79591FF72EF10099FB35 /* PhotoColletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoColletionViewController.swift; sourceTree = "<group>"; };
 		10CE795B1FF72EF10099FB35 /* PhotoAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAlbumCell.xib; sourceTree = "<group>"; };
@@ -113,6 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				10CE79041FF72ED90099FB35 /* ViewController.swift */,
+				1082698C2149215D00FEDA22 /* DetailViewController.swift */,
+				1082698D2149215D00FEDA22 /* DetailViewController.xib */,
 				10CE79051FF72ED90099FB35 /* Assets.xcassets */,
 				10CE79061FF72ED90099FB35 /* SupportFile */,
 				10CE79081FF72ED90099FB35 /* LaunchScreen.storyboard */,
@@ -185,7 +192,7 @@
 		10CE79561FF72EF10099FB35 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				10CE79571FF72EF10099FB35 /* PhotoThumbCell.xib */,
+				105C3EDD205A65BE00BE47BA /* PhotoThumbCell.xib */,
 				10CE79581FF72EF10099FB35 /* PhotoThumbCell.swift */,
 				10CE79591FF72EF10099FB35 /* PhotoColletionViewController.swift */,
 			);
@@ -205,6 +212,7 @@
 		10CE795E1FF72EF10099FB35 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				105C3EE6205A945E00BE47BA /* TYProgressView.swift */,
 				10CE795F1FF72EF10099FB35 /* Extension.swift */,
 				10CE79601FF72EF10099FB35 /* PopViewHelper.swift */,
 			);
@@ -282,8 +290,9 @@
 				TargetAttributes = {
 					CF2C77ED1C89613700B72821 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = U722WZ76UQ;
-						LastSwiftMigration = 0900;
+						DevelopmentTeam = W5PEWS45E5;
+						LastSwiftMigration = 0920;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -314,11 +323,11 @@
 				10CE797E1FF730DB0099FB35 /* TYImagePicker.xcassets in Resources */,
 				10CE79691FF72EF10099FB35 /* CameraPreviewCell.xib in Resources */,
 				104208222010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */,
-				10CE793F1FF72ED90099FB35 /* Info.plist in Resources */,
 				10CE79771FF72EF10099FB35 /* PhotoAlbumCell.xib in Resources */,
+				105C3EDE205A65BE00BE47BA /* PhotoThumbCell.xib in Resources */,
 				10CE792F1FF72ED90099FB35 /* Main.storyboard in Resources */,
+				1082698F2149215D00FEDA22 /* DetailViewController.xib in Resources */,
 				104208212010A2A000A779FC /* TYImagePickerLocalize.strings in Resources */,
-				10CE79741FF72EF10099FB35 /* PhotoThumbCell.xib in Resources */,
 				10CE792D1FF72ED90099FB35 /* Assets.xcassets in Resources */,
 				103964E51FFB5F7F00DB583A /* ImageCollectionViewCell.xib in Resources */,
 				10CE792E1FF72ED90099FB35 /* LaunchScreen.storyboard in Resources */,
@@ -353,10 +362,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,8 +399,10 @@
 			files = (
 				10CE79781FF72EF10099FB35 /* PhotoAlbumCell.swift in Sources */,
 				10CE79661FF72EF10099FB35 /* CameraPreviewCell.swift in Sources */,
+				1082698E2149215D00FEDA22 /* DetailViewController.swift in Sources */,
 				10CE79621FF72EF10099FB35 /* PhotosManager.swift in Sources */,
 				103964E41FFB5F7F00DB583A /* ImageCollectionViewCell.swift in Sources */,
+				105C3EE7205A945E00BE47BA /* TYProgressView.swift in Sources */,
 				10CE79791FF72EF10099FB35 /* PhotoAlbumView.swift in Sources */,
 				10CE797B1FF72EF10099FB35 /* PopViewHelper.swift in Sources */,
 				10CE79751FF72EF10099FB35 /* PhotoThumbCell.swift in Sources */,
@@ -534,16 +547,20 @@
 			baseConfigurationReference = 30193EB4488311F7EE4A4CBB /* Pods-ImagePickerProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = U722WZ76UQ;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = W5PEWS45E5;
 				INFOPLIST_FILE = "$(SRCROOT)/ImagePickerDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ty.ImagePicker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ty.imagePicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = DevelopmentGeneral;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -554,15 +571,18 @@
 			baseConfigurationReference = 95A5E52D98A73A4239134B4F /* Pods-ImagePickerProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = U722WZ76UQ;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ImagePickerDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ty.ImagePicker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ty.imagePicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

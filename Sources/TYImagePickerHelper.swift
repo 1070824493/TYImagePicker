@@ -49,7 +49,7 @@ public enum TYResourceType {
 open class TYImagePickerHelper: NSObject {
   
   private var cameraHelper: CameraHelper!
-  private weak var handlerViewController: UIViewController?
+  weak var handlerViewController: UIViewController?
   
   public weak var delegate: TYImagePickerDelegate?
   public var maxSelectedCount: Int = 9
@@ -59,6 +59,10 @@ open class TYImagePickerHelper: NSObject {
   public var rowCountV: Int = 4
   public var maskEnable:Bool = false
   public var resourceOption: TYResourceOption = .image
+  
+  public var space: CGFloat = 0 //裁剪框间隔
+  public var bottomLabelTitle:String? = nil   //底部文字说明
+  public var bottomButtonTitle:String? = nil  //底部按钮文字
   
   public init(delegate: TYImagePickerDelegate?, handlerViewController: UIViewController? = nil) {
     self.delegate = delegate
@@ -94,6 +98,7 @@ open class TYImagePickerHelper: NSObject {
       if resourceOption.contains(.image) {
         cameraHelper = CameraHelper(handlerViewController: _handlerViewController)
         cameraHelper.isCrop = isCrop
+        cameraHelper.space = space
         cameraHelper.cropViewControllerTranlateType = CameraHelper.cropViewControllerTranlateType_Present
         cameraHelper.openCamera()
       } else if resourceOption.contains(.video) {
@@ -158,7 +163,6 @@ open class TYImagePickerHelper: NSObject {
   }
   
   private func finish(with resource: TYResourceType) {
-    
     handlerViewController?.dismiss(animated: true, completion: {
       
       PhotosManager.sharedInstance.clearData()
@@ -216,8 +220,7 @@ open class TYImagePickerHelper: NSObject {
   
   private func fetchImages() {
     
-    PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
-      
+    PhotosManager.sharedInstance.fetchSelectedImages({ (images) in
       var images: [UIImage] = images
       
       if self.isCrop && images.count == 1 {
@@ -229,7 +232,7 @@ open class TYImagePickerHelper: NSObject {
       guard self.shouldPick(resource: resource) else { return }
       
       self.finish(with: resource)
-    }
+    })
   }
   
   private func showAblum() {
@@ -239,6 +242,9 @@ open class TYImagePickerHelper: NSObject {
     viewController.rowCountH = self.rowCountH
     viewController.rowCountV = self.rowCountV
     viewController.maskEnable = self.maskEnable
+    viewController.bottomLabelTitle = self.bottomLabelTitle
+    viewController.bottomButtonTitle = self.bottomButtonTitle
+    viewController.space = self.space
     let navigationController = UINavigationController(rootViewController: viewController)
     navigationController.navigationBar.barTintColor = .black
     navigationController.navigationBar.barStyle = .black
@@ -253,7 +259,7 @@ extension NSObject {
         return image
     }
   
-    func GetLocalizableText(key: String) -> String {
+    public func GetLocalizableText(key: String) -> String {
         let bundle = Bundle(for: TYImagePickerHelper.self)
         return bundle.localizedString(forKey: key, value: "", table: "TYImagePickerLocalize")
     }
