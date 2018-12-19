@@ -119,7 +119,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   # s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "SnapKit", '4.2.0'
-  s.dependency "SVProgressHUD", '2.1'
+  s.dependency "SnapKit", '~> 4.2.0'
+  s.dependency "SVProgressHUD", '~> 2.1'
 
 end
