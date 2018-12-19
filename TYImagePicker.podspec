@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "TYImagePicker"
 
-  s.version      = "4.0.1"
+  s.version      = "4.0.2"
 
   s.summary      = "A complete functions ImagePicker."
 
@@ -120,5 +120,6 @@ A complete functions ImagePicker. It can picks image, gif, video.
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   s.dependency "SnapKit", '4.0.0'
+  s.dependency "SVProgressHUD", '2.1'
 
 end
