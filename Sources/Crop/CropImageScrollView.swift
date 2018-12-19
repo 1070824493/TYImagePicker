@@ -89,7 +89,7 @@ class CropImageScrollView: UIScrollView {
     backgroundColor = UIColor.black
     showsHorizontalScrollIndicator = false
     showsVerticalScrollIndicator = false
-    decelerationRate = UIScrollViewDecelerationRateFast
+    decelerationRate = UIScrollView.DecelerationRate.fast
     alwaysBounceVertical = true
     alwaysBounceHorizontal = true
     bounces = true

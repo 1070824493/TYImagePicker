@@ -32,7 +32,7 @@ class PhotoColletionViewController: UIViewController {
 
   lazy private var backButton : UIButton = { [unowned self] in
     let back = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
-    back.setAttributedTitle(NSAttributedString(string: self.GetLocalizableText(key: "TYImagePickerBackText") , attributes: [NSAttributedStringKey.foregroundColor : UIColor.white ,NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)]), for: .normal)
+    back.setAttributedTitle(NSAttributedString(string: self.GetLocalizableText(key: "TYImagePickerBackText") , attributes: [NSAttributedString.Key.foregroundColor : UIColor.white ,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]), for: .normal)
     back.setImage(self.ImageResourcePath("back_white_arrow"), for: .normal)
     back.contentMode = .scaleAspectFill
     back.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
@@ -68,7 +68,7 @@ class PhotoColletionViewController: UIViewController {
     super.viewDidLoad()
     
     initAblum()
-    NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: UIDevice.orientationDidChangeNotification, object: nil)
     self.view.backgroundColor = .white
     setupUI()
     
@@ -76,7 +76,7 @@ class PhotoColletionViewController: UIViewController {
   
   deinit {
     print(#function)
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
   }
   
   @available(iOS 11.0, *)
@@ -155,7 +155,7 @@ class PhotoColletionViewController: UIViewController {
     
     let bgcolor = selectedCount == 0 ? completionBgColorDisable : completionBgColorEnable
     
-    completionButton.setAttributedTitle(NSAttributedString(string: countString, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15) , NSAttributedStringKey.foregroundColor : UIColor.white]), for: .normal)
+    completionButton.setAttributedTitle(NSAttributedString(string: countString, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15) , NSAttributedString.Key.foregroundColor : UIColor.white]), for: .normal)
     
     completionButton.backgroundColor = bgcolor
     completionButton.isEnabled = selectedCount != 0
@@ -264,7 +264,7 @@ class PhotoColletionViewController: UIViewController {
     
     //导航栏右边取消按钮
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: self.GetLocalizableText(key: "TYImagePickerCancelText"), style: .plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
-    navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white , NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)], for: .normal)
+    navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white , NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], for: .normal)
     
     //导航栏左边返回按钮
     if isShow {
@@ -305,7 +305,7 @@ class PhotoColletionViewController: UIViewController {
       make.bottom.equalToSuperview()
     }
     bottomBarLabel = UILabel()
-    bottomBarLabel.attributedText = NSAttributedString(string: self.bottomLabelTitle ?? self.GetLocalizableText(key: "TYImagePickerShareLabelText"), attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17) , NSAttributedStringKey.foregroundColor : UIColor.white])
+    bottomBarLabel.attributedText = NSAttributedString(string: self.bottomLabelTitle ?? self.GetLocalizableText(key: "TYImagePickerShareLabelText"), attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17) , NSAttributedString.Key.foregroundColor : UIColor.white])
     bottomBarLabel.backgroundColor = .black
     bottomBarLabel.textColor = .white
     bottomBarBaseView.addSubview(bottomBarLabel)
@@ -320,7 +320,7 @@ class PhotoColletionViewController: UIViewController {
     completionButton.setTitleColor(.white, for: .normal)
     completionButton.backgroundColor = completionBgColorDisable
     completionButton.layer.cornerRadius = 5
-    completionButton.setAttributedTitle(NSAttributedString(string: self.bottomButtonTitle ?? self.GetLocalizableText(key: "TYImagePickerShareButtonText"), attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15) , NSAttributedStringKey.foregroundColor : UIColor.white]), for: .normal)
+    completionButton.setAttributedTitle(NSAttributedString(string: self.bottomButtonTitle ?? self.GetLocalizableText(key: "TYImagePickerShareButtonText"), attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15) , NSAttributedString.Key.foregroundColor : UIColor.white]), for: .normal)
     completionButton.isEnabled = false
     completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), for: .touchUpInside)
     bottomBarBaseView.addSubview(completionButton)

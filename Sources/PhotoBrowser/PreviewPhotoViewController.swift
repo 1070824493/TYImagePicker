@@ -229,9 +229,9 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
       make.height.equalTo(44)
     }
     
-    completeButton.setTitle(self.GetLocalizableText(key: "TYImagePickerCompleteButtonText"), for: UIControlState())
+    completeButton.setTitle(self.GetLocalizableText(key: "TYImagePickerCompleteButtonText"), for: UIControl.State())
     completeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-    completeButton.setTitleColor(UIColor.green, for: UIControlState())
+    completeButton.setTitleColor(UIColor.green, for: UIControl.State())
     completeButton.addTarget(self, action: #selector(PreviewPhotoViewController.onComplete), for: .touchUpInside)
     
     //selectedCountLabel
@@ -265,8 +265,9 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     
     if !isSuccess {
         if PhotosManager.sharedInstance.maxSelectedCount == 9 {
-            let alert = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), delegate: nil, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerSureText"))
-            alert.show()
+          let alert = UIAlertController(title: nil, message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: nil))
+          UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alert, animated: true, completion: nil)
         }
         return
     }
@@ -279,7 +280,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     
     self.setPhotoSelected(!isSelected)
     
-    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: UIViewAnimationOptions(), animations: { () -> Void in
+    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: UIView.AnimationOptions(), animations: { () -> Void in
       
       self.setPhotoSelected(isSelected)
       

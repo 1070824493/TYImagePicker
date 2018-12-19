@@ -46,7 +46,7 @@ class TYPhotoBrowserLite: UIViewController {
   }
   
   deinit {
-      NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+      NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
   }
   required init?(coder aDecoder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
@@ -56,7 +56,7 @@ class TYPhotoBrowserLite: UIViewController {
     super.viewDidLoad()
   
     initView()
-    NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: UIDevice.orientationDidChangeNotification, object: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -156,9 +156,8 @@ class TYPhotoBrowserLite: UIViewController {
     if navigationController == nil {
       return
     }
-    
-    let isHidden = navigationController!.isNavigationBarHidden
-    navigationController!.setNavigationBarHidden(!isHidden, animated: true)
+
+    navigationController!.isNavigationBarHidden.toggle()
     
   }
   

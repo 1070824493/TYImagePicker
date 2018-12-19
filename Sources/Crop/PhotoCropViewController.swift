@@ -44,6 +44,10 @@ class PhotoCropViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -131,11 +135,11 @@ class PhotoCropViewController: UIViewController {
       return
     }
     
-    let isHidden = navigationController!.isNavigationBarHidden
-    UIApplication.shared.setStatusBarHidden(!isHidden, with: .none)
-    navigationController!.setNavigationBarHidden(!isHidden, animated: true)
+    navigationController!.isNavigationBarHidden.toggle()
     
   }
+  
+  
   
   fileprivate func setupUI() {
     
@@ -182,9 +186,9 @@ class PhotoCropViewController: UIViewController {
       make.width.equalTo(70)
     }
     
-    completeButton.setTitle(self.GetLocalizableText(key: "TYImagePickerChooseText"), for: UIControlState())
+    completeButton.setTitle(self.GetLocalizableText(key: "TYImagePickerChooseText"), for: UIControl.State())
     completeButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-    completeButton.setTitleColor(UIColor.white, for: UIControlState())
+    completeButton.setTitleColor(UIColor.white, for: UIControl.State())
     completeButton.addTarget(self, action: #selector(PhotoCropViewController.onComplete), for: .touchUpInside)
     
     //selectedCountLabel
@@ -195,9 +199,9 @@ class PhotoCropViewController: UIViewController {
       make.width.equalTo(60)
     }
     
-    cancelButton.setTitle(self.GetLocalizableText(key: "TYImagePickerCancelText"), for: UIControlState())
+    cancelButton.setTitle(self.GetLocalizableText(key: "TYImagePickerCancelText"), for: UIControl.State())
     cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-    cancelButton.setTitleColor(UIColor.white, for: UIControlState())
+    cancelButton.setTitleColor(UIColor.white, for: UIControl.State())
     cancelButton.addTarget(self, action: #selector(PhotoCropViewController.onCancel), for: .touchUpInside)
     
     imageView = UIImageView()

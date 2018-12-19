@@ -40,33 +40,34 @@ class CameraHelper: NSObject {
       handlerViewController?.modalPresentationStyle = .overCurrentContext
       handlerViewController?.present(imagePicker, animated: true, completion: nil)
     } else {
-      let alertView = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerCameraNoAuth"), message: self.GetLocalizableText(key: "TYImagePickerNoAuthMessage"), delegate: self, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerCancelText"), otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
-      alertView.show()
+      
+      let alert = UIAlertController(title: self.GetLocalizableText(key: "TYImagePickerCameraNoAuth"), message: self.GetLocalizableText(key: "TYImagePickerNoAuthMessage"), preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerCancelText"), style: .cancel, handler: nil))
+      alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: { (action) in
+        if let openUrl = URL(string: UIApplication.openSettingsURLString) {
+          if UIApplication.shared.canOpenURL(openUrl) {
+            UIApplication.shared.openURL(openUrl)
+          }
+        }
+      }))
+      UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alert, animated: true, completion: nil)
     }
   }
 }
 
-extension CameraHelper: UIAlertViewDelegate {
-  public func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-    if buttonIndex == 1 {
-      if let openUrl = URL(string: UIApplicationOpenSettingsURLString) {
-        if UIApplication.shared.canOpenURL(openUrl) {
-          UIApplication.shared.openURL(openUrl)
-        }
-      }
-    }
-  }
-}
 
 extension CameraHelper: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
     
-    let type : String = info[UIImagePickerControllerMediaType] as! String
+    let type : String = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! String
     
     if type == "public.image" {
       
-      let image : UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+      let image : UIImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
       
       if isCrop {
         
@@ -99,4 +100,14 @@ extension CameraHelper: UIImagePickerControllerDelegate, UINavigationControllerD
     }
   }
   
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

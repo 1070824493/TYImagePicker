@@ -21,7 +21,7 @@ class TYProgressView: UIView {
   init() {
     super.init(frame: UIScreen.main.bounds)
     initView()
-    NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveOrientNoti), name: .UIDeviceOrientationDidChange, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveOrientNoti), name: UIDevice.orientationDidChangeNotification, object: nil)
     
   }
   
@@ -106,7 +106,7 @@ class TYProgressView: UIView {
     layer.backgroundColor = UIColor.clear.cgColor
     layer.strokeColor = color?.cgColor
     layer.lineWidth = lineWidth
-    layer.lineCap = "round"
+    layer.lineCap = convertToCAShapeLayerLineCap("round")
     return layer
   }
   
@@ -121,4 +121,9 @@ class TYProgressView: UIView {
     frame = UIScreen.main.bounds
     loadingView.center = center
   }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAShapeLayerLineCap(_ input: String) -> CAShapeLayerLineCap {
+	return CAShapeLayerLineCap(rawValue: input)
 }

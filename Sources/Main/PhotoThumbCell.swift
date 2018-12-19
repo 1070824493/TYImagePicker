@@ -34,8 +34,11 @@ class PhotoThumbCell: UICollectionViewCell {
   @IBAction func onClickMask(_ sender: UIButton) {
     
     if PhotosManager.sharedInstance.maxSelectedCount == 9 {
-        let alert = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), delegate: nil, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerSureText"))
-        alert.show()
+      
+      let alert = UIAlertController(title: nil, message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: nil))
+      UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alert, animated: true, completion: nil)
+      
     }
     
   }
@@ -94,8 +97,10 @@ class PhotoThumbCell: UICollectionViewCell {
     
     if !isSuccess {
         if PhotosManager.sharedInstance.maxSelectedCount == 9 {
-            let alert = UIAlertView(title: "", message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), delegate: nil, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerSureText"))
-            alert.show()
+
+          let alert = UIAlertController(title: nil, message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: nil))
+          UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alert, animated: true, completion: nil)
         }
         return
     }
@@ -112,7 +117,7 @@ class PhotoThumbCell: UICollectionViewCell {
     
     self.setResourceSelected(!isSelected)
     
-    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: UIViewAnimationOptions(), animations: { () -> Void in
+    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: UIView.AnimationOptions(), animations: { () -> Void in
       
       self.setResourceSelected(isSelected)
       

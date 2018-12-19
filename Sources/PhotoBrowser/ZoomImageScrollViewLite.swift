@@ -40,7 +40,7 @@ class ZoomImageScrollViewLite: UIScrollView {
     backgroundColor = UIColor.black
     showsHorizontalScrollIndicator = false
     showsVerticalScrollIndicator = false
-    decelerationRate = UIScrollViewDecelerationRateFast
+    decelerationRate = UIScrollView.DecelerationRate.fast
     //    autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
     alwaysBounceHorizontal = false
     delegate = self

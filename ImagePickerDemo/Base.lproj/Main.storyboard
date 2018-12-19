@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -34,7 +34,7 @@
                                 </connections>
                             </switch>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="27v-kr-1YE">
-                                <rect key="frame" x="75" y="77" width="245" height="29"/>
+                                <rect key="frame" x="75" y="77.5" width="245" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="245" id="emo-MP-kSP"/>
                                     <constraint firstAttribute="height" constant="28" id="pYC-Xa-w4e"/>
@@ -89,7 +89,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="竖屏每行显示个数(2-4)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEb-ts-qGw">
-                                <rect key="frame" x="20" y="191" width="179" height="21"/>
+                                <rect key="frame" x="20" y="190.5" width="179" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ChV-lr-mnt"/>
                                 </constraints>
@@ -111,7 +111,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="达到Max未选是否遮罩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vky-YJ-YB2">
-                                <rect key="frame" x="20" y="268" width="171" height="21"/>
+                                <rect key="frame" x="20" y="267.5" width="171" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="GAY-ve-Qh3"/>
                                 </constraints>
@@ -120,7 +120,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bx9-xf-eh5">
-                                <rect key="frame" x="20" y="306" width="32" height="30"/>
+                                <rect key="frame" x="20" y="305.5" width="32" height="30"/>
                                 <color key="backgroundColor" red="0.8627451062" green="0.2588235438" blue="0.27450981740000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="hl9-FD-dFF"/>
@@ -133,7 +133,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nu1-8T-u4f">
-                                <rect key="frame" x="0.0" y="386" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="385.5" width="375" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Hw5-eI-RAJ"/>
@@ -154,11 +154,11 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0ct-Wj-861">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="demo" id="0ct-Wj-861">
                                     <rect key="frame" x="0.0" y="0.0" width="10" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KOZ-rH-3wK">
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="demo2" id="KOZ-rH-3wK">
                                     <rect key="frame" x="108" y="0.0" width="10" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
@@ -168,7 +168,7 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="横屏每行显示个数(6-8)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qsv-GR-7Dg">
-                                <rect key="frame" x="20" y="227" width="179.5" height="21"/>
+                                <rect key="frame" x="20" y="226.5" width="179.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Yne-r5-Ydn"/>
                                 </constraints>
@@ -177,7 +177,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="6" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bqt-CE-Jkm">
-                                <rect key="frame" x="204.5" y="222.5" width="40" height="30"/>
+                                <rect key="frame" x="204.5" y="222" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="C7E-NP-nf0"/>
                                     <constraint firstAttribute="width" constant="40" id="I4x-ZU-4sE"/>
@@ -190,7 +190,7 @@
                                 </connections>
                             </textField>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Be9-Hj-HH7">
-                                <rect key="frame" x="215" y="263" width="49" height="31"/>
+                                <rect key="frame" x="215" y="262.5" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="H4D-3O-nBy"/>
                                     <constraint firstAttribute="width" constant="47" id="yVx-Fa-qPM"/>
@@ -200,7 +200,7 @@
                                 </connections>
                             </switch>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="裁剪间隔" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HRo-CT-rym">
-                                <rect key="frame" x="164" y="36" width="78.5" height="30"/>
+                                <rect key="frame" x="164" y="35.5" width="78.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>

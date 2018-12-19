@@ -277,11 +277,11 @@ class PopViewHelper: NSObject {
     setupUI()
     
     if let _mask = mask{
-      superView.bringSubview(toFront: _mask)
+      superView.bringSubviewToFront(_mask)
     }
     
     superView.addSubview(targetView)
-    superView.bringSubview(toFront: targetView)
+    superView.bringSubviewToFront(targetView)
     targetView.isHidden = false
     isShow = true
     isAnimating = true
@@ -299,7 +299,7 @@ class PopViewHelper: NSObject {
         delay: TimeInterval(0),
         usingSpringWithDamping: spring,
         initialSpringVelocity: initVelocity,
-        options: UIViewAnimationOptions(),
+        options: UIView.AnimationOptions(),
         animations: self.showAction(),
         completion: self.showCompletionAction())
       
@@ -380,7 +380,7 @@ class PopViewHelper: NSObject {
         delay: 0,
         usingSpringWithDamping: spring,
         initialSpringVelocity: initVelocity,
-        options: UIViewAnimationOptions(),
+        options: UIView.AnimationOptions(),
         animations: self.hideAction() ,
         completion: self.hideCompletionAction())
       

@@ -121,8 +121,18 @@ open class TYImagePickerHelper: NSObject {
                 }
             })
         case .restricted,.denied:
-            let alertView = UIAlertView(title: self.GetLocalizableText(key: "TYImagePickerNoAuthTitle"), message: self.GetLocalizableText(key: "TYImagePickerNoAuthMessage"), delegate: self, cancelButtonTitle: self.GetLocalizableText(key: "TYImagePickerCancelText"), otherButtonTitles: self.GetLocalizableText(key: "TYImagePickerSureText"))
-            alertView.show()
+            
+            let alert = UIAlertController(title: self.GetLocalizableText(key: "TYImagePickerNoAuthTitle"), message: self.GetLocalizableText(key: "TYImagePickerNoAuthMessage"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerCancelText"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: { (action) in
+              if let openUrl = URL(string: UIApplication.openSettingsURLString) {
+                if UIApplication.shared.canOpenURL(openUrl) {
+                  UIApplication.shared.openURL(openUrl)
+                }
+              }
+            }))
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+          
         case .authorized:
             showAblum()
         }
@@ -265,14 +275,3 @@ extension NSObject {
     }
 }
 
-extension TYImagePickerHelper: UIAlertViewDelegate {
-    public func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-        if buttonIndex == 1 {
-            if let openUrl = URL(string: UIApplicationOpenSettingsURLString) {
-                if UIApplication.shared.canOpenURL(openUrl) {
-                    UIApplication.shared.openURL(openUrl)
-                }
-            }
-        }
-    }
-}

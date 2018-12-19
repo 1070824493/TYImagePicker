@@ -90,8 +90,8 @@ class CameraPreviewView: UIView {
     
     for device in AVCaptureDevice.devices(for: AVMediaType.video) {
       
-      if (device as? AVCaptureDevice)?.position == position {
-        return device as? AVCaptureDevice
+      if device.position == position {
+        return device
       }
     }
     
