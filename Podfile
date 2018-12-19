@@ -6,5 +6,5 @@ target 'ImagePickerProject' do
   use_frameworks!
 
   pod 'SnapKit' ,'~> 4.0.0'
-
+  pod 'SVProgressHUD', '~> 2.1'
 end
