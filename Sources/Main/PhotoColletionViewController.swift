@@ -14,9 +14,28 @@ let kScreenH = UIScreen.main.bounds.height
 let kScreenW = UIScreen.main.bounds.width
 let longer = ((kScreenW > kScreenH) ? kScreenW : kScreenH)
 let shorter = ((kScreenW < kScreenH) ? kScreenW : kScreenH)
-let isIPhoneX = (longer == 812 ? true : false)
-let kStatusBarOffset:CGFloat = (isIPhoneX ? 24 : 0)
-let kHomeIndicator: CGFloat = (isIPhoneX ? 34 : 0)
+
+var isLandscape: Bool {
+  return UIApplication.shared.statusBarOrientation.isLandscape
+}
+
+func isIpad() -> Bool {
+  if UIDevice.current.userInterfaceIdiom == .pad {
+    return true
+  }
+  return false
+}
+
+func tySafeAreaInset() -> UIEdgeInsets {
+  if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.keyWindow {
+    return keyWindow.safeAreaInsets
+  }else {
+    return UIEdgeInsets.zero
+  }
+}
+
+let kStatusBarHeight: CGFloat = 20
+let kStatusBarOffset:CGFloat = (tySafeAreaInset().top > 0 ? 24 : 0)
 let kBottomBarHeight: CGFloat = 50
 let completionBgColorDisable = #colorLiteral(red: 0.006263995543, green: 0.1826446056, blue: 0.3904125094, alpha: 1)
 let completionBgColorEnable = #colorLiteral(red: 0, green: 0.364348799, blue: 0.7843860388, alpha: 1)
@@ -184,14 +203,14 @@ class PhotoColletionViewController: UIViewController {
     completionButton.snp.remakeConstraints { (make) in
       make.top.equalToSuperview().offset(10)
       make.right.equalToSuperview().offset(-10-edg.right)
-      make.bottom.equalToSuperview().offset(-10-kHomeIndicator)
+      make.bottom.equalToSuperview().offset(-10-tySafeAreaInset().bottom)
       make.width.equalTo(70)
     }
     bottomBarLabel.snp.remakeConstraints { (make) in
       make.left.equalToSuperview().offset(20+edg.left)
       make.top.equalToSuperview().offset(10)
       make.right.equalToSuperview()
-      make.bottom.equalToSuperview().offset(-10-kHomeIndicator)
+      make.bottom.equalToSuperview().offset(-10-tySafeAreaInset().bottom)
     }
   }
   
@@ -243,7 +262,7 @@ class PhotoColletionViewController: UIViewController {
     collectionView.snp.makeConstraints { (make) in
         make.top.equalToSuperview()
       make.left.right.equalToSuperview()
-      make.bottom.equalToSuperview().offset(-kBottomBarHeight - kHomeIndicator)
+      make.bottom.equalToSuperview().offset(-kBottomBarHeight - tySafeAreaInset().bottom)
     }
   }
   
@@ -301,7 +320,7 @@ class PhotoColletionViewController: UIViewController {
     self.view.addSubview(bottomBarBaseView)
     bottomBarBaseView.snp.makeConstraints { (make) in
       make.left.right.equalToSuperview()
-      make.height.equalTo(kBottomBarHeight + kHomeIndicator)
+      make.height.equalTo(kBottomBarHeight + tySafeAreaInset().bottom)
       make.bottom.equalToSuperview()
     }
     bottomBarLabel = UILabel()
@@ -313,7 +332,7 @@ class PhotoColletionViewController: UIViewController {
       make.left.equalToSuperview().offset(20)
       make.top.equalToSuperview().offset(10)
       make.right.equalToSuperview()
-      make.bottom.equalToSuperview().offset(-10-kHomeIndicator)
+      make.bottom.equalToSuperview().offset(-10-tySafeAreaInset().bottom)
     }
     
     completionButton = UIButton(type: .custom)
@@ -327,7 +346,7 @@ class PhotoColletionViewController: UIViewController {
     completionButton.snp.makeConstraints { (make) in
       make.top.equalToSuperview().offset(10)
       make.right.equalToSuperview().offset(-10)
-      make.bottom.equalToSuperview().offset(-10-kHomeIndicator)
+      make.bottom.equalToSuperview().offset(-10-tySafeAreaInset().bottom)
       make.width.equalTo(70)
     }
     

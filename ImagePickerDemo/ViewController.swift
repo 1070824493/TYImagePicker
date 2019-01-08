@@ -69,6 +69,7 @@ class ViewController: UIViewController {
       maxCountTextField.text = "1"
       maxCount = 1
       spaceTF.isHidden = false
+      spaceTF.text = "20"
     }else{
       spaceTF.isHidden = true
       spaceTF.text = nil

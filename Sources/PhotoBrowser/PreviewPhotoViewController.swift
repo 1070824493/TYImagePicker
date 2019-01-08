@@ -201,7 +201,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     view.addSubview(bottomBarTransparentView)
     bottomBarTransparentView.snp.makeConstraints { (make) -> Void in
       make.right.left.equalTo(view)
-      make.height.equalTo(44+kHomeIndicator)
+      make.height.equalTo(44+tySafeAreaInset().bottom)
       make.bottom.equalTo(view)
     }
     
@@ -213,7 +213,7 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     view.addSubview(bottomBarContainerView)
     bottomBarContainerView.snp.makeConstraints { (make) -> Void in
       make.right.left.equalTo(view)
-      make.height.equalTo(44+kHomeIndicator)
+      make.height.equalTo(44+tySafeAreaInset().bottom)
       make.bottom.equalTo(view)
     }
     

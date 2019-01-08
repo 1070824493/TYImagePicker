@@ -18,13 +18,13 @@ class PhotoCropViewController: UIViewController {
   var originImage: UIImage!
   
   var cropImageScrollView: CropImageScrollView!
+  var maskView: PhotoMaskView!
   
   var bottomBarContainerView: UIView!
   var bottomBarTransparentView: UIView!
   var completeButton: UIButton!
   var cancelButton: UIButton!
   
-  var imageView: UIImageView!
   
   init(asset: PHAsset) {
     
@@ -56,6 +56,7 @@ class PhotoCropViewController: UIViewController {
     
     guard let asset = asset, originImage == nil else {
       self.setupUI()
+      initBottomBar()
       return
     }
     
@@ -67,6 +68,7 @@ class PhotoCropViewController: UIViewController {
       
       self.originImage = _image
       self.setupUI()
+      self.initBottomBar()
       
     })
     
@@ -144,15 +146,46 @@ class PhotoCropViewController: UIViewController {
   fileprivate func setupUI() {
     
     automaticallyAdjustsScrollViewInsets = false
-    
-    cropImageScrollView = CropImageScrollView(frame: CGRect(x: 0, y: 0, width: view.bounds.width - space * 2, height: view.bounds.height - space * 2), image: originImage, space:space)
+    if self.cropImageScrollView != nil {
+      self.cropImageScrollView.removeFromSuperview()
+      self.cropImageScrollView = nil
+    }
+    if self.maskView != nil {
+      self.maskView.removeFromSuperview()
+      self.maskView = nil
+    }
+    if isLandscape {
+      let w = shorter - space * 2 - 50 - tySafeAreaInset().bottom - 20
+      let x = (longer - w) / 2
+      let y = space + kStatusBarHeight
+      cropImageScrollView = CropImageScrollView(frame: CGRect(x: x, y: y, width: w, height: w), image: originImage, space:space)
+    }else{
+      cropImageScrollView = CropImageScrollView(frame: CGRect(x: space, y: (view.bounds.height - view.bounds.width) / 2 + space, width: view.bounds.width - space*2, height: view.bounds.width - space*2), image: originImage, space:space)
+    }
+
     view.addSubview(cropImageScrollView)
     
-    let maskView = PhotoMaskView(frame: view.bounds, space:space)
+    maskView = PhotoMaskView(frame: view.bounds, space:space)
     view.addSubview(maskView)
     
-    initBottomBar()
     
+    
+  }
+  
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransition(to: size, with: coordinator)
+    
+    coordinator.animate(alongsideTransition: { (_) in
+      
+      
+      self.setupUI()
+      
+      self.view.bringSubviewToFront(self.bottomBarContainerView)
+      
+    }) { (_) in
+      
+    }
+
   }
   
   fileprivate func initBottomBar() {
@@ -162,7 +195,7 @@ class PhotoCropViewController: UIViewController {
     view.addSubview(bottomBarTransparentView)
     bottomBarTransparentView.snp.makeConstraints { (make) -> Void in
       make.right.bottom.left.equalTo(view)
-      make.height.equalTo(60 + kHomeIndicator)
+      make.height.equalTo(50 + tySafeAreaInset().bottom)
     }
     
     bottomBarTransparentView.alpha = 0.7
@@ -173,7 +206,7 @@ class PhotoCropViewController: UIViewController {
     view.addSubview(bottomBarContainerView)
     bottomBarContainerView.snp.makeConstraints { (make) -> Void in
       make.right.bottom.left.equalTo(view)
-      make.height.equalTo(60 + kHomeIndicator)
+      make.height.equalTo(50 + tySafeAreaInset().bottom)
     }
     
     bottomBarContainerView.backgroundColor = UIColor.clear
@@ -182,8 +215,9 @@ class PhotoCropViewController: UIViewController {
     completeButton = UIButton()
     bottomBarContainerView.addSubview(completeButton)
     completeButton.snp.makeConstraints { (make) -> Void in
-      make.right.bottom.top.equalTo(bottomBarContainerView)
+      make.right.top.equalTo(bottomBarContainerView)
       make.width.equalTo(70)
+      make.height.equalTo(50)
     }
     
     completeButton.setTitle(self.GetLocalizableText(key: "TYImagePickerChooseText"), for: UIControl.State())
@@ -195,22 +229,16 @@ class PhotoCropViewController: UIViewController {
     cancelButton = UIButton()
     bottomBarContainerView.addSubview(cancelButton)
     cancelButton.snp.makeConstraints { (make) -> Void in
-      make.left.bottom.top.equalTo(bottomBarContainerView)
-      make.width.equalTo(60)
+      make.left.top.equalTo(bottomBarContainerView)
+      make.width.equalTo(70)
+      make.height.equalTo(50)
     }
     
     cancelButton.setTitle(self.GetLocalizableText(key: "TYImagePickerCancelText"), for: UIControl.State())
     cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
     cancelButton.setTitleColor(UIColor.white, for: UIControl.State())
     cancelButton.addTarget(self, action: #selector(PhotoCropViewController.onCancel), for: .touchUpInside)
-    
-    imageView = UIImageView()
-    view.addSubview(imageView)
-    imageView.snp.makeConstraints { (make) -> Void in
-      make.centerX.equalTo(view)
-      make.bottom.equalTo(view)
-      make.width.height.equalTo(140)
-    }
+
   }
   
 }
