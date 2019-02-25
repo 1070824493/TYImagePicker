@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "TYImagePicker"
 
-  s.version      = "4.2.1"
+  s.version      = "4.2.2"
 
   s.summary      = "A complete functions ImagePicker."
 

@@ -51,9 +51,13 @@ class PhotoCollectionLiteCell: UICollectionViewCell {
         
         return
       }
-      
-      self.zoomImageScrollView.setImage(image == nil ? self.ImageResourcePath("default_pic") : image)
-      
+      if isInICloud == true {
+        PhotosManager.sharedInstance.fetchImagesWithoutSelected([self.asset], handleCompletion: { (images) in
+          self.zoomImageScrollView.setImage(images.count > 0 ? images[0] : self.ImageResourcePath("default_pic"))
+        })
+      }else{
+        self.zoomImageScrollView.setImage(image == nil ? self.ImageResourcePath("default_pic") : image)
+      }
     })
     
   }

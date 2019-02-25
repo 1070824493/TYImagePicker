@@ -460,19 +460,35 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
        
         PhotosManager.sharedInstance.checkImageIsInLocal(with: asset) { isExistInLocal in
           
-          if PhotosManager.sharedInstance.isCrop {
-            let vc = PhotoCropViewController(asset: asset)
-            vc.space = self.space
-            self.navigationController?.pushViewController(vc, animated: true)
+          if isExistInLocal {
+            if PhotosManager.sharedInstance.isCrop {
+                let vc = PhotoCropViewController(asset: asset)
+                vc.space = self.space
+                self.navigationController?.pushViewController(vc, animated: true)
+              
+            } else {
+                self.selectItemNum = PhotosManager.sharedInstance.currentImageAlbumFetchResult.index(of: asset)
+                self.goToPhotoBrowser()
+              
+            }
+          }else{
+            //图片在云端iCloud
+            if PhotosManager.sharedInstance.isCrop {
+              PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
+              PhotosManager.sharedInstance.selectPhoto(with: asset)
+              PhotosManager.sharedInstance.fetchSelectedImages({ (images) in
+                let vc = PhotoCropViewController(image: images[0])
+                vc.space = self.space
+                self.navigationController?.pushViewController(vc, animated: true)
+              })
+            } else {
+              self.selectItemNum = PhotosManager.sharedInstance.currentImageAlbumFetchResult.index(of: asset)
+              self.goToPhotoBrowser()
+            }
             
-          } else {
-            
-            
-            self.selectItemNum = PhotosManager.sharedInstance.currentImageAlbumFetchResult.index(of: asset)
-            self.goToPhotoBrowser()
             
           }
-          
+
         }
       }
       
