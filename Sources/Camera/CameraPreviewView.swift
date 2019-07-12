@@ -89,12 +89,10 @@ class CameraPreviewView: UIView {
   fileprivate func getCamera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
     
     for device in AVCaptureDevice.devices(for: AVMediaType.video) {
-      
       if device.position == position {
         return device
       }
     }
-    
     return nil
   }
   

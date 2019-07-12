@@ -46,7 +46,7 @@ class CameraHelper: NSObject {
       alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: { (action) in
         if let openUrl = URL(string: UIApplication.openSettingsURLString) {
           if UIApplication.shared.canOpenURL(openUrl) {
-            UIApplication.shared.openURL(openUrl)
+            UIApplication.shared.open(openUrl, options: [:], completionHandler: nil)
           }
         }
       }))

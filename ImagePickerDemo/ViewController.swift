@@ -50,8 +50,8 @@ class ViewController: UIViewController {
     imagePickerHelper.rowCountH = rowCountH
     imagePickerHelper.rowCountV = rowCountV
     imagePickerHelper.maskEnable = maskEnable
-//    imagePickerHelper.bottomButtonTitle = "确定"
-//    imagePickerHelper.bottomLabelTitle = "测试底部标题"
+    imagePickerHelper.bottomButtonTitle = "确定"
+    imagePickerHelper.bottomLabelTitle = "测试底部标题"
     imagePickerHelper.space = CGFloat(spaceTF.text == "" ? 0 : Double(spaceTF.text!)!)
     imagePickerHelper.start()
   }

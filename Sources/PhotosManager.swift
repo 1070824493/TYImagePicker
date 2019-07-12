@@ -337,7 +337,8 @@ class PhotosManager: NSObject {
     
     if isExist {
       lastCount = selectedImages.count
-      let index:Int = selectedImages.index(of: asset)!
+//      let index:Int = selectedImages.index(of: asset)!
+        let index:Int = selectedImages.firstIndex(of: asset)!
       selectedImages.remove(at: index)
     } else {
       
@@ -462,7 +463,7 @@ class PhotosManager: NSObject {
   func fetchVideo(videoAsset: PHAsset, handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
     
     let videoRequestOptions = PHVideoRequestOptions()
-    videoRequestOptions.isNetworkAccessAllowed = false
+    videoRequestOptions.isNetworkAccessAllowed = true
     videoRequestOptions.deliveryMode = .fastFormat
     
     imageManager.requestAVAsset(forVideo: videoAsset, options: videoRequestOptions) { (avAsset, _, info) in

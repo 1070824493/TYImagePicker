@@ -49,7 +49,7 @@ public enum TYResourceType {
 open class TYImagePickerHelper: NSObject {
   
   private var cameraHelper: CameraHelper!
-  weak var handlerViewController: UIViewController?
+  weak var handlerViewController: UIViewController? //跳转的控制器
   
   public weak var delegate: TYImagePickerDelegate?
   public var maxSelectedCount: Int = 9
@@ -79,9 +79,9 @@ open class TYImagePickerHelper: NSObject {
     
     guard let _handlerViewController = handlerViewController else { return }
     
-    if resourceOption == .video {
-      maxSelectedCount = 1
-    }
+//    if resourceOption == .video {
+//      maxSelectedCount = 1
+//    }
     
     if maxSelectedCount <= 0 {
       maxSelectedCount = 1
@@ -127,7 +127,7 @@ open class TYImagePickerHelper: NSObject {
             alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: { (action) in
               if let openUrl = URL(string: UIApplication.openSettingsURLString) {
                 if UIApplication.shared.canOpenURL(openUrl) {
-                  UIApplication.shared.openURL(openUrl)
+                    UIApplication.shared.open(openUrl, options: [:], completionHandler: nil)
                 }
               }
             }))
@@ -135,6 +135,8 @@ open class TYImagePickerHelper: NSObject {
           
         case .authorized:
             showAblum()
+        @unknown default:
+            break
         }
     }
   }
@@ -173,13 +175,9 @@ open class TYImagePickerHelper: NSObject {
   }
   
   private func finish(with resource: TYResourceType) {
-    handlerViewController?.dismiss(animated: true, completion: {
-      
-      PhotosManager.sharedInstance.clearData()
-      
-      self.delegate?.pickedPhoto(self, didPickResource: resource)
-      
-    })
+//    handlerViewController?.dismiss(animated: true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+    PhotosManager.sharedInstance.clearData()
+    self.delegate?.pickedPhoto(self, didPickResource: resource)
   }
   
   private func fetchVideo() {

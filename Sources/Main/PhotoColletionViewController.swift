@@ -286,12 +286,12 @@ class PhotoColletionViewController: UIViewController {
     navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white , NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], for: .normal)
     
     //导航栏左边返回按钮
-    if isShow {
-      titleLabel.text = "相册"
-      navigationItem.leftBarButtonItem = nil
-    }else{
-      navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-    }
+//    if isShow {
+//      titleLabel.text = "相册"
+//      navigationItem.leftBarButtonItem = nil
+//    }else{
+//      navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+//    }
     self.navigationController?.navigationBar.isTranslucent = false
     
   }
