@@ -49,7 +49,7 @@ public enum TYResourceType {
 open class TYImagePickerHelper: NSObject {
   
   private var cameraHelper: CameraHelper!
-  weak var handlerViewController: UIViewController? //跳转的控制器
+  public weak var handlerViewController: UIViewController? //跳转的控制器
   
   public weak var delegate: TYImagePickerDelegate?
   public var maxSelectedCount: Int = 9
