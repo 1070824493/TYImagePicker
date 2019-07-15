@@ -494,14 +494,14 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       
       if PhotosManager.sharedInstance.resourceOption == .video {
         
-        PhotosManager.sharedInstance.checkVideoIsInLocal(with: asset) { isExistInLocal in
-          
-          guard isExistInLocal else { return }
-          
-          PhotosManager.sharedInstance.selectVideo(with: asset)
+//        PhotosManager.sharedInstance.checkVideoIsInLocal(with: asset) { isExistInLocal in
+        
+//          guard isExistInLocal else { return }
+        
+//          PhotosManager.sharedInstance.selectVideo(with: asset)
 //          PhotosManager.sharedInstance.didFinish()
           
-        }
+//        }
       }
     }
   }
