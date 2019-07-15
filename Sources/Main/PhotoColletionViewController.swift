@@ -499,7 +499,7 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
           guard isExistInLocal else { return }
           
           PhotosManager.sharedInstance.selectVideo(with: asset)
-          PhotosManager.sharedInstance.didFinish()
+//          PhotosManager.sharedInstance.didFinish()
           
         }
       }

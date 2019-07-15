@@ -175,9 +175,10 @@ open class TYImagePickerHelper: NSObject {
   }
   
   private func finish(with resource: TYResourceType) {
-//    handlerViewController?.dismiss(animated: true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-    PhotosManager.sharedInstance.clearData()
-    self.delegate?.pickedPhoto(self, didPickResource: resource)
+    handlerViewController?.dismiss(animated: true, completion: {
+        PhotosManager.sharedInstance.clearData()
+        self.delegate?.pickedPhoto(self, didPickResource: resource)
+    })
   }
   
   private func fetchVideo() {
