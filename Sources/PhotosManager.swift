@@ -301,21 +301,21 @@ class PhotosManager: NSObject {
       
       if  avAsset == nil {
         
-        if isInICloud {
-          
-          let alert = UIAlertController(title: self.GetLocalizableText(key: "TYImagePickerCanNotChooseVideo"), message: self.GetLocalizableText(key: "TYImagePickerCanNotChooseMessage"), preferredStyle: .alert)
-          alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: nil))
-          UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-          
-        } else {
-          
-          let alert = UIAlertController(title: nil, message: self.GetLocalizableText(key: "TYImagePickerChooseFailedVideo"), preferredStyle: .alert)
-          alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: nil))
-          UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alert, animated: true, completion: nil)
-          
-        }
+//        if isInICloud {
+//
+//          let alert = UIAlertController(title: self.GetLocalizableText(key: "TYImagePickerCanNotChooseVideo"), message: self.GetLocalizableText(key: "TYImagePickerCanNotChooseMessage"), preferredStyle: .alert)
+//          alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: nil))
+//          UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+//
+//        } else {
+//
+//          let alert = UIAlertController(title: nil, message: self.GetLocalizableText(key: "TYImagePickerChooseFailedVideo"), preferredStyle: .alert)
+//          alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: nil))
+//          UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alert, animated: true, completion: nil)
+//
+//        }
         
-        return
+        completion(false)
       }
       
       completion(true)

@@ -201,9 +201,16 @@ class PhotoThumbCell: UICollectionViewCell {
     self.selectedImageView.alpha = isSelected ? 1 : 0
     
     if isSelected {
-      PhotosManager.sharedInstance.checkImageIsInLocal(with: asset, completion: { (isInLocal) in
-        self.iCloudLabel.isHidden = isInLocal
-      })
+        if PhotosManager.sharedInstance.resourceOption == .image {
+            PhotosManager.sharedInstance.checkImageIsInLocal(with: asset, completion: { (isInLocal) in
+                self.iCloudLabel.isHidden = isInLocal
+            })
+        }else if PhotosManager.sharedInstance.resourceOption == .video{
+            PhotosManager.sharedInstance.checkVideoIsInLocal(with: asset, completion: { (videoInLocal) in
+                self.iCloudLabel.isHidden = videoInLocal
+            })
+        }
+      
     }else{
       self.iCloudLabel.isHidden = true
     }
