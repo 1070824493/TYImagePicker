@@ -28,7 +28,7 @@ struct ImageRectScale {
 class PhotosManager: NSObject {
   
   static let sharedInstance = PhotosManager()
-  static var assetGridThumbnailSize = CGSize(width: 50, height: 50)
+  static var assetGridThumbnailSize = CGSize(width: 150, height: 150)
   static var assetPreviewImageSize = UIScreen.main.bounds.size
   static var assetExportImageSize = UIScreen.main.bounds.size
   
@@ -62,6 +62,10 @@ class PhotosManager: NSObject {
   
   var maxSelectedCount: Int {
     return imagePicker.maxSelectedCount
+  }
+  
+  var minSelectedCount: Int {
+    return imagePicker.minSelectedCount
   }
   
   var isCrop: Bool {
@@ -186,7 +190,7 @@ class PhotosManager: NSObject {
     }
     
     let fetchResult = PHAsset.fetchAssets(in: album, options: fetchOptions)
-    
+
     return fetchResult
   }
   
@@ -456,6 +460,12 @@ class PhotosManager: NSObject {
         DispatchQueue.main.async {
           self.HUD.progressValue = CGFloat(percent)
         }
+      }else{
+        DispatchQueue.main.async {
+          SVProgressHUD.showInfo(withStatus: "iCloud同步失败")
+          self.HUD.isHidden = true
+          return
+        }
       }
     }
   }
@@ -528,7 +538,7 @@ class PhotosManager: NSObject {
     
     switch sizeType {
     case .thumbnail:
-      imageRequestOptions.isSynchronous = false
+      imageRequestOptions.isSynchronous = true
       imageRequestOptions.resizeMode = .fast
       imageRequestOptions.deliveryMode = .fastFormat
       imageRequestOptions.isNetworkAccessAllowed = false

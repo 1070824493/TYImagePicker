@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -205,12 +205,31 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="be2-45-ZOO">
+                                <rect key="frame" x="253" y="148.5" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="CHg-MW-Eg9"/>
+                                    <constraint firstAttribute="height" constant="30" id="G3C-OR-jsy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="onMinCountChange:" destination="BYZ-38-t0r" eventType="editingChanged" id="wua-2a-jrC"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最小数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPa-1K-bEr">
+                                <rect key="frame" x="164" y="153" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="nu1-8T-u4f" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0Hm-Qp-D9W"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Bx9-xf-eh5" secondAttribute="trailing" constant="20" symbolic="YES" id="2L2-MS-Ced"/>
                             <constraint firstItem="K8o-4X-cwN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="3tV-8A-H77"/>
+                            <constraint firstItem="DPa-1K-bEr" firstAttribute="leading" secondItem="x1P-Xy-dnJ" secondAttribute="trailing" constant="14.5" id="5e9-fl-8vf"/>
                             <constraint firstItem="de1-jE-D1e" firstAttribute="leading" secondItem="K8o-4X-cwN" secondAttribute="trailing" constant="20" id="6lN-3w-gUN"/>
                             <constraint firstItem="Aa3-Lt-Ru8" firstAttribute="top" secondItem="eGM-fy-Ae1" secondAttribute="bottom" constant="15" id="7Wb-la-RHC"/>
                             <constraint firstItem="Be9-Hj-HH7" firstAttribute="centerY" secondItem="Vky-YJ-YB2" secondAttribute="centerY" id="8Og-A8-YIy"/>
@@ -221,8 +240,10 @@
                             <constraint firstItem="Arj-ff-C0K" firstAttribute="top" secondItem="K8o-4X-cwN" secondAttribute="bottom" constant="20" id="Hev-8j-a5i"/>
                             <constraint firstItem="Vky-YJ-YB2" firstAttribute="top" secondItem="MEb-ts-qGw" secondAttribute="bottom" constant="56" id="Hq8-EX-J9z"/>
                             <constraint firstAttribute="trailing" secondItem="nu1-8T-u4f" secondAttribute="trailing" id="Ive-BO-rEH"/>
+                            <constraint firstItem="be2-45-ZOO" firstAttribute="centerY" secondItem="DPa-1K-bEr" secondAttribute="centerY" id="JMm-Os-DUV"/>
                             <constraint firstItem="Bqt-CE-Jkm" firstAttribute="leading" secondItem="Qsv-GR-7Dg" secondAttribute="trailing" constant="5" id="N2a-xK-oJs"/>
                             <constraint firstItem="eGM-fy-Ae1" firstAttribute="top" secondItem="Arj-ff-C0K" secondAttribute="bottom" constant="15" id="N3w-7y-Tvs"/>
+                            <constraint firstItem="be2-45-ZOO" firstAttribute="leading" secondItem="DPa-1K-bEr" secondAttribute="trailing" constant="19" id="O25-zQ-Ydy"/>
                             <constraint firstItem="HRo-CT-rym" firstAttribute="leading" secondItem="de1-jE-D1e" secondAttribute="trailing" constant="40" id="PJ3-DR-hrI"/>
                             <constraint firstItem="27v-kr-1YE" firstAttribute="centerY" secondItem="Arj-ff-C0K" secondAttribute="centerY" id="Pmn-yU-8Ta"/>
                             <constraint firstItem="YYG-5K-vm8" firstAttribute="centerY" secondItem="MEb-ts-qGw" secondAttribute="centerY" id="Q9T-Jx-6z0"/>
@@ -237,6 +258,7 @@
                             <constraint firstItem="x1P-Xy-dnJ" firstAttribute="leading" secondItem="Aa3-Lt-Ru8" secondAttribute="trailing" constant="10" id="oYM-WD-a4u"/>
                             <constraint firstItem="K8o-4X-cwN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="odz-9i-F5r"/>
                             <constraint firstItem="Bx9-xf-eh5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="orx-vO-d6b"/>
+                            <constraint firstItem="DPa-1K-bEr" firstAttribute="centerY" secondItem="Aa3-Lt-Ru8" secondAttribute="centerY" id="pRV-UY-t7x"/>
                             <constraint firstItem="x1P-Xy-dnJ" firstAttribute="centerY" secondItem="Aa3-Lt-Ru8" secondAttribute="centerY" id="qZq-9m-tI8"/>
                             <constraint firstItem="Bqt-CE-Jkm" firstAttribute="centerY" secondItem="Qsv-GR-7Dg" secondAttribute="centerY" id="sjS-Xn-VZH"/>
                             <constraint firstItem="Be9-Hj-HH7" firstAttribute="leading" secondItem="Vky-YJ-YB2" secondAttribute="trailing" constant="24" id="tqy-Vu-k0f"/>
@@ -256,6 +278,7 @@
                         <outlet property="isCropSwitch" destination="de1-jE-D1e" id="JKu-G4-Bzf"/>
                         <outlet property="maskEnableSwitch" destination="Be9-Hj-HH7" id="IXc-80-qzS"/>
                         <outlet property="maxCountTextField" destination="x1P-Xy-dnJ" id="ru9-qv-c36"/>
+                        <outlet property="minCountTextField" destination="be2-45-ZOO" id="NWe-mA-l0u"/>
                         <outlet property="spaceTF" destination="HRo-CT-rym" id="K13-Ss-SOf"/>
                     </connections>
                 </viewController>

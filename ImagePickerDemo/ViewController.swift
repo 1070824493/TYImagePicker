@@ -23,11 +23,9 @@ class ViewController: UIViewController {
   
   @IBOutlet weak var spaceTF: UITextField!
   @IBOutlet weak var maskEnableSwitch: UISwitch!
-  @IBOutlet var maxCountTextField: UITextField!
-  @IBOutlet weak var numberOfColumnField: UITextField!
-    
-  @IBOutlet weak var columnHField: UITextField!
-  //  @IBOutlet var imageViews: [UIImageView]!
+  @IBOutlet weak var maxCountTextField: UITextField!
+  @IBOutlet weak var minCountTextField: UITextField!
+  
   
   fileprivate lazy var imagePickerHelper: TYImagePickerHelper = {
     return TYImagePickerHelper(delegate: self)
@@ -36,6 +34,7 @@ class ViewController: UIViewController {
   var isCrop: Bool = false
   var type: TYImagePickerType = .albumAndCamera
   var maxCount = 9
+  var minCount = 1
   var rowCountH = 6
   var rowCountV = 4
   var maskEnable = false
@@ -45,6 +44,7 @@ class ViewController: UIViewController {
     
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
+    imagePickerHelper.minSelectedCount = minCount
     imagePickerHelper.type = type
     imagePickerHelper.resourceOption = reourceOption
     imagePickerHelper.rowCountH = rowCountH
@@ -112,6 +112,16 @@ class ViewController: UIViewController {
       isCropSwitch.setOn(false, animated: true)
     }
   }
+  @IBAction func onMinCountChange(_ sender: UITextField) {
+    guard let minCount = Int(sender.text!) else { return }
+    
+    self.minCount = minCount
+    
+    if minCount != 1 {
+      isCropSwitch.setOn(false, animated: true)
+    }
+  }
+  
   
   @IBAction func onColumnChange(_ sender: UITextField) {
     

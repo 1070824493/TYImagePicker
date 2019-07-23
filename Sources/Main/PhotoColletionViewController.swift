@@ -119,8 +119,8 @@ class PhotoColletionViewController: UIViewController {
     let count = UIApplication.shared.statusBarOrientation == .landscapeRight || UIApplication.shared.statusBarOrientation == .landscapeLeft ? rowCountH : rowCountV
 
     imageWidth = (view.frame.width - midSpace * CGFloat(count - 1)) / CGFloat(count)
-    let scale = UIScreen.main.scale
-    PhotosManager.assetGridThumbnailSize = CGSize(width: imageWidth * scale, height: imageWidth * scale)
+//    let scale = UIScreen.main.scale
+//    PhotosManager.assetGridThumbnailSize = CGSize(width: imageWidth * scale, height: imageWidth * scale)
   }
   
   @objc func completeButtonClick() {

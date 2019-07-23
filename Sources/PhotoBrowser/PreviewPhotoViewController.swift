@@ -264,11 +264,11 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
     let isSuccess = PhotosManager.sharedInstance.selectPhoto(with: currentAsset)
     
     if !isSuccess {
-        if PhotosManager.sharedInstance.maxSelectedCount == 9 {
-          let alert = UIAlertController(title: nil, message: self.GetLocalizableText(key: "TYImagePickerMaximumText"), preferredStyle: .alert)
+//        if PhotosManager.sharedInstance.maxSelectedCount == 9 {
+          let alert = UIAlertController(title: nil, message: String(format: self.GetLocalizableText(key: "TYImagePickerMaximumText"), PhotosManager.sharedInstance.maxSelectedCount), preferredStyle: .alert)
           alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: nil))
           UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alert, animated: true, completion: nil)
-        }
+//        }
         return
     }
     

@@ -53,6 +53,7 @@ open class TYImagePickerHelper: NSObject {
   
   public weak var delegate: TYImagePickerDelegate?
   public var maxSelectedCount: Int = 9
+  public var minSelectedCount: Int = 1
   public var isCrop: Bool = false
   public var type: TYImagePickerType = .albumAndCamera
   public var rowCountH: Int = 6
@@ -143,6 +144,7 @@ open class TYImagePickerHelper: NSObject {
   
   func onComplete(_ resource: TYResourceType?) {
     
+    
     if let resource = resource {
       
       guard shouldPick(resource: resource) else { return }
@@ -228,7 +230,13 @@ open class TYImagePickerHelper: NSObject {
   }
   
   private func fetchImages() {
-    
+    if PhotosManager.sharedInstance.selectedImages.count < PhotosManager.sharedInstance.imagePicker.minSelectedCount {
+      //小于最小值,提示
+      let alert = UIAlertController(title: nil, message: String(format: self.GetLocalizableText(key: "TYImagePickerMinimumText"), PhotosManager.sharedInstance.minSelectedCount), preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: self.GetLocalizableText(key: "TYImagePickerSureText"), style: .default, handler: nil))
+      UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(alert, animated: true, completion: nil)
+      return
+    }
     PhotosManager.sharedInstance.fetchSelectedImages({ (images) in
       var images: [UIImage] = images
       
