@@ -80,9 +80,9 @@ class PreviewPhotoViewController: TYPhotoBrowserLite {
       guard isExistInLocal else { return }
       
       //如果当前没有被选择的照片，则选择当前照片
-      if PhotosManager.sharedInstance.selectedImages.isEmpty {
-        PhotosManager.sharedInstance.selectPhoto(with: self.currentAsset)
-      }
+//      if PhotosManager.sharedInstance.selectedImages.isEmpty {
+//        PhotosManager.sharedInstance.selectPhoto(with: self.currentAsset)
+//      }
       
       PhotosManager.sharedInstance.didFinish()
     }
